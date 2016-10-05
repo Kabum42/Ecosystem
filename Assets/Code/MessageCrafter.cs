@@ -9,6 +9,7 @@ public class MessageCrafter : MonoBehaviour {
 	public RectTransform parentUI;
 	public GameObject optionButton;
 	public GameObject optionTemplate;
+	public GameObject consequenceTemplate;
 
 	private List<OptionCraft> options = new List<OptionCraft> ();
 
@@ -57,11 +58,18 @@ public class MessageCrafter : MonoBehaviour {
 			if (clickedObject == o.deleteButton) {
 				optionToDelete = o;
 				break;
+			} else if (clickedObject == o.consequenceButton) {
+				o.addConsequence ();
+				break;
+			} else {
+				if (o.checkConsequenceDelete (clickedObject)) {
+					break;
+				}
 			}
 		}
 
 		if (optionToDelete != null) {
-			Destroy (optionToDelete.rTransform.gameObject);
+			optionToDelete.Destroy ();
 			options.Remove (optionToDelete);
 		}
 
@@ -70,7 +78,7 @@ public class MessageCrafter : MonoBehaviour {
 
 	void addOption () {
 
-		OptionCraft o = new OptionCraft (ref optionTemplate);
+		OptionCraft o = new OptionCraft (this);
 		options.Add (o);
 
 	}
@@ -80,8 +88,14 @@ public class MessageCrafter : MonoBehaviour {
 		float yPos = -94f;
 
 		foreach (OptionCraft o in options) {
-			o.rTransform.anchoredPosition = new Vector2 (o.rTransform.anchoredPosition.x, yPos);
-			yPos -= 50f;
+			o.option.GetComponent<RectTransform>().anchoredPosition = new Vector2 (o.option.GetComponent<RectTransform>().anchoredPosition.x, yPos);
+			yPos -= 40f;
+			foreach (GameObject consequence in o.consequences) {
+				consequence.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (consequence.GetComponent<RectTransform> ().anchoredPosition.x, yPos);
+				yPos -= 40f;
+			}
+			o.consequenceButton.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (o.consequenceButton.GetComponent<RectTransform> ().anchoredPosition.x, yPos);
+			yPos -= 40f;
 		}
 
 		optionButton.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (optionButton.GetComponent<RectTransform> ().anchoredPosition.x, yPos);
@@ -93,19 +107,71 @@ public class MessageCrafter : MonoBehaviour {
 
 public class OptionCraft {
 
-	public RectTransform rTransform;
+	private MessageCrafter mC;
+	public GameObject option;
 	public GameObject deleteButton;
+	public GameObject consequenceButton;
+
 	public List<GameObject> consequences = new List<GameObject>();
 
-	public OptionCraft(ref GameObject optionTemplate) {
+	public OptionCraft(MessageCrafter auxMC) {
 
-		rTransform = MonoBehaviour.Instantiate (optionTemplate).GetComponent<RectTransform>();
-		rTransform.gameObject.SetActive (true);
-		rTransform.transform.SetParent (optionTemplate.transform.parent);
-		rTransform.transform.localScale = optionTemplate.transform.localScale;
-		rTransform.transform.position = optionTemplate.transform.position;
+		mC = auxMC;
 
-		deleteButton = rTransform.transform.FindChild ("DeleteButton").gameObject;
+		option = MonoBehaviour.Instantiate (mC.optionTemplate);
+		option.SetActive (true);
+		option.transform.SetParent (mC.optionTemplate.transform.parent);
+		option.transform.localScale = mC.optionTemplate.transform.localScale;
+		option.transform.position = mC.optionTemplate.transform.position;
+
+		deleteButton = option.transform.FindChild ("DeleteButton").gameObject;
+
+		consequenceButton = option.transform.FindChild ("ConsequenceButton").gameObject;
+		consequenceButton.transform.SetParent (option.transform.parent);
+
+	}
+
+	public void addConsequence() {
+
+		GameObject consequence = MonoBehaviour.Instantiate (mC.consequenceTemplate);
+		consequence.SetActive (true);
+		consequence.transform.SetParent (option.transform.parent);
+		consequence.transform.localScale = Vector3.one;
+		consequence.transform.position = mC.consequenceTemplate.transform.position;
+
+		consequences.Add (consequence);
+
+	}
+
+	public bool checkConsequenceDelete(GameObject clickedObject) {
+
+		GameObject consequenceToDelete = null;
+
+		foreach (GameObject consequence in consequences) {
+			if (clickedObject == consequence.transform.FindChild ("DeleteButton").gameObject) {
+				consequenceToDelete = consequence;
+				break;
+			}
+		}
+
+		if (consequenceToDelete != null) {
+			consequences.Remove (consequenceToDelete);
+			MonoBehaviour.Destroy (consequenceToDelete);
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	public void Destroy() {
+
+		MonoBehaviour.Destroy (option);
+		MonoBehaviour.Destroy (consequenceButton);
+
+		foreach (GameObject consequence in consequences) {
+			MonoBehaviour.Destroy (consequence);
+		}
 
 	}
 
