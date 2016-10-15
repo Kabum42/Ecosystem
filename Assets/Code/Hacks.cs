@@ -155,6 +155,8 @@ public static class Hacks {
 				return true;
 			}
 
+		} else if (target == null) {
+			return true;
 		}
 		
 		return false;
