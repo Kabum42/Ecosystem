@@ -21,8 +21,8 @@ public class MessageCrafter : MonoBehaviour {
 
 	private static float speed = 200f;
 
-	private static string infoHeader = "★";
-	private static string infoSeparator = "☃";
+	public static char infoHeader = '★';
+	public static char infoSeparator = '☃';
 	private string messageInfo = "";
 
 	[HideInInspector]
@@ -118,21 +118,21 @@ public class MessageCrafter : MonoBehaviour {
 
 		string path = "Messages/"+ nameInput.text +".txt";
 
-		messageInfo = infoHeader + "Type";
+		messageInfo = infoHeader.ToString() + Header.Type;
 		addInfo (typeDropDown.options[typeDropDown.value].text);
 
-		addHeader ("Sender");
+		addHeader (Header.Sender);
 		addInfo (senderInput.text);
 
-		addHeader ("Information");
+		addHeader (Header.Information);
 		addInfo (informationInput.text);
 
 		foreach (OptionCraft o in options) {
-			addHeader ("Option");
+			addHeader (Header.Option);
 			InputField i = o.option.transform.FindChild ("OptionInput").GetComponent<InputField> ();
 			addInfo (i.text);
 			foreach (GameObject consequence in o.consequences) {
-				addHeader ("Consequence");
+				addHeader (Header.Consequence);
 				// Statistic
 				Dropdown d = consequence.transform.FindChild ("ConsequenceDropdown").GetComponent<Dropdown> ();
 				addInfo (d.options [d.value].text);
@@ -146,9 +146,9 @@ public class MessageCrafter : MonoBehaviour {
 
 	}
 
-	void addHeader(string header) {
+	void addHeader(Header header) {
 
-		messageInfo += infoSeparator + infoHeader + header;
+		messageInfo += infoSeparator + infoHeader + header.ToString();
 
 	}
 
@@ -257,4 +257,13 @@ public class OptionCraft {
 
 	}
 
+}
+
+public enum Header {
+	Null,
+	Type,
+	Sender,
+	Information,
+	Option,
+	Consequence
 }
