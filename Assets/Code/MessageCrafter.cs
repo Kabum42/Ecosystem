@@ -3,11 +3,17 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using System;
 
 public class MessageCrafter : MonoBehaviour {
 
 	public RectTransform parentUI;
+	public InputField nameInput;
+	public Dropdown typeDropDown;
+	public InputField senderInput;
+	public InputField informationInput;
 	public GameObject optionButton;
+	public GameObject saveButton;
 	public GameObject optionTemplate;
 	public GameObject consequenceTemplate;
 
@@ -15,9 +21,29 @@ public class MessageCrafter : MonoBehaviour {
 
 	private static float speed = 200f;
 
+	private static string infoSeparator = "☃";
+	private string messageInfo = "";
+
+	[HideInInspector]
+	public List<string> statistics = new List<string>();
+
 	// Use this for initialization
 	void Start () {
 	
+		typeDropDown.ClearOptions ();
+
+		List<string> options = new List<string> ();
+
+		foreach (Message.Type type in Enum.GetValues(typeof(Message.Type))) {
+			options.Add (type.ToString ());
+		}
+
+		typeDropDown.AddOptions (options);
+
+		foreach (Statistic s in Enum.GetValues(typeof(Statistic))) {
+			statistics.Add (s.ToString ());
+		}
+
 	}
 	
 	// Update is called once per frame
@@ -50,6 +76,10 @@ public class MessageCrafter : MonoBehaviour {
 
 		if (clickedObject == optionButton) {
 			addOption ();
+		} else if (clickedObject == saveButton) {
+			if (nameInput.text != "") {
+				saveMessage ();
+			}
 		}
 
 		OptionCraft optionToDelete = null;
@@ -83,9 +113,47 @@ public class MessageCrafter : MonoBehaviour {
 
 	}
 
+	void saveMessage() {
+
+		string path = "Messages/"+ nameInput.text +".txt";
+
+		messageInfo = "Type";
+		addInfo (typeDropDown.options[typeDropDown.value].text);
+
+		addInfo ("Sender");
+		addInfo (senderInput.text);
+
+		addInfo ("Information");
+		addInfo (informationInput.text);
+
+		foreach (OptionCraft o in options) {
+			addInfo ("Option");
+			InputField i = o.option.transform.FindChild ("OptionInput").GetComponent<InputField> ();
+			addInfo (i.text);
+			foreach (GameObject consequence in o.consequences) {
+				addInfo ("Consequence");
+				// Statistic
+				Dropdown d = consequence.transform.FindChild ("ConsequenceDropdown").GetComponent<Dropdown> ();
+				addInfo (d.options [d.value].text);
+				// Amount
+				InputField i2 = consequence.transform.FindChild ("ConsequenceInput").GetComponent<InputField> ();
+				addInfo(i2.text);
+			}
+		}
+
+		System.IO.File.WriteAllText (path, messageInfo);
+
+	}
+
+	void addInfo(string info) {
+
+		messageInfo += infoSeparator + info;
+
+	}
+
 	void repositionUI() {
 
-		float yPos = -94f;
+		float yPos = -132.8f;
 
 		foreach (OptionCraft o in options) {
 			o.option.GetComponent<RectTransform>().anchoredPosition = new Vector2 (o.option.GetComponent<RectTransform>().anchoredPosition.x, yPos);
@@ -99,6 +167,9 @@ public class MessageCrafter : MonoBehaviour {
 		}
 
 		optionButton.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (optionButton.GetComponent<RectTransform> ().anchoredPosition.x, yPos);
+
+		yPos -= 40f;
+		saveButton.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (saveButton.GetComponent<RectTransform> ().anchoredPosition.x, yPos);
 
 	}
 
@@ -138,6 +209,10 @@ public class OptionCraft {
 		consequence.transform.SetParent (option.transform.parent);
 		consequence.transform.localScale = Vector3.one;
 		consequence.transform.position = mC.consequenceTemplate.transform.position;
+
+		Dropdown d = consequence.transform.FindChild ("ConsequenceDropdown").GetComponent<Dropdown> ();
+		d.ClearOptions ();
+		d.AddOptions (mC.statistics);
 
 		consequences.Add (consequence);
 

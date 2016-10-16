@@ -4,18 +4,19 @@ using System.Collections.Generic;
 
 public abstract class Message {
 
+	public Type type;
 	public string sender;
 	public string information;
 	public List<Option> options;
 
-}
-
-public class Letter : Message {
-
+	// LETTER ONLY
 	public Stamp stamp;
 
-	public Letter(string auxSender, string auxInformation, List<Option> auxOptions, Stamp auxStamp) {
+	// SPEECH ONLY
 
+	public Message(Type auxType, string auxSender, string auxInformation, List<Option> auxOptions, Stamp auxStamp) {
+
+		type = auxType;
 		sender = auxSender;
 		information = auxInformation;
 		options = auxOptions;
@@ -23,21 +24,14 @@ public class Letter : Message {
 
 	}
 
+	public enum Type {
+		Letter,
+		Speech
+	}
+
 	public enum Stamp {
 		TopSecret,
 		Forbidden
-	}
-
-}
-
-public class Speech : Message {
-
-	public Speech(string auxSender, string auxInformation, List<Option> auxOptions) {
-
-		sender = auxSender;
-		information = auxInformation;
-		options = auxOptions;
-
 	}
 
 }
@@ -58,17 +52,18 @@ public class Option {
 
 public class Consequence {
 
-	public Type type;
+	public Statistic statistic;
 	public float change = 0;
 
-	public Consequence(Type auxType, float auxChange) {
-		type = auxType;
+	public Consequence(Statistic auxStatistic, float auxChange) {
+		statistic = auxStatistic;
 		change = auxChange;
 	}
 
-	public enum Type {
-		bee,
-		flower
-	}
+}
 
+public enum Statistic {
+	Deer,
+	Bear,
+	Wolf
 }

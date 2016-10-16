@@ -45,14 +45,14 @@ public class ObjectGrabber : MonoBehaviour {
 	public void Grab (GameObject g) {
 
 		if (g != grabbedObject) {
-			RemoveFromReturningObjects (g);
+			FreeObject (g);
 			originalPosition = g.transform.position;
 			grabbedObject = g;
 		}
 
 	}
 
-	private void RemoveFromReturningObjects(GameObject g) {
+	public void FreeObject(GameObject g) {
 
 		ReturningObject r = null;
 
