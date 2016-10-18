@@ -8,6 +8,8 @@ public class InteractiveObject: MonoBehaviour {
 	Shader outlineShader;
 	ObjectGrabber objectGrabber;
 
+	public Vector3 rotationGrabbed;
+
 	void Start () {
 		mRenderer = GetComponent<MeshRenderer> ();
 		defaultShader = mRenderer.material.shader;

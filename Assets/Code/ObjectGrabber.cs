@@ -6,6 +6,8 @@ public class ObjectGrabber : MonoBehaviour {
 
 	public GameObject grabbedObject;
 	private Vector3 originalPosition = Vector3.zero;
+	private Vector3 originalRotation = Vector3.zero;
+	private Transform originalParent = null;
 	private List<ReturningObject> returningObjects = new List<ReturningObject>();
 
 	// Use this for initialization
@@ -23,9 +25,8 @@ public class ObjectGrabber : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0) && !Hacks.isOver(grabbedObject)) {
 
 			if (grabbedObject != null) {
-				returningObjects.Add (new ReturningObject (originalPosition, grabbedObject));
+				ReturnGrabbedObject ();
 			}
-			grabbedObject = null;
 
 		}
 
@@ -33,12 +34,14 @@ public class ObjectGrabber : MonoBehaviour {
 
 			Vector3 targetPosition = this.transform.position + this.transform.forward * 1f;
 			grabbedObject.transform.position = Vector3.Lerp (grabbedObject.transform.position, targetPosition, Time.deltaTime * 5f);
+			grabbedObject.transform.localEulerAngles = Hacks.LerpVector3Angle(grabbedObject.transform.localEulerAngles, grabbedObject.GetComponent<InteractiveObject> ().rotationGrabbed, Time.deltaTime*5f);
 
 		}
 
 		foreach (ReturningObject r in returningObjects) {
 
 			r.gameObject.transform.position = Vector3.Lerp (r.gameObject.transform.position, r.originalPosition, Time.deltaTime * 5f);
+			r.gameObject.transform.eulerAngles = Hacks.LerpVector3Angle(r.gameObject.transform.eulerAngles, r.originalRotation, Time.deltaTime*5f);
 
 		}
 	
@@ -47,10 +50,28 @@ public class ObjectGrabber : MonoBehaviour {
 	public void Grab (GameObject g) {
 
 		if (g != grabbedObject) {
+
+			if (grabbedObject != null) {
+				ReturnGrabbedObject ();
+			}
+
 			FreeObject (g);
 			originalPosition = g.transform.position;
+			originalRotation = g.transform.eulerAngles;
+			originalParent = g.transform.parent;
 			grabbedObject = g;
+
+			grabbedObject.transform.SetParent (this.transform);
 		}
+
+	}
+
+	private void ReturnGrabbedObject() {
+
+		grabbedObject.transform.SetParent (originalParent);
+		returningObjects.Add (new ReturningObject (grabbedObject, originalPosition, originalRotation));
+
+		grabbedObject = null;
 
 	}
 
@@ -74,12 +95,14 @@ public class ObjectGrabber : MonoBehaviour {
 	public class ReturningObject {
 
 		public Vector3 originalPosition;
+		public Vector3 originalRotation;
 		public GameObject gameObject;
 
-		public ReturningObject(Vector3 auxOriginalPosition, GameObject auxGameObject) {
+		public ReturningObject(GameObject auxGameObject, Vector3 auxPosition, Vector3 auxRotation) {
 
-			originalPosition = auxOriginalPosition;
 			gameObject = auxGameObject;
+			originalPosition = auxPosition;
+			originalRotation = auxRotation;
 
 		}
 
