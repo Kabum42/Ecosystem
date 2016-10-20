@@ -142,23 +142,21 @@ public static class Hacks {
 	}
 
 	// DETECT MOUSE OVER GAMEOBJECT
-	public static bool isOver(GameObject target) {
-		return isOver (target, "Clickable");
-	}
 
-	public static bool isOver(GameObject target, string mask)
+	public static bool isOver(GameObject target)
 	{
-		
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		
-		// CLICKABLE MASK
-		RaycastHit2D[] hits = Physics2D.RaycastAll(new Vector2(ray.origin.x, ray.origin.y), Vector2.zero, 0f, LayerMask.GetMask(mask));
-		
-		for (int i = 0; i < hits.Length; i++)
-		{
 
-			if (hits[i].collider.gameObject == target) { return true; }
-			
+		Ray aimingRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+		RaycastHit hit;
+
+		if (Physics.Raycast (aimingRay, out hit)) {
+
+			if (hit.collider.gameObject == target) {
+				return true;
+			}
+
+		} else if (target == null) {
+			return true;
 		}
 		
 		return false;
@@ -316,6 +314,35 @@ public static class Hacks {
 		gameObject1.transform.LookAt (gameObject2.transform);
 
 		return gameObject1.transform.eulerAngles;
+
+	}
+
+	public static Vector3 GetBSpline (Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4, float t) {
+
+		double[] a = new double[4];
+		double[] b = new double[4];
+		double[] c = new double[4];
+
+		a[0] = (-p1.x + 3 * p2.x - 3 * p3.x + p4.x) / 6.0;
+		a[1] = (3 * p1.x - 6 * p2.x + 3 * p3.x) / 6.0;
+		a[2] = (-3 * p1.x + 3 * p3.x) / 6.0;
+		a[3] = (p1.x + 4 * p2.x + p3.x) / 6.0;
+
+		b[0] = (-p1.y + 3 * p2.y - 3 * p3.y + p4.y) / 6.0;
+		b[1] = (3 * p1.y - 6 * p2.y + 3 * p3.y) / 6.0;
+		b[2] = (-3 * p1.y + 3 * p3.y) / 6.0;
+		b[3] = (p1.y + 4 * p2.y + p3.y) / 6.0;
+
+		c[0] = (-p1.z + 3 * p2.z - 3 * p3.z + p4.z) / 6.0;
+		c[1] = (3 * p1.z - 6 * p2.z + 3 * p3.z) / 6.0;
+		c[2] = (-3 * p1.z + 3 * p3.z) / 6.0;
+		c[3] = (p1.z + 4 * p2.z + p3.z) / 6.0;
+
+		float value_x = (float) ( (a[2] + t * (a[1] + t * a[0]))*t+a[3] );
+		float value_y = (float) ( (b[2] + t * (b[1] + t * b[0]))*t+b[3] );
+		float value_z = (float) ( (c[2] + t * (c[1] + t * c[0]))*t+c[3] );
+
+		return new Vector3 (value_x, value_y, value_z);
 
 	}
 
