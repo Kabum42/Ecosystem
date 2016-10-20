@@ -8,7 +8,7 @@ public class CursorMovement : MonoBehaviour {
 	private float posCooldown = 0f;
 
 	[Range(0f, 0.5f)]
-	public float lateralThreshold = 0.25f;
+	public float lateralThreshold = 0.1f;
 
 	// Use this for initialization
 	void Start () {
@@ -43,7 +43,7 @@ public class CursorMovement : MonoBehaviour {
 
 	void handleRotation() {
 
-		Vector3 targetRotation = new Vector3 (0f, posX * 30f, 0f);
+		Vector3 targetRotation = new Vector3 (this.transform.eulerAngles.x, posX * 30f, 0f);
 
 		Camera.main.transform.eulerAngles = Hacks.LerpVector3Angle(Camera.main.transform.eulerAngles, targetRotation, Time.deltaTime * 2f);
 

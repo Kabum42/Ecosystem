@@ -1,26 +1,78 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
-public abstract class Message {
+public class Message {
 
+	public Type type;
 	public string sender;
 	public string information;
-	public List<Option> options;
+	public List<Option> options = new List<Option>();
+	private Header lastHeader = Header.Null;
+	private Option lastOption = null;
+	private Consequence lastConsequence = null;
 
-}
-
-public class Letter : Message {
-
+	// LETTER ONLY
 	public Stamp stamp;
 
-	public Letter(string auxSender, string auxInformation, List<Option> auxOptions, Stamp auxStamp) {
+	// SPEECH ONLY
 
-		sender = auxSender;
-		information = auxInformation;
-		options = auxOptions;
-		stamp = auxStamp;
+	public Message(string path) {
 
+		path = "Messages/" + path;
+		string info = (Resources.Load (path) as TextAsset).text;
+		string[] subStrings = info.Split (MessageCrafter.infoSeparator);
+
+		foreach (string s in subStrings) {
+			if (s [0] == MessageCrafter.infoHeader) {
+				// IT'S A HEADER
+				string s2 = s.Substring (1, s.Length - 1);
+
+				foreach (Header header in Enum.GetValues(typeof(Header))) {
+					if (s2 == header.ToString ()) {
+						lastHeader = header;
+						if (lastHeader == Header.Option) {
+							lastOption = new Option ();
+							options.Add (lastOption);
+						} else if (lastHeader == Header.Consequence) {
+							lastConsequence = new Consequence ();
+							lastOption.consequences.Add (lastConsequence);
+						}
+						break;
+					}
+				}
+
+			} else {
+				// NOT A HEADER
+				if (lastHeader == Header.Type) {
+					type = (Type)Enum.Parse (typeof(Type), s);
+				} else if (lastHeader == Header.Sender) {
+					sender = s;
+				} else if (lastHeader == Header.Information) {
+					information = s;
+				} else if (lastHeader == Header.Option) {
+					// OPTION
+					lastOption.text = s;
+				} else if (lastHeader == Header.Consequence) {
+					// CONSEQUENCE
+					float change = 0f;
+
+					if (float.TryParse (s, out change)) {
+						lastConsequence.change = change;
+					} else {
+						lastConsequence.statistic = (Statistic)Enum.Parse (typeof(Statistic), s);
+					}
+
+				}
+			}
+		}
+
+	}
+
+	public enum Type {
+		Letter,
+		Speech
 	}
 
 	public enum Stamp {
@@ -30,27 +82,12 @@ public class Letter : Message {
 
 }
 
-public class Speech : Message {
-
-	public Speech(string auxSender, string auxInformation, List<Option> auxOptions) {
-
-		sender = auxSender;
-		information = auxInformation;
-		options = auxOptions;
-
-	}
-
-}
-
 public class Option {
 
 	public string text;
-	public List<Consequence> consequences;
+	public List<Consequence> consequences = new List<Consequence>();
 
-	public Option(string auxText, List<Consequence> auxConsequences) {
-
-		text = auxText;
-		consequences = auxConsequences;
+	public Option() {
 
 	}
 
@@ -58,17 +95,17 @@ public class Option {
 
 public class Consequence {
 
-	public Type type;
+	public Statistic statistic;
 	public float change = 0;
 
-	public Consequence(Type auxType, float auxChange) {
-		type = auxType;
-		change = auxChange;
+	public Consequence() {
+
 	}
 
-	public enum Type {
-		bee,
-		flower
-	}
+}
 
+public enum Statistic {
+	Deer,
+	Bear,
+	Wolf
 }
