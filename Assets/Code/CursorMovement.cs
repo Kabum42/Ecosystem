@@ -3,9 +3,12 @@ using System.Collections;
 
 public class CursorMovement : MonoBehaviour {
 
-	private int posX = 0;
-	private int posY = 0;
-	private float posCooldown = 0f;
+	private float posY = 0;
+
+	[Range(0f, 180f)]
+	public float limitRotation = 30f;
+
+	public float speedRotation = 50f;
 
 	[Range(0f, 0.5f)]
 	public float lateralThreshold = 0.1f;
@@ -18,11 +21,11 @@ public class CursorMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (posCooldown <= 0f) {
+		//if (posCooldown <= 0f) {
 			handleChangePos ();
-		} else {
-			posCooldown -= Time.deltaTime;
-		}
+		//} else {
+		//	posCooldown -= Time.deltaTime;
+		//}
 
 
 		handleRotation ();
@@ -31,21 +34,19 @@ public class CursorMovement : MonoBehaviour {
 
 	void handleChangePos() {
 
-		if (posX > -1 && Input.mousePosition.x < Screen.width * lateralThreshold) {
-			posX--;
-			posCooldown = 1f;
-		} else if (posX < 1 && Input.mousePosition.x > Screen.width - Screen.width * lateralThreshold) {
-			posX++;
-			posCooldown = 1f;
+		if (posY > -limitRotation && Input.mousePosition.x < Screen.width * lateralThreshold) {
+			posY -= Time.deltaTime * speedRotation;
+		} else if (posY < limitRotation && Input.mousePosition.x > Screen.width - Screen.width * lateralThreshold) {
+			posY += Time.deltaTime * speedRotation;
 		}
 
 	}
 
 	void handleRotation() {
 
-		Vector3 targetRotation = new Vector3 (this.transform.eulerAngles.x, posX * 30f, 0f);
+		Vector3 targetRotation = new Vector3 (this.transform.eulerAngles.x, posY, 0f);
 
-		Camera.main.transform.eulerAngles = Hacks.LerpVector3Angle(Camera.main.transform.eulerAngles, targetRotation, Time.deltaTime * 2f);
+		Camera.main.transform.eulerAngles = Hacks.LerpVector3Angle(Camera.main.transform.eulerAngles, targetRotation, Time.deltaTime * 10f);
 
 	}
 

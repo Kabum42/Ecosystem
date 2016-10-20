@@ -346,8 +346,9 @@ GameObject:
   - 4: {fileID: 1965839510}
   - 33: {fileID: 1965839509}
   - 23: {fileID: 1965839508}
-  - 114: {fileID: 1965839507}
   - 65: {fileID: 1965839511}
+  - 114: {fileID: 1965839513}
+  - 114: {fileID: 1965839512}
   m_Layer: 0
   m_Name: Walkie
   m_TagString: Untagged
@@ -355,19 +356,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1965839507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1965839506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 651de3151cd5c2d4aaf3078d76aae03d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationGrabbed: {x: -10, y: 10, z: -30}
-  positionGrabbed: {x: 1.5, y: -0.15, z: 3}
 --- !u!23 &1965839508
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -431,3 +419,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.070994, y: 8.661201, z: 1.1551354}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1965839512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1965839506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31bdfcbc9a6a25d428fbfe02b89dd32d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationGrabbed: {x: -10, y: 10, z: -30}
+  positionGrabbed: {x: 1.5, y: -0.15, z: 3}
+--- !u!114 &1965839513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1965839506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e84ff01dd5f7f34085c98f9ecd59517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
