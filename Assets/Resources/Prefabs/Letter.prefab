@@ -254,6 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationGrabbed: {x: -80, y: 0, z: 0}
+  positionGrabbed: {x: 0, y: 0, z: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

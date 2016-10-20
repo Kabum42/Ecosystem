@@ -32,7 +32,7 @@ public class ObjectGrabber : MonoBehaviour {
 
 		if (grabbedObject != null) {
 
-			Vector3 targetPosition = this.transform.position + this.transform.forward * 3f;
+			Vector3 targetPosition = this.transform.position + this.transform.forward * grabbedObject.GetComponent<InteractiveObject> ().positionGrabbed.z + this.transform.right * grabbedObject.GetComponent<InteractiveObject> ().positionGrabbed.x + this.transform.up * grabbedObject.GetComponent<InteractiveObject> ().positionGrabbed.y ;
 			grabbedObject.transform.position = Vector3.Lerp (grabbedObject.transform.position, targetPosition, Time.deltaTime * 5f);
 			grabbedObject.transform.localEulerAngles = Hacks.LerpVector3Angle(grabbedObject.transform.localEulerAngles, grabbedObject.GetComponent<InteractiveObject> ().rotationGrabbed, Time.deltaTime*5f);
 

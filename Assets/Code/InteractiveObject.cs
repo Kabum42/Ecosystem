@@ -9,6 +9,7 @@ public class InteractiveObject: MonoBehaviour {
 	ObjectGrabber objectGrabber;
 
 	public Vector3 rotationGrabbed;
+	public Vector3 positionGrabbed;
 
 	void Start () {
 		mRenderer = GetComponent<MeshRenderer> ();
