@@ -45,7 +45,8 @@ GameObject:
   - 33: {fileID: 3346820}
   - 64: {fileID: 6465834}
   - 23: {fileID: 2302520}
-  - 114: {fileID: 11403742}
+  - 114: {fileID: 114000011665196630}
+  - 114: {fileID: 114000010929614678}
   m_Layer: 0
   m_Name: Letter
   m_TagString: Untagged
@@ -242,19 +243,6 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
---- !u!114 &11403742
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 193854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 651de3151cd5c2d4aaf3078d76aae03d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationGrabbed: {x: -80, y: 0, z: 0}
-  positionGrabbed: {x: 0, y: 0, z: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -266,3 +254,27 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 193854}
   m_IsPrefabParent: 1
+--- !u!114 &114000010929614678
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31bdfcbc9a6a25d428fbfe02b89dd32d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationGrabbed: {x: -80, y: 0, z: 0}
+  positionGrabbed: {x: 0, y: 0, z: 3}
+--- !u!114 &114000011665196630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e84ff01dd5f7f34085c98f9ecd59517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
