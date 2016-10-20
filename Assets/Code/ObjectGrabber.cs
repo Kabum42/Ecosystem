@@ -32,9 +32,10 @@ public class ObjectGrabber : MonoBehaviour {
 
 		if (grabbedObject != null) {
 
-			Vector3 targetPosition = this.transform.position + this.transform.forward * grabbedObject.GetComponent<InteractiveObject> ().positionGrabbed.z + this.transform.right * grabbedObject.GetComponent<InteractiveObject> ().positionGrabbed.x + this.transform.up * grabbedObject.GetComponent<InteractiveObject> ().positionGrabbed.y ;
+			Grabbable grabbable = grabbedObject.GetComponent<Grabbable> ();
+			Vector3 targetPosition = this.transform.position + this.transform.forward * grabbable.positionGrabbed.z + this.transform.right * grabbable.positionGrabbed.x + this.transform.up * grabbable.positionGrabbed.y ;
 			grabbedObject.transform.position = Vector3.Lerp (grabbedObject.transform.position, targetPosition, Time.deltaTime * 5f);
-			grabbedObject.transform.localEulerAngles = Hacks.LerpVector3Angle(grabbedObject.transform.localEulerAngles, grabbedObject.GetComponent<InteractiveObject> ().rotationGrabbed, Time.deltaTime*5f);
+			grabbedObject.transform.localEulerAngles = Hacks.LerpVector3Angle(grabbedObject.transform.localEulerAngles, grabbable.rotationGrabbed, Time.deltaTime*5f);
 
 		}
 
@@ -55,11 +56,15 @@ public class ObjectGrabber : MonoBehaviour {
 				ReturnGrabbedObject ();
 			}
 
-			FreeObject (g);
+
 			originalPosition = g.transform.position;
 			originalRotation = g.transform.eulerAngles;
 			originalParent = g.transform.parent;
 			grabbedObject = g;
+			FreeObject (g);
+
+			g.GetComponent<Outliner> ().Outline (false);
+			g.GetComponent<Outliner> ().enabled = false;
 
 			grabbedObject.transform.SetParent (this.transform);
 		}
@@ -70,6 +75,7 @@ public class ObjectGrabber : MonoBehaviour {
 
 		grabbedObject.transform.SetParent (originalParent);
 		returningObjects.Add (new ReturningObject (grabbedObject, originalPosition, originalRotation));
+		grabbedObject.GetComponent<Outliner> ().enabled = true;
 
 		grabbedObject = null;
 
@@ -88,6 +94,8 @@ public class ObjectGrabber : MonoBehaviour {
 
 		if (r != null) {
 			returningObjects.Remove (r);
+			originalPosition = r.originalPosition;
+			originalRotation = r.originalRotation;
 		}
 
 	}

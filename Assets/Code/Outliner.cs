@@ -1,30 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InteractiveObject: MonoBehaviour {
+public class Outliner : MonoBehaviour {
 
 	MeshRenderer mRenderer;
 	Shader defaultShader;
 	Shader outlineShader;
-	ObjectGrabber objectGrabber;
 
-	public Vector3 rotationGrabbed;
-	public Vector3 positionGrabbed;
-
+	// Use this for initialization
 	void Start () {
+	
 		mRenderer = GetComponent<MeshRenderer> ();
 		defaultShader = mRenderer.material.shader;
 		outlineShader = Shader.Find ("Outlined_Diffuse");
-		objectGrabber = Camera.main.gameObject.GetComponent<ObjectGrabber> ();
+
 	}
 	
+	// Update is called once per frame
 	void Update () {
-		
+	
 		if (Hacks.isOver (this.gameObject)) {
 			Outline (true);
-			if (Input.GetMouseButtonDown (0)) {
-				objectGrabber.Grab (this.gameObject);
-			}
 		} else {
 			Outline (false);
 		}
@@ -32,7 +28,7 @@ public class InteractiveObject: MonoBehaviour {
 	}
 
 	public void Outline(bool b) {
-		
+
 		if (b) {
 			if (mRenderer.material.shader != outlineShader) {
 				mRenderer.material.shader = outlineShader;
@@ -44,4 +40,5 @@ public class InteractiveObject: MonoBehaviour {
 		}
 
 	}
+
 }
