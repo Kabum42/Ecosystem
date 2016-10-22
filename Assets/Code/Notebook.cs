@@ -5,18 +5,14 @@ using System.Collections.Generic;
 public class Notebook : MonoBehaviour {
 
 	[SerializeField] List<GameObject> pages = new List<GameObject>();
-	List<GameObject> separators = new List<GameObject>();
-	Vector3 rotPoint;
+	[SerializeField] List<GameObject> separators = new List<GameObject>();
 	int actualPage = 0;
 
-	public bool isGrabbed = false;
-
 	void Start () {
-		rotPoint = transform.GetChild (0).transform.position;
 	}
 	
 	void Update () {
-		if (isGrabbed) {
+		if (Camera.main.GetComponent<ObjectGrabber> ().grabbedObject == this.gameObject) {
 			CheckInput ();
 		}
 
@@ -31,8 +27,15 @@ public class Notebook : MonoBehaviour {
 	void CheckInput() {
 		foreach (GameObject s in separators) {
 			if (Hacks.isOver (s)) {
-				int index = separators.IndexOf (s);
-				ShowPage (index);
+				s.GetComponent<Outliner> ().enabled = true;
+				if (Input.GetMouseButtonDown (0)) {
+					int index = separators.IndexOf (s) + 1;
+					ShowPage (index);
+				}
+			}
+			else {
+				s.GetComponent<Outliner> ().Outline (false);
+				s.GetComponent<Outliner> ().enabled = false;
 			}
 		}
 	}
@@ -53,8 +56,10 @@ public class Notebook : MonoBehaviour {
 
 	void TurnPage(GameObject page, bool left) {
 		if(left)
-			page.transform.RotateAround (rotPoint, page.transform.up, 180f);
+			//page.transform.RotateAround (rotPoint, page.transform.up, 180f);
+			page.transform.Translate(page.transform.right * -2f);
 		else
-			page.transform.RotateAround (rotPoint, page.transform.up, -180f);
+			//page.transform.RotateAround (rotPoint, page.transform.up, -180f);
+			page.transform.Translate(page.transform.right * 2f);
 	}
 }
