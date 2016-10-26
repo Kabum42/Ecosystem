@@ -41,8 +41,8 @@ public class MessageCrafter : MonoBehaviour {
 
 		typeDropDown.AddOptions (options);
 
-		foreach (Statistic s in Enum.GetValues(typeof(Statistic))) {
-			statistics.Add (s.ToString ());
+		foreach (Species species in Enum.GetValues(typeof(Species))) {
+			statistics.Add (species.ToString ());
 		}
 
 	}

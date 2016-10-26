@@ -31,6 +31,11 @@ public static class Hacks {
         s.color = new Color(s.color.r, s.color.g, s.color.b, a);
     }
 
+	public static void SpriteRendererAlpha(SpriteRenderer s, float a, float t)
+	{
+		s.color = Color.Lerp (s.color, new Color (s.color.r, s.color.g, s.color.b, a), t);
+	}
+
     // SPRITE RENDERER COLOR
     public static void SpriteRendererColor(GameObject g, Color c)
     {
@@ -69,6 +74,11 @@ public static class Hacks {
 		
 		return new Vector3 (resultX, resultY, resultZ);
 		
+	}
+
+	// POSITION GAMEOBJECT
+	public static void GameObjectLerp(GameObject g, Vector3 position, float t) {
+		g.transform.position = Vector3.Lerp (g.transform.position, position, t);
 	}
 
     // BINARY PERLIN
