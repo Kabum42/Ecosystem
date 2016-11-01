@@ -10,6 +10,9 @@ public static class Ecosystem {
 	public static float cleaning = 100f/100f;
 	public static List<SpeciesData> speciesDataList = new List<SpeciesData>();
 
+	private static int vegetationCap = 1000;
+	private static float vegetationReproduction = 0.3f;
+
 	public static void Start() {
 		if (!started) {
 			started = true;
@@ -21,54 +24,45 @@ public static class Ecosystem {
 
 		SpeciesData sp;
 
-		//TREE
-		sp = new SpeciesData(Species.Tree, 20f);
-		sp.populationCap = 1000;
-		sp.AddBooster (Species.Bee);
-		speciesDataList.Add (sp);
-
-		//BUSH
-		sp = new SpeciesData(Species.Bush, 20f);
-		sp.populationCap = 2000;
-		sp.AddBooster (Species.Bee);
+		//VEGETATION
+		sp = new SpeciesData(Species.Vegetation, deathRate + vegetationReproduction);
+		sp.populationCap = vegetationCap;
+		sp.AddBooster (Species.Beehive);
 		speciesDataList.Add (sp);
 
 		//BEE
-		sp = new SpeciesData(Species.Bee, 20f);
-		sp.populationCap = 3000;
-		sp.AddBooster (Species.Tree);
-		sp.AddBooster (Species.Bush);
+		sp = new SpeciesData(Species.Beehive, deathRate + vegetationReproduction);
+		sp.populationCap = 50;
+		sp.AddBooster (Species.Vegetation);
 		speciesDataList.Add (sp);
 
 		//RABBIT
-		sp = new SpeciesData(Species.Rabbit, 20f);
-		sp.AddPrey (Species.Bush);
+		sp = new SpeciesData(Species.Rabbit, deathRate + vegetationReproduction * 1.5f);
+		sp.AddPrey (Species.Vegetation);
+		speciesDataList.Add (sp);
+
+		//SALMON
+		sp = new SpeciesData(Species.Salmon, deathRate + vegetationReproduction * 0.31f);
+		sp.AddPrey (Species.Vegetation);
 		speciesDataList.Add (sp);
 
 		//DEER
-		sp = new SpeciesData(Species.Deer, 5f);
-		sp.AddPrey (Species.Bush);
+		sp = new SpeciesData(Species.Deer, deathRate + vegetationReproduction * 0.32f);
+		sp.AddPrey (Species.Vegetation);
 		speciesDataList.Add (sp);
 
 		//WOLF
-		sp = new SpeciesData(Species.Wolf, 5f);
+		sp = new SpeciesData(Species.Wolf, deathRate + vegetationReproduction * 0.05f);
 		sp.AddPrey (Species.Rabbit);
 		sp.AddPrey (Species.Deer);
 		speciesDataList.Add (sp);
 
 		//BEAR
-		sp = new SpeciesData(Species.Bear, 1.1f);
-		sp.AddPrey (Species.Bush);
-		sp.AddPrey (Species.Bee);
+		sp = new SpeciesData(Species.Bear, deathRate + vegetationReproduction * 0.01f);
+		sp.AddPrey (Species.Beehive);
 		sp.AddPrey (Species.Rabbit);
 		sp.AddPrey (Species.Salmon);
 		speciesDataList.Add (sp);
-
-		//SALMON
-		sp = new SpeciesData(Species.Salmon, 20f);
-		sp.populationCap = 100;
-		speciesDataList.Add (sp);
-
 
 	}
 
@@ -148,8 +142,8 @@ public class SpeciesData {
 				float wantToEat = population * weight;
 				float eat = wantToEat;
 
-				if (eat > preyData.population * preyData.reproductionRate/100f *0.1f) {
-					eat = preyData.population * preyData.reproductionRate/100f *0.1f;
+				if (eat > preyData.population * 0.05f) {
+					eat = preyData.population * 0.05f;
 				}
 
 				preyData.population -= eat;
@@ -162,7 +156,7 @@ public class SpeciesData {
 				float weight = 1f / ((float)preys.Count + (float) boosters.Count);
 				SpeciesData boosterData = Ecosystem.GetSpeciesData (booster);
 
-				float wantToEat = population * weight * 0.1f;
+				float wantToEat = population * weight * 0.05f;
 				float eat = wantToEat;
 
 				if (eat > boosterData.population) {
@@ -187,7 +181,7 @@ public class SpeciesData {
 		// REPRODUCTION
 		if (population >= 2) {
 			float foodModifier = Predate();
-			populationChange += (reproductionRate/100f) * foodModifier;
+			populationChange += (reproductionRate) * foodModifier;
 		}
 
 		// DEATH
@@ -204,9 +198,8 @@ public class SpeciesData {
 }
 
 public enum Species {
-	Tree,
-	Bush,
-	Bee,
+	Vegetation,
+	Beehive,
 	Rabbit,
 	Deer,
 	Wolf,
