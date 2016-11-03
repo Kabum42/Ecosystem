@@ -11,6 +11,7 @@ public class Outliner : MonoBehaviour {
 
 	public Color outlineColor;
 	public float outlineWidth;
+	public bool isOutlined = false;
 
 	void Start () {
 		foreach (MeshRenderer mR in objectsToOutline) {
@@ -42,6 +43,7 @@ public class Outliner : MonoBehaviour {
 			else if (objectsToOutline [i].material.shader != defaultShaders [i])
 				objectsToOutline [i].material.shader = defaultShaders [i];
 		}
-	}
 
+		isOutlined = b;
+	}
 }

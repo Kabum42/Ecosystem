@@ -29,12 +29,14 @@ public class Notebook : MonoBehaviour {
 			if (Hacks.isOver (s)) {
 				s.GetComponent<Outliner> ().enabled = true;
 				if (Input.GetMouseButtonDown (0)) {
-					int index = separators.IndexOf (s) + 1;
-					ShowPage (index);
+					int index = separators.IndexOf (s);
+					ShowPage (index + 1);
 				}
 			}
 			else {
-				s.GetComponent<Outliner> ().Outline (false);
+				if(s.GetComponent<Outliner>().isOutlined)
+					s.GetComponent<Outliner> ().Outline (false);
+				
 				s.GetComponent<Outliner> ().enabled = false;
 			}
 		}
