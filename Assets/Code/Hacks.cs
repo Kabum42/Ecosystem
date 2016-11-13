@@ -173,6 +173,32 @@ public static class Hacks {
 		
 	}
 
+	public static bool isOver(GameObject target, bool checkLayer)
+	{
+
+		if (!checkLayer) {
+			return isOver (target);
+		} else {
+
+			Ray aimingRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+			RaycastHit hit;
+
+			if (Physics.Raycast (aimingRay, out hit, float.PositiveInfinity, target.layer)) {
+
+				if (hit.collider.gameObject == target) {
+					return true;
+				}
+
+			} else if (target == null) {
+				return true;
+			}
+
+			return false;
+
+		}
+
+	}
+
 	// SOUND
 	public static AudioSource GetAudioSource() {
 

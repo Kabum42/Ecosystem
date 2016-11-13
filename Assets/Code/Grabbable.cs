@@ -9,7 +9,7 @@ public class Grabbable : MonoBehaviour {
 	public Vector3 positionGrabbed;
 
 	private static float lastTimeChecked = 0f;
-	private static string consensusTexture = "none";
+	private static CursorOption lastCursor = CursorOption.Arrow;
 
 	void Start () {
 
@@ -37,15 +37,13 @@ public class Grabbable : MonoBehaviour {
 	void setHand() {
 
 		if (lastTimeChecked == Time.time) {
-
-			consensusTexture = "hand";
+			// OVERRIDES
+			lastCursor = CursorOption.Hand;
 
 		} else {
 
 			setPrevious ();
-
-			consensusTexture = "hand";
-			lastTimeChecked = Time.time;
+			lastCursor = CursorOption.Hand;
 
 		}
 
@@ -55,14 +53,12 @@ public class Grabbable : MonoBehaviour {
 
 		if (lastTimeChecked == Time.time) {
 
-
+			// DOESN'T OVERRIDE
 
 		} else {
 
 			setPrevious ();
-
-			consensusTexture = "arrow";
-			lastTimeChecked = Time.time;
+			lastCursor = CursorOption.Arrow;
 
 		}
 
@@ -70,9 +66,25 @@ public class Grabbable : MonoBehaviour {
 
 	void setPrevious() {
 
-		Texture2D cursorTexture = Resources.Load ("2d/cursor_"+consensusTexture, typeof(Texture2D)) as Texture2D;
-		Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+		if (lastCursor == CursorOption.Arrow) {
+			
+			Texture2D cursorTexture = Resources.Load ("2d/cursor_arrow", typeof(Texture2D)) as Texture2D;
+			Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
 
+		} else if (lastCursor == CursorOption.Hand) {
+			
+			Texture2D cursorTexture = Resources.Load ("2d/cursor_hand", typeof(Texture2D)) as Texture2D;
+			Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
+
+		}
+
+		lastTimeChecked = Time.time;
+
+	}
+
+	private enum CursorOption {
+		Arrow,
+		Hand
 	}
 
 }
