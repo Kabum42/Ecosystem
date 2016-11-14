@@ -407,7 +407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   limitRotation: 30
   speedRotation: 50
-  lateralThreshold: 0.05
+  lateralThreshold: 0.02
 --- !u!114 &766758564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,6 +493,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!1001 &1212657703
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 489624, guid: 347d0da11757d4c49aefe986a9bb4bfc, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 489624, guid: 347d0da11757d4c49aefe986a9bb4bfc, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 5.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 489624, guid: 347d0da11757d4c49aefe986a9bb4bfc, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 14.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 489624, guid: 347d0da11757d4c49aefe986a9bb4bfc, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489624, guid: 347d0da11757d4c49aefe986a9bb4bfc, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489624, guid: 347d0da11757d4c49aefe986a9bb4bfc, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489624, guid: 347d0da11757d4c49aefe986a9bb4bfc, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 489624, guid: 347d0da11757d4c49aefe986a9bb4bfc, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 193854, guid: 347d0da11757d4c49aefe986a9bb4bfc, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 10237940, guid: 347d0da11757d4c49aefe986a9bb4bfc, type: 2}
+      propertyPath: m_Color.rgba
+      value: 4278190080
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 347d0da11757d4c49aefe986a9bb4bfc, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1965839506
 GameObject:
   m_ObjectHideFlags: 0

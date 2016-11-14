@@ -4,6 +4,7 @@ using System.Collections;
 public class PhysicalLetter {
 
 	public GameObject gameObject;
+	public Vector3 targetLocalEulerAngles = Vector3.zero;
 	private TextMesh senderTextMesh;
 	private TextMesh informationTextMesh;
 

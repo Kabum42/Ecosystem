@@ -3,7 +3,9 @@ using System.Collections;
 
 public class Grabbable : MonoBehaviour {
 
-	ObjectGrabber objectGrabber;
+	public static ObjectGrabber objectGrabber;
+
+	public Grabbable grabbableParent;
 
 	public Vector3 rotationGrabbed;
 	public Vector3 positionGrabbed;
@@ -13,7 +15,9 @@ public class Grabbable : MonoBehaviour {
 
 	void Start () {
 
-		objectGrabber = Camera.main.gameObject.GetComponent<ObjectGrabber> ();
+		if (objectGrabber == null) {
+			objectGrabber = Camera.main.gameObject.GetComponent<ObjectGrabber> ();
+		}
 
 	}
 
@@ -24,11 +28,27 @@ public class Grabbable : MonoBehaviour {
 			setHand ();
 
 			if (Input.GetMouseButtonDown (0)) {
-				objectGrabber.Grab (this.gameObject);
+
+				Grab ();
+
 			}
 		} else {
 
 			setArrow ();
+
+		}
+
+	}
+
+	public void Grab() {
+
+		if (grabbableParent == null) {
+
+			objectGrabber.Grab (this.gameObject);
+
+		} else {
+
+			grabbableParent.Grab ();
 
 		}
 

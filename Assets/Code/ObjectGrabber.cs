@@ -63,8 +63,10 @@ public class ObjectGrabber : MonoBehaviour {
 			grabbedObject = g;
 			FreeObject (g);
 
-			g.GetComponent<Outliner> ().Outline (false);
-			g.GetComponent<Outliner> ().enabled = false;
+			if (g.GetComponent<Outliner> () != null) {
+				g.GetComponent<Outliner> ().Outline (false);
+				g.GetComponent<Outliner> ().enabled = false;
+			}
 
 			grabbedObject.transform.SetParent (this.transform);
 		}
@@ -75,7 +77,10 @@ public class ObjectGrabber : MonoBehaviour {
 
 		grabbedObject.transform.SetParent (originalParent);
 		returningObjects.Add (new ReturningObject (grabbedObject, originalPosition, originalRotation));
-		grabbedObject.GetComponent<Outliner> ().enabled = true;
+
+		if (grabbedObject.GetComponent<Outliner> () != null) {
+			grabbedObject.GetComponent<Outliner> ().enabled = true;
+		}
 
 		grabbedObject = null;
 
