@@ -23,7 +23,7 @@ public class Grabbable : MonoBehaviour {
 
 	void Update () {
 
-		if (Hacks.isOver (this.gameObject)) {
+		if (Hacks.isOver (this.gameObject, true)) {
 
 			setHand ();
 

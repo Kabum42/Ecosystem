@@ -176,14 +176,14 @@ public static class Hacks {
 	public static bool isOver(GameObject target, bool checkLayer)
 	{
 
-		if (!checkLayer) {
+		if (!checkLayer || target == null) {
 			return isOver (target);
 		} else {
 
 			Ray aimingRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hit;
 
-			if (Physics.Raycast (aimingRay, out hit, float.PositiveInfinity, target.layer)) {
+			if (Physics.Raycast (aimingRay, out hit, float.PositiveInfinity,  1 << target.layer)) {
 
 				if (hit.collider.gameObject == target) {
 					return true;
@@ -196,6 +196,38 @@ public static class Hacks {
 			return false;
 
 		}
+
+	}
+
+	public static GameObject getOver()
+	{
+
+		Ray aimingRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+		RaycastHit hit;
+
+		if (Physics.Raycast (aimingRay, out hit)) {
+
+			return hit.collider.gameObject;
+
+		}
+
+		return null;
+
+	}
+
+	public static GameObject getOver(int layer)
+	{
+
+		Ray aimingRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+		RaycastHit hit;
+
+		if (Physics.Raycast (aimingRay, out hit, float.PositiveInfinity,  1 << layer)) {
+
+			return hit.collider.gameObject;
+
+		}
+
+		return null;
 
 	}
 

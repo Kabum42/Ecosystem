@@ -22,7 +22,7 @@ public class ObjectGrabber : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetMouseButtonDown (0) && !Hacks.isOver(grabbedObject)) {
+		if (Input.GetMouseButtonDown (0) && trueOver() != grabbedObject) {
 
 			if (grabbedObject != null) {
 				ReturnGrabbedObject ();
@@ -48,6 +48,20 @@ public class ObjectGrabber : MonoBehaviour {
 	
 	}
 
+	private GameObject trueOver() {
+
+		GameObject g = Hacks.getOver (LayerMask.NameToLayer("Grabbable"));
+
+		if (g != null) {
+			while (g.GetComponent<Grabbable> ().grabbableParent != null) {
+				g = g.GetComponent<Grabbable> ().grabbableParent.gameObject;
+			}
+		}
+
+		return g;
+
+	}
+
 	public void Grab (GameObject g) {
 
 		if (g != grabbedObject) {
@@ -55,7 +69,6 @@ public class ObjectGrabber : MonoBehaviour {
 			if (grabbedObject != null) {
 				ReturnGrabbedObject ();
 			}
-
 
 			originalPosition = g.transform.position;
 			originalRotation = g.transform.eulerAngles;
@@ -86,7 +99,7 @@ public class ObjectGrabber : MonoBehaviour {
 
 	}
 
-	public void FreeObject(GameObject g) {
+	private void FreeObject(GameObject g) {
 
 		ReturningObject r = null;
 

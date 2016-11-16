@@ -552,7 +552,7 @@ GameObject:
   - 65: {fileID: 1965839511}
   - 114: {fileID: 1965839513}
   - 114: {fileID: 1965839512}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Walkie
   m_TagString: Untagged
   m_Icon: {fileID: 0}

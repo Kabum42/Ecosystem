@@ -31,6 +31,7 @@ public class Main : MonoBehaviour {
 		public LetterStack() {
 
 			gameobject = new GameObject();
+			gameobject.layer = LayerMask.NameToLayer("Grabbable");
 			gameobject.transform.position = new Vector3(-0.46f, 5.23f, 14.63f);
 			gameobject.AddComponent<Grabbable>();
 			gameobject.GetComponent<Grabbable>().rotationGrabbed = new Vector3(-80f, 0f, 0f);
