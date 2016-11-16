@@ -35,7 +35,7 @@ public class Main : MonoBehaviour {
 			gameobject.transform.position = new Vector3(-0.46f, 5.23f, 14.63f);
 			gameobject.AddComponent<Grabbable>();
 			gameobject.GetComponent<Grabbable>().rotationGrabbed = new Vector3(-80f, 0f, 0f);
-			gameobject.GetComponent<Grabbable>().positionGrabbed = new Vector3(0f, 0f, 3f);
+			gameobject.GetComponent<Grabbable>().positionGrabbed = new Vector3(0f, 0.1f, 3f);
 
 		}
 
