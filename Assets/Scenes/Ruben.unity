@@ -536,10 +536,6 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 10237940, guid: 347d0da11757d4c49aefe986a9bb4bfc, type: 2}
-      propertyPath: m_Color.rgba
-      value: 4278190080
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 347d0da11757d4c49aefe986a9bb4bfc, type: 2}
   m_IsPrefabParent: 0
@@ -637,6 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31bdfcbc9a6a25d428fbfe02b89dd32d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grabbableParent: {fileID: 0}
   rotationGrabbed: {x: -10, y: 10, z: -30}
   positionGrabbed: {x: 1.5, y: -0.15, z: 3}
 --- !u!114 &1965839513

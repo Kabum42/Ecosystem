@@ -64,6 +64,18 @@ public class Main : MonoBehaviour {
 
 			if (Grabbable.objectGrabber.grabbedObject == gameobject) {
 
+				PhysicalLetter currentPL = pLetterList [pLetterList.Count -1];
+
+				foreach (TextMesh optionTM in currentPL.optionsTextMesh) {
+
+					if (Hacks.isOver (optionTM.gameObject)) {
+						optionTM.color = Color.green;
+					} else {
+						optionTM.color = Color.gray;
+					}
+
+				}
+
 				if (Input.GetKeyDown (KeyCode.UpArrow)) {
 					PhysicalLetter pL = pLetterList [0];
 					pLetterList.Remove(pL);
