@@ -24,7 +24,12 @@ public class AnimalInstantiator : MonoBehaviour {
 	public float offsetx;
 
 	void Start () {
+		//Ecosystem.Start ();
+
 		InstantiateAnimals ();
+
+		//GET ANIMAL POPULATION
+		//Ecosystem.speciesDataList [4].population;
 
 		circle = new GameObject ("Circle");
 		circle.transform.position = zoneCenter.position;
