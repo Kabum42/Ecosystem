@@ -37,6 +37,7 @@ public class LineChartCreator : MonoBehaviour {
 			dot.AddComponent<SpriteRenderer> ();
 			dot.GetComponent<SpriteRenderer> ().sprite = dotSprite;
 			dot.transform.localPosition = new Vector3 (minX + ((i) * stepX), ((values [i]/100) * stepY) - maxY, 0);
+			dot.transform.localEulerAngles = Vector3.zero;
 
 			if (i < values.Count - 1) {
 				string lineName = "line" + i;
@@ -60,6 +61,7 @@ public class LineChartCreator : MonoBehaviour {
 		Vector3 scale = new Vector3 (1, 1, 1);
 		scale.x = Vector3.Distance (initialPos, finalPos);
 		line.transform.localScale = new Vector3 (scale.x * 7f, 0.5f, 1);
+		line.transform.localEulerAngles = new Vector3 (0f, 0f, line.transform.localEulerAngles.z);
 	}
 
 	void RandomValues() {

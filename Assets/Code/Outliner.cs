@@ -1,22 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Outliner : MonoBehaviour {
 
-	MeshRenderer mRenderer;
+	[SerializeField] List<MeshRenderer> objectsToOutline = new List<MeshRenderer>();
+	List<Shader> defaultShaders = new List<Shader> ();
 	Shader defaultShader;
 	Shader outlineShader;
 
-	// Use this for initialization
-	void Start () {
-	
-		mRenderer = GetComponent<MeshRenderer> ();
-		defaultShader = mRenderer.material.shader;
-		outlineShader = Shader.Find ("Outlined_Diffuse");
+	public Color outlineColor;
+	public float outlineWidth;
+	public bool isOutlined = false;
 
+	void Start () {
+		foreach (MeshRenderer mR in objectsToOutline) {
+			defaultShaders.Add (mR.material.shader);
+		}
+
+		outlineShader = Shader.Find ("Outlined_Diffuse");
 	}
 	
-	// Update is called once per frame
 	void Update () {
 	
 		if (Hacks.isOver (this.gameObject)) {
@@ -28,17 +32,18 @@ public class Outliner : MonoBehaviour {
 	}
 
 	public void Outline(bool b) {
-
-		if (b) {
-			if (mRenderer.material.shader != outlineShader) {
-				mRenderer.material.shader = outlineShader;
+		for (int i = 0; i < objectsToOutline.Count; i++) {
+			if (b) {
+				if (objectsToOutline [i].material.shader != outlineShader) {
+					objectsToOutline [i].material.shader = outlineShader;
+					objectsToOutline [i].material.SetColor ("_OutlineColor", outlineColor);
+					objectsToOutline [i].material.SetFloat ("_Outline", outlineWidth);
+				}
 			}
-		} else {
-			if (mRenderer.material.shader != defaultShader) {
-				mRenderer.material.shader = defaultShader;
-			}
+			else if (objectsToOutline [i].material.shader != defaultShaders [i])
+				objectsToOutline [i].material.shader = defaultShaders [i];
 		}
 
+		isOutlined = b;
 	}
-
 }
