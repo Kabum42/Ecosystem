@@ -22,7 +22,7 @@ public class ObjectGrabber : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetMouseButtonDown (0) && !Hacks.isOver(grabbedObject)) {
+		if (Input.GetMouseButtonDown (0) && trueOver() != grabbedObject) {
 
 			if (grabbedObject != null) {
 				ReturnGrabbedObject ();
@@ -48,6 +48,20 @@ public class ObjectGrabber : MonoBehaviour {
 	
 	}
 
+	private GameObject trueOver() {
+
+		GameObject g = Hacks.getOver (LayerMask.NameToLayer("Grabbable"));
+
+		if (g != null) {
+			while (g.GetComponent<Grabbable> ().grabbableParent != null) {
+				g = g.GetComponent<Grabbable> ().grabbableParent.gameObject;
+			}
+		}
+
+		return g;
+
+	}
+
 	public void Grab (GameObject g) {
 
 		if (g != grabbedObject) {
@@ -56,15 +70,16 @@ public class ObjectGrabber : MonoBehaviour {
 				ReturnGrabbedObject ();
 			}
 
-
 			originalPosition = g.transform.position;
 			originalRotation = g.transform.eulerAngles;
 			originalParent = g.transform.parent;
 			grabbedObject = g;
 			FreeObject (g);
 
-			g.GetComponent<Outliner> ().Outline (false);
-			g.GetComponent<Outliner> ().enabled = false;
+			if (g.GetComponent<Outliner> () != null) {
+				g.GetComponent<Outliner> ().Outline (false);
+				g.GetComponent<Outliner> ().enabled = false;
+			}
 
 			grabbedObject.transform.SetParent (this.transform);
 		}
@@ -75,13 +90,16 @@ public class ObjectGrabber : MonoBehaviour {
 
 		grabbedObject.transform.SetParent (originalParent);
 		returningObjects.Add (new ReturningObject (grabbedObject, originalPosition, originalRotation));
-		grabbedObject.GetComponent<Outliner> ().enabled = true;
+
+		if (grabbedObject.GetComponent<Outliner> () != null) {
+			grabbedObject.GetComponent<Outliner> ().enabled = true;
+		}
 
 		grabbedObject = null;
 
 	}
 
-	public void FreeObject(GameObject g) {
+	private void FreeObject(GameObject g) {
 
 		ReturningObject r = null;
 

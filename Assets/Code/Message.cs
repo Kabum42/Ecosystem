@@ -61,7 +61,7 @@ public class Message {
 					if (float.TryParse (s, out change)) {
 						lastConsequence.change = change;
 					} else {
-						lastConsequence.statistic = (Statistic)Enum.Parse (typeof(Statistic), s);
+						lastConsequence.species = (Species)Enum.Parse (typeof(Species), s);
 					}
 
 				}
@@ -95,17 +95,11 @@ public class Option {
 
 public class Consequence {
 
-	public Statistic statistic;
+	public Species species;
 	public float change = 0;
 
 	public Consequence() {
 
 	}
 
-}
-
-public enum Statistic {
-	Deer,
-	Bear,
-	Wolf
 }

@@ -31,6 +31,11 @@ public static class Hacks {
         s.color = new Color(s.color.r, s.color.g, s.color.b, a);
     }
 
+	public static void SpriteRendererAlpha(SpriteRenderer s, float a, float t)
+	{
+		s.color = Color.Lerp (s.color, new Color (s.color.r, s.color.g, s.color.b, a), t);
+	}
+
     // SPRITE RENDERER COLOR
     public static void SpriteRendererColor(GameObject g, Color c)
     {
@@ -69,6 +74,11 @@ public static class Hacks {
 		
 		return new Vector3 (resultX, resultY, resultZ);
 		
+	}
+
+	// POSITION GAMEOBJECT
+	public static void GameObjectLerp(GameObject g, Vector3 position, float t) {
+		g.transform.position = Vector3.Lerp (g.transform.position, position, t);
 	}
 
     // BINARY PERLIN
@@ -161,6 +171,64 @@ public static class Hacks {
 		
 		return false;
 		
+	}
+
+	public static bool isOver(GameObject target, bool checkLayer)
+	{
+
+		if (!checkLayer || target == null) {
+			return isOver (target);
+		} else {
+
+			Ray aimingRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+			RaycastHit hit;
+
+			if (Physics.Raycast (aimingRay, out hit, float.PositiveInfinity,  1 << target.layer)) {
+
+				if (hit.collider.gameObject == target) {
+					return true;
+				}
+
+			} else if (target == null) {
+				return true;
+			}
+
+			return false;
+
+		}
+
+	}
+
+	public static GameObject getOver()
+	{
+
+		Ray aimingRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+		RaycastHit hit;
+
+		if (Physics.Raycast (aimingRay, out hit)) {
+
+			return hit.collider.gameObject;
+
+		}
+
+		return null;
+
+	}
+
+	public static GameObject getOver(int layer)
+	{
+
+		Ray aimingRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+		RaycastHit hit;
+
+		if (Physics.Raycast (aimingRay, out hit, float.PositiveInfinity,  1 << layer)) {
+
+			return hit.collider.gameObject;
+
+		}
+
+		return null;
+
 	}
 
 	// SOUND
