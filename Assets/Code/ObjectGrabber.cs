@@ -86,7 +86,7 @@ public class ObjectGrabber : MonoBehaviour {
 
 	}
 
-	private void ReturnGrabbedObject() {
+	public void ReturnGrabbedObject() {
 
 		grabbedObject.transform.SetParent (originalParent);
 		returningObjects.Add (new ReturningObject (grabbedObject, originalPosition, originalRotation));
