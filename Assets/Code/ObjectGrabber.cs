@@ -15,8 +15,6 @@ public class ObjectGrabber : MonoBehaviour {
 	
 		grabbedObject = null;
 
-		Message m = new Message ("hehe");
-
 	}
 	
 	// Update is called once per frame
