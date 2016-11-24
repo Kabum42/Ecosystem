@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Main : MonoBehaviour {
 
 	private LetterStack todayStack;
+	public static List<PhysicalLetter> discardedLetters = new List<PhysicalLetter>();
+	public Image fade;
+	private State state = State.Playing;
 
 	// Use this for initialization
 	void Start () {
-	
+
+		Ecosystem.Start ();
 		todayStack = new LetterStack ();
 		todayStack.addLetters (5);
 
@@ -17,8 +22,49 @@ public class Main : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		todayStack.Update ();
+		if (state == State.Playing) {
 
+			todayStack.Update ();
+
+			if (todayStack.pLetterList.Count == 0) {
+				
+				Grabbable.objectGrabber.ReturnGrabbedObject ();
+				state = State.Off;
+
+			}
+
+		} else if (state == State.Off) {
+
+			fade.color = Hacks.ColorLerpAlpha (fade.color, 1.1f, Time.deltaTime * 2f);
+
+			if (fade.color.a >= 1f) {
+
+				Ecosystem.Simulate ();
+				todayStack.addLetters (5);
+				state = State.On;
+
+			}
+
+		} else if (state == State.On) {
+
+			todayStack.Update ();
+
+			fade.color = Hacks.ColorLerpAlpha (fade.color, -0.1f, Time.deltaTime * 2f);
+
+			if (fade.color.a <= 0f) {
+
+				state = State.Playing;
+
+			}
+
+		}
+
+	}
+
+	private enum State {
+		Playing,
+		Off,
+		On
 	}
 
 
@@ -63,44 +109,70 @@ public class Main : MonoBehaviour {
 
 		public void Update() {
 
-			if (Grabbable.objectGrabber.grabbedObject == gameobject) {
+			if (Grabbable.objectGrabber.grabbedObject == gameobject && pLetterList.Count > 0) {
 
 				PhysicalLetter currentPL = pLetterList [pLetterList.Count -1];
 
-				foreach (TextMesh optionTM in currentPL.optionsTextMesh) {
+				if (currentPL.selectedOption == null) {
+					foreach (TextMesh optionTM in currentPL.optionsTextMesh) {
 
-					if (Hacks.isOver (optionTM.gameObject)) {
-						optionTM.color = Color.green;
-					} else {
-						optionTM.color = Color.gray;
+						if (Hacks.isOver (optionTM.gameObject)) {
+							
+							optionTM.color = PhysicalLetter.selectedColor;
+
+							if (Input.GetMouseButtonDown (0)) {
+								
+								currentPL.selectedOption = optionTM;
+								currentPL.tick.transform.localPosition = new Vector3 (currentPL.tick.transform.localPosition.x, currentPL.tick.transform.localPosition.y, currentPL.selectedOption.transform.localPosition.z);
+								currentPL.tick.gameObject.SetActive (true);
+
+								UseLetter (currentPL);
+
+							}
+
+						} else {
+							
+							optionTM.color = PhysicalLetter.unselectedColor;
+
+						}
+
 					}
 
 				}
-
+					
 				if (Input.GetKeyDown (KeyCode.UpArrow)) {
+					
 					PhysicalLetter pL = pLetterList [0];
 					pLetterList.Remove(pL);
 					pLetterList.Add (pL);
+
 				} else if (Input.GetKeyDown (KeyCode.DownArrow)) {
+					
 					PhysicalLetter pL = pLetterList[pLetterList.Count - 1];
 					pLetterList.Remove(pL);
 					pLetterList.Insert (0, pL);
+
 				}
 
 				if (!lastTimeGrabbed) {
+					
 					foreach (PhysicalLetter pL in pLetterList) {
 						pL.targetLocalEulerAngles = Vector3.zero;
 					}
+
 				}
 				lastTimeGrabbed = true;
 
 			} else {
+				
 				if (lastTimeGrabbed) {
 					
 					foreach (PhysicalLetter pL in pLetterList) {
 						pL.targetLocalEulerAngles = new Vector3 (0f, Random.Range (-10f, 10f), 0f);
 					}
+
 				}
+
 				lastTimeGrabbed = false;
 
 			}
@@ -114,6 +186,15 @@ public class Main : MonoBehaviour {
 				distance += 0.03f;
 
 			}
+
+		}
+
+		private void UseLetter(PhysicalLetter pL) {
+
+			pL.Use ();
+			pLetterList.Remove (pL);
+			Main.discardedLetters.Add (pL);
+			pL.gameObject.SetActive (false);
 
 		}
 

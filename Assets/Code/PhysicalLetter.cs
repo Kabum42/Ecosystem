@@ -6,10 +6,16 @@ public class PhysicalLetter {
 
 	public GameObject gameObject;
 	public Vector3 targetLocalEulerAngles = Vector3.zero;
+	public static Color selectedColor = new Color(0.1f, 0.1f, 0.1f);
+	public static Color unselectedColor = new Color (0.4f, 0.4f, 0.4f);
+
 	private TextMesh senderTextMesh;
 	private TextMesh informationTextMesh;
 	private TextMesh optionSourceTextMesh;
+	public SpriteRenderer tick;
+
 	public List<TextMesh> optionsTextMesh = new List<TextMesh> ();
+	public TextMesh selectedOption = null;
 
 	private Message message;
 
@@ -20,6 +26,9 @@ public class PhysicalLetter {
 		informationTextMesh = gameObject.transform.FindChild ("Information").GetComponent<TextMesh> ();
 		optionSourceTextMesh = gameObject.transform.FindChild ("OptionSource").GetComponent<TextMesh> ();
 		optionSourceTextMesh.gameObject.SetActive (false);
+		tick = gameObject.transform.FindChild ("Tick").GetComponent<SpriteRenderer> ();
+		tick.color = selectedColor;
+		tick.gameObject.SetActive (false);
 
 	}
 
@@ -41,6 +50,18 @@ public class PhysicalLetter {
 			physicalOption.GetComponent<TextMesh> ().text = m.options [i].text;
 			optionsTextMesh.Add (physicalOption.GetComponent<TextMesh> ());
 			physicalOption.SetActive (true);
+
+		}
+
+	}
+
+	public void Use() {
+
+		int posOption = optionsTextMesh.IndexOf(selectedOption);
+
+		foreach (Consequence consequence in message.options[posOption].consequences) {
+
+			Ecosystem.GetSpeciesData (consequence.species).population += consequence.change;
 
 		}
 
