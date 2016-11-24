@@ -22,10 +22,10 @@ public class Message {
 
 		path = "Messages/" + path;
 		string info = (Resources.Load (path) as TextAsset).text;
-		string[] subStrings = info.Split (MessageCrafter.infoSeparator);
+		string[] subStrings = info.Split (MessageCrafter.infoSeparator.ToCharArray());
 
 		foreach (string s in subStrings) {
-			if (s [0] == MessageCrafter.infoHeader) {
+			if (s [0].ToString() == MessageCrafter.infoHeader) {
 				// IT'S A HEADER
 				string s2 = s.Substring (1, s.Length - 1);
 
