@@ -26,39 +26,60 @@ public static class Ecosystem {
 
 		//VEGETATION
 		sp = new SpeciesData(Species.Vegetation, deathRate + vegetationReproduction);
+		sp.maxVisualPoblation = 100;
+		sp.population = 1000;
+		sp.initialPopulation = sp.population;
 		sp.populationCap = vegetationCap;
 		sp.AddBooster (Species.Beehive);
 		speciesDataList.Add (sp);
 
 		//BEE
 		sp = new SpeciesData(Species.Beehive, deathRate + vegetationReproduction);
+		sp.maxVisualPoblation = 10;
+		sp.population = 50;
+		sp.initialPopulation = sp.population;
 		sp.populationCap = 50;
 		sp.AddBooster (Species.Vegetation);
 		speciesDataList.Add (sp);
 
 		//RABBIT
 		sp = new SpeciesData(Species.Rabbit, deathRate + vegetationReproduction * 1.5f);
+		sp.maxVisualPoblation = 20;
+		sp.population = 366;
+		sp.initialPopulation = sp.population;
 		sp.AddPrey (Species.Vegetation);
 		speciesDataList.Add (sp);
 
 		//SALMON
 		sp = new SpeciesData(Species.Salmon, deathRate + vegetationReproduction * 0.31f);
+		sp.maxVisualPoblation = 10;
+		sp.population = 100;
+		sp.initialPopulation = sp.population;
 		sp.AddPrey (Species.Vegetation);
 		speciesDataList.Add (sp);
 
 		//DEER
 		sp = new SpeciesData(Species.Deer, deathRate + vegetationReproduction * 0.32f);
+		sp.maxVisualPoblation = 10;
+		sp.population = 100;
+		sp.initialPopulation = sp.population;
 		sp.AddPrey (Species.Vegetation);
 		speciesDataList.Add (sp);
 
 		//WOLF
 		sp = new SpeciesData(Species.Wolf, deathRate + vegetationReproduction * 0.05f);
+		sp.maxVisualPoblation = 10;
+		sp.population = 62;
+		sp.initialPopulation = sp.population;
 		sp.AddPrey (Species.Rabbit);
 		sp.AddPrey (Species.Deer);
 		speciesDataList.Add (sp);
 
 		//BEAR
 		sp = new SpeciesData(Species.Bear, deathRate + vegetationReproduction * 0.01f);
+		sp.maxVisualPoblation = 10;
+		sp.population = 20;
+		sp.initialPopulation = sp.population;
 		sp.AddPrey (Species.Beehive);
 		sp.AddPrey (Species.Rabbit);
 		sp.AddPrey (Species.Salmon);
@@ -98,6 +119,8 @@ public static class Ecosystem {
 public class SpeciesData {
 
 	public Species species;
+	public int maxVisualPoblation = 0;
+	public float initialPopulation = 0f;
 	public float population = 100f;
 	public float reproductionRate = 0f;
 	public int populationCap = -1;
@@ -111,6 +134,16 @@ public class SpeciesData {
 		reproductionRate = auxReproductionRate;
 
 	}
+
+
+	public int GetVisualPoblation() {
+
+		float percentage = population / (initialPopulation * 2f);
+		int visualPopulation =  Mathf.FloorToInt(percentage * (float) maxVisualPoblation);
+		return visualPopulation;
+
+	}
+
 
 	public void AddPrey(Species prey) {
 
