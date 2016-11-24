@@ -21,8 +21,8 @@ public class MessageCrafter : MonoBehaviour {
 
 	private static float speed = 200f;
 
-	public static char infoHeader = '★';
-	public static char infoSeparator = '☃';
+	public static string infoHeader = "{";
+	public static string infoSeparator = "}";
 	private string messageInfo = "";
 
 	[HideInInspector]
@@ -116,9 +116,9 @@ public class MessageCrafter : MonoBehaviour {
 
 	void saveMessage() {
 
-		string path = "Messages/"+ nameInput.text +".txt";
+		string path = "Assets/Resources/Messages/"+ nameInput.text +".txt";
 
-		messageInfo = infoHeader.ToString() + Header.Type;
+		messageInfo = infoHeader + Header.Type;
 		addInfo (typeDropDown.options[typeDropDown.value].text);
 
 		addHeader (Header.Sender);

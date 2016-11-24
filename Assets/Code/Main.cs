@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Main : MonoBehaviour {
 
@@ -91,7 +92,9 @@ public class Main : MonoBehaviour {
 
 			for (int i = 0; i < num; i++) {
 				PhysicalLetter pL = new PhysicalLetter ();
-				pL.AssignMessage (new Message ("hehe"));
+				TextAsset[] texts = Resources.LoadAll ("Messages", typeof(TextAsset)).Cast<TextAsset> ().ToArray ();
+				TextAsset text = texts [Random.Range (0, texts.Length)];
+				pL.AssignMessage (new Message (text.name));
 				pL.gameObject.transform.SetParent (gameobject.transform);
 				pL.gameObject.transform.localPosition = new Vector3 (0f, 0f, 0f);
 				pL.gameObject.transform.localEulerAngles = new Vector3 (0f, 0f, 0f);
