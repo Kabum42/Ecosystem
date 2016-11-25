@@ -108,7 +108,8 @@ public class AnimalInstantiator : MonoBehaviour {
 			line.useWorldSpace = false;
 		}
 
-		circle.AddComponent<SphereCollider> ();
+		SphereCollider sc = circle.AddComponent<SphereCollider> () as SphereCollider;
+		sc.isTrigger = true;
 		ZoneCollider zc = circle.AddComponent<ZoneCollider> () as ZoneCollider;
 		zc.SetPage (notebookPage);
 		circle.transform.SetParent (parent.transform);

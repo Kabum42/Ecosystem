@@ -11,6 +11,8 @@ public class Notebook : MonoBehaviour {
 	int desirePage = 0;
 	bool turningPage = false;
 	bool turningLeft;
+	int turningCounter = 0;
+	bool grabbed = false;
 
 	public static Notebook Instance;
 
@@ -20,7 +22,12 @@ public class Notebook : MonoBehaviour {
 	
 	void Update () {
 		if (Camera.main.GetComponent<ObjectGrabber> ().grabbedObject == this.gameObject && !turningPage) {
+			grabbed = true;
 			CheckInput ();
+		}
+		else if (Camera.main.GetComponent<ObjectGrabber> ().grabbedObject != this.gameObject && grabbed) {
+			grabbed = false;
+			ShowPage (0);
 		}
 			
 		if (turningPage) {
@@ -31,7 +38,6 @@ public class Notebook : MonoBehaviour {
 					TurnPage (pages [actualPage - 1], turningLeft);
 			} else
 				turningPage = false;
-				//WaitPageTurn ();
 		}
 	}
 
@@ -55,44 +61,47 @@ public class Notebook : MonoBehaviour {
 		//SHOW NEXT PAGE
 		if (Input.GetAxis("Mouse ScrollWheel") < 0f) {
 			if (actualPage < (pages.Count - 1)) {
-				turningPage = true;
 				ShowPage (actualPage + 1);
-				WaitPageTurn ();
 			}
 		}
 
 		//SHOW PREVIOUS PAGE
 		if (Input.GetAxis("Mouse ScrollWheel") > 0f) {
 			if (actualPage > 0) {
-				turningPage = true;
 				ShowPage (actualPage - 1);
-				WaitPageTurn ();
 			}
 		}
 	}
 
 	public void ShowPage(int i) {
+		turningPage = true;
 		turningLeft = (actualPage < i);
+		turningCounter = (turningLeft) ? 0 : 160;
 		desirePage = i;
 	}
 
 	void TurnPage(GameObject page, bool left) {
 		if (left) {
-			if (page.transform.eulerAngles.y < 160f) {
+			if (turningCounter < 160) {
 				page.transform.RotateAround (pivotRot.position, transform.up, 10f);
-			} else
+				turningCounter += 10;
+			}
+			else {
 				actualPage++;
+				turningCounter = 0;
+			}
 		} 
 		else {
-			if (page.transform.eulerAngles.y > 0f) {
+			if (turningCounter > 0) {
 				page.transform.RotateAround (pivotRot.position, transform.up, -10f);
-			} else
+				turningCounter -= 10;
+			}
+			else {
 				actualPage--;
+				turningCounter = 160;
+			}
 		}
-	}
 
-	IEnumerator WaitPageTurn() {
-		yield return new WaitForSeconds (1f);
-		turningPage = false;
+		Debug.Log (turningCounter);
 	}
 }

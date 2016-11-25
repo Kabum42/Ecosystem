@@ -20,6 +20,7 @@ public class LineChartCreator : MonoBehaviour {
 		stepY = (maxY - minY);
 
 		UpdateChart ();
+		RandomValues ();
 	}
 	
 	void Update () {
@@ -29,6 +30,10 @@ public class LineChartCreator : MonoBehaviour {
 	}
 
 	public void UpdateChart() {
+		//THIS LINE FIXED DRAWING WHEN NOTEBOOK IS NOT GRABBED
+		if(Camera.main.GetComponent<ObjectGrabber>().grabbedObject != Notebook.Instance.gameObject)
+			this.transform.parent.parent.eulerAngles = new Vector3 (10f, 0f, 0f);
+
 		for (int i = 0; i < values.Count; i++) {
 			string name = "value" + i;
 			GameObject dot = new GameObject (name);
@@ -49,6 +54,9 @@ public class LineChartCreator : MonoBehaviour {
 				CreateLine (line, new Vector3 (minX + ((i) * stepX), ((values [i] / 100) * stepY) - maxY, 0), new Vector3 (minX + ((i + 1) * stepX), ((values [i + 1] / 100) * stepY) - maxY, 0));
 			}
 		}
+
+		if(Camera.main.GetComponent<ObjectGrabber>().grabbedObject != Notebook.Instance.gameObject)
+			this.transform.parent.parent.eulerAngles = new Vector3 (90f, 0f, 0f);
 	}
 
 	void CreateLine(GameObject line, Vector3 initialPos, Vector3 finalPos) {
