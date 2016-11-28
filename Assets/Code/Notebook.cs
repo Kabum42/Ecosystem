@@ -12,7 +12,8 @@ public class Notebook : MonoBehaviour {
 	bool turningPage = false;
 	bool turningLeft;
 	int turningCounter = 0;
-	bool grabbed = false;
+
+	public bool grabbed = false;
 
 	public static Notebook Instance;
 
