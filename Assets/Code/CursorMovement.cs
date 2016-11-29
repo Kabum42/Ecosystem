@@ -4,6 +4,7 @@ using System.Collections;
 public class CursorMovement : MonoBehaviour {
 
 	private float posY = 0;
+	private float offsetY = 0f;
 
 	[Range(0f, 180f)]
 	public float limitRotation = 30f;
@@ -16,17 +17,14 @@ public class CursorMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	
+		offsetY = this.transform.eulerAngles.y;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		//if (posCooldown <= 0f) {
-			handleChangePos ();
-		//} else {
-		//	posCooldown -= Time.deltaTime;
-		//}
-
+		handleChangePos ();
 
 		handleRotation ();
 	
@@ -44,7 +42,7 @@ public class CursorMovement : MonoBehaviour {
 
 	void handleRotation() {
 
-		Vector3 targetRotation = new Vector3 (this.transform.eulerAngles.x, posY, 0f);
+		Vector3 targetRotation = new Vector3 (this.transform.eulerAngles.x, offsetY + posY, 0f);
 
 		Camera.main.transform.eulerAngles = Hacks.LerpVector3Angle(Camera.main.transform.eulerAngles, targetRotation, Time.deltaTime * 10f);
 

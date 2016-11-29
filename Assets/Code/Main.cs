@@ -9,7 +9,11 @@ public class Main : MonoBehaviour {
 	private LetterStack todayStack;
 	public static List<PhysicalLetter> discardedLetters = new List<PhysicalLetter>();
 	public Image fade;
+	public TOD_Sky sky;
 	private State state = State.Playing;
+
+	private static float minHour = 6f;
+	private static float maxHour = 19f;
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +21,8 @@ public class Main : MonoBehaviour {
 		Ecosystem.Start ();
 		todayStack = new LetterStack ();
 		todayStack.addLetters (5);
+		fade.color = Hacks.ColorLerpAlpha (fade.color, 1f, 1f);
+		state = State.On;
 
 	}
 	
@@ -36,19 +42,21 @@ public class Main : MonoBehaviour {
 
 		} else if (state == State.Off) {
 
-			fade.color = Hacks.ColorLerpAlpha (fade.color, 1.1f, Time.deltaTime * 2f);
+			if (sky.Cycle.Hour == maxHour) {
+				fade.color = Hacks.ColorLerpAlpha (fade.color, 1.1f, Time.deltaTime * 2f);
+			}
 
 			if (fade.color.a >= 1f) {
 
 				Ecosystem.Simulate ();
+				todayStack.originalNum = 0;
 				todayStack.addLetters (5);
+				sky.Cycle.Hour = minHour;
 				state = State.On;
 
 			}
 
 		} else if (state == State.On) {
-
-			todayStack.Update ();
 
 			fade.color = Hacks.ColorLerpAlpha (fade.color, -0.1f, Time.deltaTime * 2f);
 
@@ -59,6 +67,18 @@ public class Main : MonoBehaviour {
 			}
 
 		}
+
+		float percentageHour =  1f - (float)todayStack.pLetterList.Count/(float)todayStack.originalNum;
+		float targetHour = minHour + (maxHour - minHour) * percentageHour;
+
+		sky.Cycle.Hour = Mathf.MoveTowards (sky.Cycle.Hour, targetHour, 0.01f);
+
+		if (targetHour == maxHour) {
+
+			sky.Cycle.Hour = Mathf.MoveTowards (sky.Cycle.Hour, targetHour, 0.1f);
+
+		}
+
 
 	}
 
@@ -71,6 +91,7 @@ public class Main : MonoBehaviour {
 
 	public class LetterStack {
 
+		public int originalNum;
 		public GameObject gameobject;
 		public List<PhysicalLetter> pLetterList = new List<PhysicalLetter>();
 		private bool lastTimeGrabbed = false;
@@ -79,14 +100,21 @@ public class Main : MonoBehaviour {
 
 			gameobject = new GameObject();
 			gameobject.layer = LayerMask.NameToLayer("Grabbable");
-			gameobject.transform.position = new Vector3(-0.46f, 5.23f, 14.63f);
+			gameobject.transform.SetParent(Camera.main.transform);
+			gameobject.transform.localPosition = new Vector3(0.5f, -3.55f, 8.63f);
+			gameobject.transform.eulerAngles = new Vector3(0f, 90f, 0f);
+			gameobject.transform.SetParent(null);
+			//gameobject.transform.position = Camera.main.transform.position + new Vector3(0.5f, -3.55f, 8.63f);
+			//gameobject.transform.position = Camera.main.transform.position + new Vector3(0.5f, 0f, 0f);
 			gameobject.AddComponent<Grabbable>();
 			gameobject.GetComponent<Grabbable>().rotationGrabbed = new Vector3(-80f, 0f, 0f);
-			gameobject.GetComponent<Grabbable>().positionGrabbed = new Vector3(0f, 0.1f, 3f);
+			gameobject.GetComponent<Grabbable>().positionGrabbed = new Vector3(0f, 0.1f, 70f);
 
 		}
 
 		public void addLetters(int num) {
+
+			originalNum = num;
 
 			float distance = 0f;
 
@@ -186,7 +214,7 @@ public class Main : MonoBehaviour {
 
 				pL.gameObject.transform.localEulerAngles = Hacks.LerpVector3Angle(pL.gameObject.transform.localEulerAngles, pL.targetLocalEulerAngles, Time.deltaTime*3f);
 				pL.gameObject.transform.localPosition = Vector3.Lerp (pL.gameObject.transform.localPosition, new Vector3 (0f, distance, 0f), Time.deltaTime * 10f);
-				distance += 0.03f;
+				distance += 0.2f;
 
 			}
 
