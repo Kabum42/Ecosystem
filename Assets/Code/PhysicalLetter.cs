@@ -6,8 +6,8 @@ public class PhysicalLetter {
 
 	public GameObject gameObject;
 	public Vector3 targetLocalEulerAngles = Vector3.zero;
-	public static Color selectedColor = new Color(0.1f, 0.1f, 0.1f);
-	public static Color unselectedColor = new Color (0.4f, 0.4f, 0.4f);
+	public static Color selectedColor = new Color(0f, 0f, 0f);
+	public static Color unselectedColor = new Color (0.2f, 0.2f, 0.2f);
 
 	private TextMesh senderTextMesh;
 	private TextMesh informationTextMesh;
