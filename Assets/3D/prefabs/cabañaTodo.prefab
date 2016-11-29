@@ -2418,7 +2418,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 460290}
   m_Layer: 0
-  m_Name: "caba\xF1aTodo"
+  m_Name: "caban\u0303aTodo"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

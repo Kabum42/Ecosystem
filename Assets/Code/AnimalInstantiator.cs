@@ -79,8 +79,9 @@ public class AnimalInstantiator : MonoBehaviour {
 		line.SetWidth (.5f, .5f);
 
 		float x;
-		float y = 50f;
+		float y = 1000f;
 		float z;
+		float ycount = 0f;
 
 		float angle = 20f;
 
@@ -108,12 +109,14 @@ public class AnimalInstantiator : MonoBehaviour {
 
 			line.useWorldSpace = false;
 		}
+			
+		circle.transform.position = new Vector3 (circle.transform.position.x, 0f, circle.transform.position.z);
 
 		SphereCollider sc = circle.AddComponent<SphereCollider> () as SphereCollider;
 		sc.isTrigger = true;
 		ZoneCollider zc = circle.AddComponent<ZoneCollider> () as ZoneCollider;
 		zc.SetPage (notebookPage);
-		circle.transform.SetParent (parent.transform);
+		//circle.transform.SetParent (parent.transform);
 	}
 
 //	void CreateZoneCollider() {
