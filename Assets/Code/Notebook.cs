@@ -102,7 +102,5 @@ public class Notebook : MonoBehaviour {
 				turningCounter = 160;
 			}
 		}
-
-		Debug.Log (turningCounter);
 	}
 }
