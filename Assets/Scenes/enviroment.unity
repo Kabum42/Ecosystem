@@ -958,8 +958,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 94480848}
-  m_LocalRotation: {x: -0.13444117, y: 0.62211204, z: 0.10955888, w: 0.7634783}
-  m_LocalPosition: {x: -1940.2896, y: -530.4647, z: -326.57352}
+  m_LocalRotation: {x: -0.093653254, y: 0.3569118, z: 0.03599059, w: 0.9287345}
+  m_LocalPosition: {x: -907.4785, y: 28.038948, z: -28.19448}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -2619,6 +2619,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 344916398}
   m_Mesh: {fileID: 4300002, guid: 681e41ee1260343b395ca58745c94870, type: 3}
+--- !u!1 &379400273
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 379400274}
+  m_Layer: 0
+  m_Name: BearZoneCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &379400274
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 379400273}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -564.2, y: 53.47, z: -240.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
 --- !u!1 &405247571
 GameObject:
   m_ObjectHideFlags: 0
@@ -5400,16 +5428,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5799bfbccbd15d94aba08faa73803848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_screenShotKey: 293
-  m_imageFormat: 1
-  m_targetDirectory: 53637265656e73686f7473
-  m_targetWidth: 1900
-  m_targetHeight: 1200
-  m_useScreenSize: 0
-  m_mainCamera: {fileID: 0}
-  m_takeShot: 0
-  m_refreshAssetDB: 0
-  m_watermark: {fileID: 2800000, guid: b40d888b5d5f63443b08da9b1e72e8f6, type: 3}
 --- !u!1 &719350301
 GameObject:
   m_ObjectHideFlags: 0
@@ -6209,7 +6227,7 @@ GameObject:
   - 154: {fileID: 838134772}
   m_Layer: 0
   m_Name: Terrain_0_0-20161103-160449
-  m_TagString: Untagged
+  m_TagString: terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -9043,6 +9061,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1480860241}
   m_RootOrder: 4
+--- !u!1 &1306027234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1306027235}
+  m_Layer: 0
+  m_Name: BunnyZoneCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1306027235
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1306027234}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -923, y: -204.99625, z: -197.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
 --- !u!1 &1309150024
 GameObject:
   m_ObjectHideFlags: 0
@@ -11951,6 +11997,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1601270733}
   m_Mesh: {fileID: 4300072, guid: dfa769ff95f334499ba7ec9bb236864a, type: 3}
+--- !u!1 &1621996128
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1621996129}
+  m_Layer: 0
+  m_Name: DeerZoneCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1621996129
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1621996128}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -855, y: -204.99625, z: 30}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
 --- !u!1 &1629524414
 GameObject:
   m_ObjectHideFlags: 0
@@ -14024,6 +14098,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1937084099}
   m_Mesh: {fileID: 4300014, guid: a5648826d49ef4bd5a727c39f4dd1cd9, type: 3}
+--- !u!1 &1939575488
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1939575489}
+  m_Layer: 0
+  m_Name: WolfZoneCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1939575489
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1939575488}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -697, y: -204.99625, z: -27}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
 --- !u!1 &1946382566
 GameObject:
   m_ObjectHideFlags: 0
@@ -14897,6 +14999,118 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2060223247}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2063706348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2063706350}
+  - 114: {fileID: 2063706353}
+  - 114: {fileID: 2063706352}
+  - 114: {fileID: 2063706351}
+  - 114: {fileID: 2063706349}
+  m_Layer: 0
+  m_Name: AnimalInstantiators
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2063706349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2063706348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727f25f855c30a8448248ccddd914626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  segments: 20
+  initialY: 100
+  zoneCenter: {fileID: 379400274}
+  zoneRadius: 5
+  animalPrefab: {fileID: 107524, guid: a1996fe2620624884922d58ff893b9b2, type: 2}
+  notebookPage: 2
+  offsetz: 0
+  offsetx: 0
+  offsety: 2
+--- !u!4 &2063706350
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2063706348}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+--- !u!114 &2063706351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2063706348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727f25f855c30a8448248ccddd914626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  segments: 20
+  initialY: 100
+  zoneCenter: {fileID: 1939575489}
+  zoneRadius: 5
+  animalPrefab: {fileID: 197360, guid: 10cdc5eadd7b045248f453d31bcdceec, type: 2}
+  notebookPage: 2
+  offsetz: 0
+  offsetx: 0
+  offsety: 1.5
+--- !u!114 &2063706352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2063706348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727f25f855c30a8448248ccddd914626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  segments: 20
+  initialY: 100
+  zoneCenter: {fileID: 1306027235}
+  zoneRadius: 5
+  animalPrefab: {fileID: 119154, guid: 4162d9f8d4f2649818cb7cb7f2fa5adb, type: 2}
+  notebookPage: 2
+  offsetz: 0
+  offsetx: 0
+  offsety: 0.55
+--- !u!114 &2063706353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2063706348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727f25f855c30a8448248ccddd914626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  segments: 20
+  initialY: 100
+  zoneCenter: {fileID: 1621996129}
+  zoneRadius: 5
+  animalPrefab: {fileID: 169736, guid: df29fda4da7dd452c835a733de5dd8fe, type: 2}
+  notebookPage: 2
+  offsetz: 0
+  offsetx: 0
+  offsety: 2.3
 --- !u!1 &2066388728
 GameObject:
   m_ObjectHideFlags: 0
