@@ -19,7 +19,7 @@ public class LineChartCreator : MonoBehaviour {
 		stepX = (maxX - minX) / 12;
 		stepY = (maxY - minY);
 
-		UpdateChart ();
+		RandomValues ();
 	}
 	
 	void Update () {
@@ -29,6 +29,12 @@ public class LineChartCreator : MonoBehaviour {
 	}
 
 	public void UpdateChart() {
+		DestroyValues ();
+
+		//THIS LINE FIXED DRAWING WHEN NOTEBOOK IS NOT GRABBED
+		if(!Notebook.Instance.grabbed)
+			Notebook.Instance.transform.eulerAngles = new Vector3(10f, 0f, 0f);
+
 		for (int i = 0; i < values.Count; i++) {
 			string name = "value" + i;
 			GameObject dot = new GameObject (name);
@@ -45,10 +51,14 @@ public class LineChartCreator : MonoBehaviour {
 				line.transform.SetParent (this.transform);
 				line.AddComponent<SpriteRenderer> ();
 				line.GetComponent<SpriteRenderer> ().sprite = lineSprite;
+				line.GetComponent<SpriteRenderer> ().color = new Color (1, 0, 0, 0.5f);
 				line.GetComponent<SpriteRenderer> ().sortingOrder = -1;
 				CreateLine (line, new Vector3 (minX + ((i) * stepX), ((values [i] / 100) * stepY) - maxY, 0), new Vector3 (minX + ((i + 1) * stepX), ((values [i + 1] / 100) * stepY) - maxY, 0));
 			}
 		}
+			
+		if(!Notebook.Instance.grabbed)
+			Notebook.Instance.transform.eulerAngles = new Vector3(90f, 0f, 0f);
 	}
 
 	void CreateLine(GameObject line, Vector3 initialPos, Vector3 finalPos) {
@@ -65,14 +75,16 @@ public class LineChartCreator : MonoBehaviour {
 	}
 
 	void RandomValues() {
-		foreach (Transform child in this.transform) {
-			Destroy (child.gameObject);
-		}
-
 		for (int i = 0; i < values.Count; i++) {
 			values [i] = Random.Range (0, 100);
 		}
 
 		UpdateChart ();
+	}
+
+	void DestroyValues() {
+		foreach (Transform child in this.transform) {
+			Destroy (child.gameObject);
+		}
 	}
 }

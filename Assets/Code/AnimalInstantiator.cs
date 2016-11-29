@@ -6,11 +6,12 @@ public class AnimalInstantiator : MonoBehaviour {
 
 	int animalNum = 10;
 	List<GameObject> animalsInScene = new List<GameObject> ();
-	float zoneMinX = 100f;
-	float zoneMaxX = -100f;
-	float zoneMinZ = 100f;
-	float zoneMaxZ = -100f;
+//	float zoneMinX = 100f;
+//	float zoneMaxX = -100f;
+//	float zoneMinZ = 100f;
+//	float zoneMaxZ = -100f;
 	List<Vector3> circlePoints = new List<Vector3>();
+	GameObject parent;
 
 	public int segments;
 	LineRenderer line;
@@ -19,24 +20,22 @@ public class AnimalInstantiator : MonoBehaviour {
 	public Transform zoneCenter;
 	public float zoneRadius;
 	public GameObject animalPrefab;
+	public int notebookPage;
 
 	public float offsetz;
 	public float offsetx;
+	public float offsety;
 
 	void Start () {
-		//Ecosystem.Start ();
+//		Ecosystem.Start ();
+//
+//		GET ANIMAL POPULATION
+//		animalNum = Ecosystem.GetSpeciesData(Species.Deer).populationCap;
+
+		parent = new GameObject (animalPrefab.name + "Zone");
 
 		InstantiateAnimals ();
 
-		//GET ANIMAL POPULATION
-		//Ecosystem.speciesDataList [4].population;
-
-		circle = new GameObject ("Circle");
-		circle.transform.position = zoneCenter.position;
-		line = circle.gameObject.AddComponent<LineRenderer> ();
-		line.SetVertexCount (segments + 1);
-		line.material.color = Color.white;
-		line.SetWidth (.5f, .5f);
 		DrawCircle ();
 	}
 	
@@ -63,13 +62,22 @@ public class AnimalInstantiator : MonoBehaviour {
 			if (Physics.Raycast (ray, out hit, Mathf.Infinity)) {
 				if (hit.transform.tag == "terrain") {
 					animal.transform.position = new Vector3 (animal.transform.position.x, 
-						hit.point.y + animal.GetComponent<BoxCollider> ().bounds.extents.y, animal.transform.position.z);
+						hit.point.y + offsety /*animal.GetComponent<BoxCollider> ().bounds.extents.y*/, animal.transform.position.z);
 				}
 			}
+
+			animal.transform.SetParent (parent.transform);
 		}
 	}
 
 	void DrawCircle() {
+		circle = new GameObject ("Circle");
+		circle.transform.position = zoneCenter.position;
+		line = circle.gameObject.AddComponent<LineRenderer> ();
+		line.SetVertexCount (segments + 1);
+		line.material.color = Color.white;
+		line.SetWidth (.5f, .5f);
+
 		float x;
 		float y = 50f;
 		float z;
@@ -82,7 +90,6 @@ public class AnimalInstantiator : MonoBehaviour {
 			z = Mathf.Cos (Mathf.Deg2Rad * angle) * (zoneRadius + 2f);
 
 			circlePoints.Add (new Vector3 (x, y, z));
-			Debug.Log (circlePoints [i]);
 
 			line.SetPosition (i, circlePoints[i]);
 
@@ -101,5 +108,23 @@ public class AnimalInstantiator : MonoBehaviour {
 
 			line.useWorldSpace = false;
 		}
+
+		SphereCollider sc = circle.AddComponent<SphereCollider> () as SphereCollider;
+		sc.isTrigger = true;
+		ZoneCollider zc = circle.AddComponent<ZoneCollider> () as ZoneCollider;
+		zc.SetPage (notebookPage);
+		circle.transform.SetParent (parent.transform);
 	}
+
+//	void CreateZoneCollider() {
+//		PolygonCollider2D col = circle.AddComponent<PolygonCollider2D> () as PolygonCollider2D;
+//		List<Vector2> polygonPoints = new List<Vector2> ();
+//
+//		foreach (Vector3 circlePoint in circlePoints) {
+//			polygonPoints.Add(new Vector2(circlePoint.x, circlePoint.z));
+//		}
+//			
+//		polygonPoints.RemoveAt (polygonPoints.Count-1);
+//		col.SetPath (0, polygonPoints.ToArray ());
+//	}
 }
