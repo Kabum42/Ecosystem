@@ -23,6 +23,7 @@ public class Main : MonoBehaviour {
 		todayStack.addLetters (5);
 		fade.color = Hacks.ColorLerpAlpha (fade.color, 1f, 1f);
 		state = State.On;
+		sky.Cycle.Hour = minHour;
 
 	}
 	
@@ -35,7 +36,7 @@ public class Main : MonoBehaviour {
 
 			if (todayStack.pLetterList.Count == 0) {
 				
-				Grabbable.objectGrabber.ReturnGrabbedObject ();
+				ObjectGrabber.instance.ReturnGrabbedObject ();
 				state = State.Off;
 
 			}
@@ -108,7 +109,7 @@ public class Main : MonoBehaviour {
 			//gameobject.transform.position = Camera.main.transform.position + new Vector3(0.5f, 0f, 0f);
 			gameobject.AddComponent<Grabbable>();
 			gameobject.GetComponent<Grabbable>().rotationGrabbed = new Vector3(-80f, 0f, 0f);
-			gameobject.GetComponent<Grabbable>().positionGrabbed = new Vector3(0f, 0.1f, 70f);
+			gameobject.GetComponent<Grabbable>().positionGrabbed = new Vector3(0f, 0.1f, 2.6f);
 
 		}
 
@@ -140,7 +141,7 @@ public class Main : MonoBehaviour {
 
 		public void Update() {
 
-			if (Grabbable.objectGrabber.grabbedObject == gameobject && pLetterList.Count > 0) {
+			if (ObjectGrabber.instance.grabbedObject == gameobject && pLetterList.Count > 0) {
 
 				PhysicalLetter currentPL = pLetterList [pLetterList.Count -1];
 

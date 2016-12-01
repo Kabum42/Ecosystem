@@ -3,8 +3,6 @@ using System.Collections;
 
 public class Grabbable : MonoBehaviour {
 
-	public static ObjectGrabber objectGrabber;
-
 	public Grabbable grabbableParent;
 
 	public Vector3 rotationGrabbed;
@@ -15,15 +13,13 @@ public class Grabbable : MonoBehaviour {
 
 	void Start () {
 
-		if (objectGrabber == null) {
-			objectGrabber = Camera.main.gameObject.GetComponent<ObjectGrabber> ();
-		}
+
 
 	}
 
 	void Update () {
 
-		if (Hacks.isOver (this.gameObject, true)) {
+		if (ObjectGrabber.instance.trueOver() == this.gameObject && ObjectGrabber.instance.grabbedObject != this.gameObject) {
 
 			setHand ();
 
@@ -44,7 +40,7 @@ public class Grabbable : MonoBehaviour {
 
 		if (grabbableParent == null) {
 
-			objectGrabber.Grab (this.gameObject);
+			ObjectGrabber.instance.Grab (this.gameObject);
 
 		} else {
 
