@@ -1,0 +1,5 @@
+{Type}Letter}{Sender}Gobierno}{Information}Una gran mejora para el parque y nuestra ciudad sería la construcción de una presa.
+
+La presa supondría un gran impacto económico para la ciudad y reducción de coste energéticos.
+
+Esperamos tu confirmación lo más rápido posible.}{Option}Habilitar permiso}{Option}Denegar permiso

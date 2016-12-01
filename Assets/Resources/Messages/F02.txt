@@ -1,1 +1,0 @@
-﻿{Type}Letter}{Sender}Anónimo}{Information}Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget nibh eget quam condimentum efficitur. Nullam lacinia, magna sit amet molestie bibendum.}{Option}Hacer algo}{Consequence}Deer}-2}{Option}No hacer nada}{Consequence}Deer}-5
