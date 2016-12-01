@@ -13,7 +13,9 @@ public class Grabbable : MonoBehaviour {
 
 	void Start () {
 
-
+		if (ObjectGrabber.instance == null) {
+			ObjectGrabber.instance = Camera.main.GetComponent<ObjectGrabber> ();
+		}
 
 	}
 
