@@ -1,1 +1,0 @@
-{Type}Letter}{Sender}Anónimo}{Information}Texto prueba}{Option}Hacer algo}{Consequence}Deer}-2}{Option}No hacer nada}{Consequence}Deer}-5

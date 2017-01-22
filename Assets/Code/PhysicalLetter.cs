@@ -35,8 +35,8 @@ public class PhysicalLetter {
 	public void AssignMessage(Message m) {
 
 		message = m;
-		senderTextMesh.text = m.sender;
-		informationTextMesh.text = m.information;
+		senderTextMesh.text = Hacks.TextMultiline (senderTextMesh.gameObject, m.sender, 5f);
+		informationTextMesh.text = Hacks.TextMultiline (informationTextMesh.gameObject, m.information, 22f);
 
 		float distanceBetweenOptions = 0.7f;
 		float maxOffset = (m.options.Count -1) * distanceBetweenOptions;

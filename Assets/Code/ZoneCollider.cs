@@ -4,13 +4,18 @@ using System.Collections;
 public class ZoneCollider : MonoBehaviour {
 
 	int notebookPage;
-	
+	Camera camera;
+
+	void Start() {
+		camera = GameObject.Find ("CameraRenderTexture").GetComponent<Camera> ();
+	}
+
 	void Update () {
-		if (Hacks.isOver (this.gameObject)) {
-			if (Input.GetMouseButtonDown (0)) {
-				StartCoroutine (OpenNotebook ());
-			}
-		}
+//		if (isOver (this.gameObject, camera)) {
+//			if (Input.GetMouseButtonDown (0)) {
+//				StartCoroutine (OpenNotebook ());
+//			}
+//		}
 	}
 
 	public void SetPage(int i) {
@@ -22,4 +27,21 @@ public class ZoneCollider : MonoBehaviour {
 		yield return new WaitForSeconds (0.5f);
 		Notebook.Instance.ShowPage (notebookPage);
 	}
+
+//	bool isOver(GameObject target, Camera cam) {
+//		Ray aimingRay = cam.ScreenPointToRay (Input.mousePosition);
+//		RaycastHit hit;
+//
+//		if (Physics.Raycast (aimingRay, out hit)) {
+//			Debug.DrawRay (Input.mousePosition, (hit.point - Input.mousePosition));
+//			if (hit.collider.gameObject == target) {
+//				return true;
+//			}
+//
+//		} else if (target == null) {
+//			return true;
+//		}
+//
+//		return false;
+//	}
 }

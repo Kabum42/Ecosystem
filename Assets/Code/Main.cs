@@ -23,6 +23,7 @@ public class Main : MonoBehaviour {
 		todayStack.addLetters (5);
 		fade.color = Hacks.ColorLerpAlpha (fade.color, 1f, 1f);
 		state = State.On;
+		sky.Cycle.Hour = minHour;
 
 	}
 	
@@ -35,7 +36,7 @@ public class Main : MonoBehaviour {
 
 			if (todayStack.pLetterList.Count == 0) {
 				
-				Grabbable.objectGrabber.ReturnGrabbedObject ();
+				ObjectGrabber.instance.ReturnGrabbedObject ();
 				state = State.Off;
 
 			}
@@ -108,7 +109,7 @@ public class Main : MonoBehaviour {
 			//gameobject.transform.position = Camera.main.transform.position + new Vector3(0.5f, 0f, 0f);
 			gameobject.AddComponent<Grabbable>();
 			gameobject.GetComponent<Grabbable>().rotationGrabbed = new Vector3(-80f, 0f, 0f);
-			gameobject.GetComponent<Grabbable>().positionGrabbed = new Vector3(0f, 0.1f, 70f);
+			gameobject.GetComponent<Grabbable>().positionGrabbed = new Vector3(0f, 0.1f, 2.6f);
 
 		}
 
@@ -117,11 +118,12 @@ public class Main : MonoBehaviour {
 			originalNum = num;
 
 			float distance = 0f;
+			int letterCounter = 0;
 
 			for (int i = 0; i < num; i++) {
 				PhysicalLetter pL = new PhysicalLetter ();
 				TextAsset[] texts = Resources.LoadAll ("Messages", typeof(TextAsset)).Cast<TextAsset> ().ToArray ();
-				TextAsset text = texts [Random.Range (0, texts.Length)];
+				TextAsset text = texts [letterCounter];
 				pL.AssignMessage (new Message (text.name));
 				pL.gameObject.transform.SetParent (gameobject.transform);
 				pL.gameObject.transform.localPosition = new Vector3 (0f, 0f, 0f);
@@ -134,13 +136,15 @@ public class Main : MonoBehaviour {
 				pL.gameObject.transform.FindChild ("Sender").GetComponent<TextMesh> ().text = "" + i;
 				pLetterList.Add (pL);
 				distance += 0.03f;
+
+				letterCounter++;
 			}
 
 		}
 
 		public void Update() {
 
-			if (Grabbable.objectGrabber.grabbedObject == gameobject && pLetterList.Count > 0) {
+			if (ObjectGrabber.instance.grabbedObject == gameobject && pLetterList.Count > 0) {
 
 				PhysicalLetter currentPL = pLetterList [pLetterList.Count -1];
 

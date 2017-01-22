@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class ObjectGrabber : MonoBehaviour {
 
+	public static ObjectGrabber instance;
 	public GameObject grabbedObject;
 	private Vector3 originalPosition = Vector3.zero;
 	private Vector3 originalRotation = Vector3.zero;
@@ -13,6 +14,7 @@ public class ObjectGrabber : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	
+		instance = this;
 		grabbedObject = null;
 
 	}
@@ -31,8 +33,7 @@ public class ObjectGrabber : MonoBehaviour {
 		if (grabbedObject != null) {
 
 			Grabbable grabbable = grabbedObject.GetComponent<Grabbable> ();
-			Vector3 targetPosition = this.transform.position + this.transform.forward * grabbable.positionGrabbed.z + this.transform.right * grabbable.positionGrabbed.x + this.transform.up * grabbable.positionGrabbed.y ;
-			grabbedObject.transform.position = Vector3.Lerp (grabbedObject.transform.position, targetPosition, Time.deltaTime * 5f);
+			grabbedObject.transform.localPosition = Vector3.Lerp (grabbedObject.transform.localPosition, grabbable.positionGrabbed, Time.deltaTime * 5f);
 			grabbedObject.transform.localEulerAngles = Hacks.LerpVector3Angle(grabbedObject.transform.localEulerAngles, grabbable.rotationGrabbed, Time.deltaTime*5f);
 
 		}
@@ -46,15 +47,28 @@ public class ObjectGrabber : MonoBehaviour {
 	
 	}
 
-	private GameObject trueOver() {
+	public GameObject trueOver() {
 
-		GameObject g = Hacks.getOver (LayerMask.NameToLayer("Grabbable"));
+		GameObject[] gameObjects = Hacks.getOverAll ();
+		GameObject g = null;
+
+		foreach (GameObject g2 in gameObjects) {
+
+			if (g2.GetComponent<Grabbable> () != null) {
+				g = g2;
+				break;
+			}
+
+		}
 
 		if (g != null) {
 			while (g.GetComponent<Grabbable> ().grabbableParent != null) {
 				g = g.GetComponent<Grabbable> ().grabbableParent.gameObject;
 			}
 		}
+
+
+
 
 		return g;
 

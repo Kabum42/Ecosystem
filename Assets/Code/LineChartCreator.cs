@@ -58,7 +58,7 @@ public class LineChartCreator : MonoBehaviour {
 		}
 			
 		if(!Notebook.Instance.grabbed)
-			Notebook.Instance.transform.eulerAngles = new Vector3(90f, 0f, 0f);
+			Notebook.Instance.transform.eulerAngles = new Vector3(90f, 0f, -90f);
 	}
 
 	void CreateLine(GameObject line, Vector3 initialPos, Vector3 finalPos) {

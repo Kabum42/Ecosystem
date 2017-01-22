@@ -121,31 +121,62 @@ public static class Hacks {
 	// TEXT
 	public static string TextMultilineCentered(GameObject g, string s) {
 
+		Renderer r = g.GetComponent<Renderer> ();
+		TextMesh t = g.GetComponent<TextMesh>();
 
-        string previousString = g.GetComponent<TextMesh>().text;
+        string previousString = t.text;
 
 		string result = "";
 		string[] lines = s.Split('\n');
 		float maxSizeX = 0f;
 
 		for (int i = 0; i < lines.Length; i++) {
-			g.GetComponent<TextMesh>().text = lines[i];
-			if (g.GetComponent<Renderer>().bounds.size.x > maxSizeX) {
-				maxSizeX = g.GetComponent<Renderer>().bounds.size.x;
+			t.text = lines[i];
+
+			if (r.bounds.size.x > maxSizeX) {
+				maxSizeX = r.bounds.size.x;
 			}
 		}
 
 		for (int i = 0; i < lines.Length; i++) {
-			g.GetComponent<TextMesh>().text = lines[i];
-			while (g.GetComponent<Renderer>().bounds.size.x < maxSizeX) {
+			t.text = lines[i];
+			while (r.bounds.size.x < maxSizeX) {
 				lines[i] = " "+lines[i]+" "; 
-				g.GetComponent<TextMesh>().text = lines[i];
+				t.text = lines[i];
 			}
 			result += lines[i];
 			if (i < lines.Length-1) { result += "\n"; }
 		}
 
-        g.GetComponent<TextMesh>().text = previousString;
+        t.text = previousString;
+
+		return result;
+
+	}
+
+	public static string TextMultiline(GameObject g, string s, float maxWidth) {
+
+		Renderer r = g.GetComponent<Renderer> ();
+		TextMesh t = g.GetComponent<TextMesh>();
+
+		string previousString = t.text;
+
+		string result = "";
+		string[] lines = s.Split(' ');
+		t.text = lines [0];
+
+		for (int i = 1; i < lines.Length; i++) {
+
+			string aux = t.text;
+			t.text += " " + lines[i];
+
+			if (r.bounds.size.x > maxWidth) {
+				t.text = aux + "\n" + lines [i];
+			}
+		}
+
+		result = t.text;
+		t.text = previousString;
 
 		return result;
 
@@ -228,6 +259,34 @@ public static class Hacks {
 		}
 
 		return null;
+
+	}
+
+	public static GameObject[] getOverAll() {
+
+		Ray aimingRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+		RaycastHit[] hits;
+
+
+		hits = Physics.RaycastAll (aimingRay);
+
+		if (hits != null) {
+
+			GameObject[] gameObjects = new GameObject[hits.Length];
+
+			for (int i = 0; i < hits.Length; i++) {
+
+				gameObjects [i] = hits [i].collider.gameObject;
+
+			}
+
+			return gameObjects;
+
+		} else {
+
+			return null;
+
+		}
 
 	}
 
