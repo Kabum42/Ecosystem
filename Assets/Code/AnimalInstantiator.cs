@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class AnimalInstantiator : MonoBehaviour {
 
-	int animalNum = 10;
 	List<GameObject> animalsInScene = new List<GameObject> ();
 //	float zoneMinX = 100f;
 //	float zoneMaxX = -100f;
@@ -12,10 +11,11 @@ public class AnimalInstantiator : MonoBehaviour {
 //	float zoneMaxZ = -100f;
 	List<Vector3> circlePoints = new List<Vector3>();
 	GameObject parent;
+    LineRenderer line;
+    GameObject circle;
 
-	public int segments;
-	LineRenderer line;
-	GameObject circle;
+	public int animalNum;
+    public int segments;
 	public float initialY;
 	public Transform zoneCenter;
 	public float zoneRadius;

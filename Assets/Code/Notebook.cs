@@ -27,7 +27,7 @@ public class Notebook : MonoBehaviour {
 			CheckInput ();
 		}
 		else if (Camera.main.GetComponent<ObjectGrabber> ().grabbedObject != this.gameObject && grabbed) {
-			grabbed = false;
+            grabbed = false;
 			ShowPage (0);
 		}
 			
