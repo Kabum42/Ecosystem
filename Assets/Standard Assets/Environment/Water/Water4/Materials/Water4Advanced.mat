@@ -214,7 +214,7 @@ Material:
       second: {r: 0.04582553, g: 0.0182, b: 0.045714468, a: 0.027129691}
     - first:
         name: _BaseColor
-      second: {r: 0.15370905, g: 0.26813015, b: 0.29850745, a: 0.82}
+      second: {r: 0.15370905, g: 0.26813015, b: 0.29850745, a: 0.822}
     - first:
         name: _BumpDirection
       second: {r: 40, g: 40, b: 40, a: -40}
@@ -283,7 +283,7 @@ Material:
       second: {r: 1, g: 1, b: 0, a: 0}
     - first:
         name: _ReflectionColor
-      second: {r: 0.5794164, g: 0.6849238, b: 0.76119405, a: 0.43137255}
+      second: {r: 0.5794164, g: 0.6849238, b: 0.76119405, a: 0.447}
     - first:
         name: _ReflectionTex_ST
       second: {r: 1, g: 1, b: 0, a: 0}

@@ -1,0 +1,5 @@
+{Type}Letter}{Sender}Alcalde}{Information}Bienvenido a tu nuevo puesto.
+
+En esta ciudad amamos mucho nuestro GreenStem Forest.
+
+Esperamos que tomes las decisiones correctas para asegurar la prosperidad tanto del parque como de aquellos animales que habitan en el.}{Option}Hare todo lo posible.}{Option}No responder.

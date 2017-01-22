@@ -1,0 +1,3 @@
+{Type}Letter}{Sender}Ecologistas}{Information}Un bosque tan bello y bien cuidado como el suyo merece un reconocimiento.
+
+Esperamos cubrir algunas necesidades del bosque con el dinero de este premio.}{Option}Agradecer y recibir el premio.}{Option}Rechazar el premio.

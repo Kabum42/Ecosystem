@@ -21,6 +21,7 @@ public class AnimalInstantiator : MonoBehaviour {
 	public float zoneRadius;
 	public GameObject animalPrefab;
 	public int notebookPage;
+	public Material circleMat;
 
 	public float offsetz;
 	public float offsetx;
@@ -66,6 +67,7 @@ public class AnimalInstantiator : MonoBehaviour {
 				}
 			}
 
+			animal.transform.RotateAround (animal.transform.position, Vector3.up, Random.Range (0, 360));
 			animal.transform.SetParent (parent.transform);
 		}
 	}
@@ -75,8 +77,8 @@ public class AnimalInstantiator : MonoBehaviour {
 		circle.transform.position = zoneCenter.position;
 		line = circle.gameObject.AddComponent<LineRenderer> ();
 		line.SetVertexCount (segments + 1);
-		line.material.color = Color.white;
-		line.SetWidth (.5f, .5f);
+		line.material = circleMat;
+		line.SetWidth (3f, 3f);
 
 		float x;
 		float y = 1000f;

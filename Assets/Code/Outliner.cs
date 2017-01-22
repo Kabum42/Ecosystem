@@ -32,6 +32,7 @@ public class Outliner : MonoBehaviour {
 	}
 
 	public void Outline(bool b) {
+		
 		for (int i = 0; i < objectsToOutline.Count; i++) {
 			if (b) {
 				if (objectsToOutline [i].material.shader != outlineShader) {
@@ -45,5 +46,6 @@ public class Outliner : MonoBehaviour {
 		}
 
 		isOutlined = b;
+
 	}
 }
