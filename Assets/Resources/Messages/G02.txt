@@ -1,0 +1,2 @@
+{Type}Letter}{Sender}Alcalde}{Information}Desde la secretaría medioambiental estamos organizando unas jornadas de reforestación.
+¿¡Qué mejor manera de pasar un fin de semana en familia que ayudando a reforestar un bosque!?}{Option}Suena estupendo, mandaré 2 de mis trabajadores.}{Consequence}Vegetation}5}{Option}¿Y si mejor os quedáis en casa?}{Consequence}Vegetation}-3

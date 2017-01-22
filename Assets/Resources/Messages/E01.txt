@@ -1,0 +1,4 @@
+{Type}Letter}{Sender}EcoFriends}{Information}Buenos días nuevo forestal!
+Somos la agrupación de Ecologistas, codo con codo trabajamos con el anterior guarda forestal para preservar la pureza de Greenstem Forest. Mientras paseábamos por el bosque no hemos visto casi abejas ¿Podrías decirnos el número de abejas que hay actualmente? 
+Puedes clickar tu cuaderno o clickar a alguna abeja, pero no muy fuerte, son frágiles.
+}{Option}Enviar datos sobre abejas
