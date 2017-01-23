@@ -118,11 +118,12 @@ public class Main : MonoBehaviour {
 			originalNum = num;
 
 			float distance = 0f;
+			int letterCounter = 0;
 
 			for (int i = 0; i < num; i++) {
 				PhysicalLetter pL = new PhysicalLetter ();
 				TextAsset[] texts = Resources.LoadAll ("Messages", typeof(TextAsset)).Cast<TextAsset> ().ToArray ();
-				TextAsset text = texts [Random.Range (0, texts.Length)];
+				TextAsset text = texts [letterCounter];
 				pL.AssignMessage (new Message (text.name));
 				pL.gameObject.transform.SetParent (gameobject.transform);
 				pL.gameObject.transform.localPosition = new Vector3 (0f, 0f, 0f);
@@ -135,6 +136,8 @@ public class Main : MonoBehaviour {
 				pL.gameObject.transform.FindChild ("Sender").GetComponent<TextMesh> ().text = "" + i;
 				pLetterList.Add (pL);
 				distance += 0.03f;
+
+				letterCounter++;
 			}
 
 		}
