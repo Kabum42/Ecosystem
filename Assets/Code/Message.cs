@@ -45,9 +45,8 @@ public class Message {
 
 			} else {
 				// NOT A HEADER
-				if (lastHeader == Header.Type) {
-					type = (Type)Enum.Parse (typeof(Type), s);
-				} else if (lastHeader == Header.Sender) {
+				// type = (Type)Enum.Parse (typeof(Type), s);
+				if (lastHeader == Header.Sender) {
 					sender = s;
 				} else if (lastHeader == Header.Information) {
 					information = s;
@@ -70,9 +69,11 @@ public class Message {
 
 	}
 
-	public enum Type {
-		Letter,
-		Speech
+	public enum Faction {
+		Gobierno,
+		Cooperativa,
+		Ecologistas,
+		Otro
 	}
 
 	public enum Stamp {
