@@ -5,8 +5,7 @@ using System;
 
 public class Message {
 
-	public Type type;
-	public string sender;
+	public Faction sender;
 	public string information;
 	public List<Option> options = new List<Option>();
 	private Header lastHeader = Header.Null;
@@ -47,7 +46,7 @@ public class Message {
 				// NOT A HEADER
 				// type = (Type)Enum.Parse (typeof(Type), s);
 				if (lastHeader == Header.Sender) {
-					sender = s;
+					sender = (Faction)Enum.Parse (typeof(Faction), s);
 				} else if (lastHeader == Header.Information) {
 					information = s;
 				} else if (lastHeader == Header.Option) {
@@ -55,6 +54,7 @@ public class Message {
 					lastOption.text = s;
 				} else if (lastHeader == Header.Consequence) {
 					// CONSEQUENCE
+					/*
 					float change = 0f;
 
 					if (float.TryParse (s, out change)) {
@@ -62,7 +62,7 @@ public class Message {
 					} else {
 						lastConsequence.species = (Species)Enum.Parse (typeof(Species), s);
 					}
-
+					*/
 				}
 			}
 		}
