@@ -60,7 +60,16 @@ public class Message {
 					if (float.TryParse (s, out change)) {
 						lastConsequence.change = change;
 					} else {
-						//lastConsequence.species = (Species)Enum.Parse (typeof(Species), s);
+						
+						string[] subS = s.Split ('.');
+
+						if (subS.Length == 1) {
+							lastConsequence.action = s;
+						} else if (subS.Length == 2) {
+							lastConsequence.species = (Species)Enum.Parse (typeof(Species), subS[0]);
+							lastConsequence.action = subS [1];
+						}
+
 					}
 
 				}
@@ -98,6 +107,7 @@ public class Consequence {
 
 	public Species species;
 	public float change = 0;
+	public string action;
 
 	public Consequence() {
 

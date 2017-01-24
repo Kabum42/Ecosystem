@@ -63,7 +63,21 @@ public class PhysicalLetter {
 
 		foreach (Consequence consequence in message.options[posOption].consequences) {
 
-			Ecosystem.GetSpeciesData (consequence.species).population += consequence.change;
+			if (consequence.action == "Pob") {
+				Ecosystem.GetSpeciesData (consequence.species).population += consequence.change * (float)Ecosystem.GetSpeciesData (consequence.species).populationCap;
+			} else if (consequence.action == "Crec") {
+				Ecosystem.GetSpeciesData (consequence.species).reproductionRate += consequence.change;
+			} else if (consequence.action == Message.Faction.Gobierno.ToString()) {
+				Ecosystem.friendshipGobierno += consequence.change;
+			} else if (consequence.action == Message.Faction.Cooperativa.ToString()) {
+				Ecosystem.friendshipCooperativa += consequence.change;
+			} else if (consequence.action == Message.Faction.Ecologistas.ToString()) {
+				Ecosystem.friendshipEcologistas += consequence.change;
+			} else if (consequence.action == "Trabajador") {
+
+			} else if (consequence.action == "Desbloquea") {
+
+			}
 
 		}
 
