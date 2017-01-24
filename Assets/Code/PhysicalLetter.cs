@@ -13,7 +13,7 @@ public class PhysicalLetter {
 	private TextMesh informationTextMesh;
 	private TextMesh optionSourceTextMesh;
 	public SpriteRenderer tick;
-	private SpriteRenderer stamp;
+	private MeshRenderer stamp;
 
 	public List<TextMesh> optionsTextMesh = new List<TextMesh> ();
 	public TextMesh selectedOption = null;
@@ -29,7 +29,7 @@ public class PhysicalLetter {
 		tick = gameObject.transform.FindChild ("Tick").GetComponent<SpriteRenderer> ();
 		tick.color = selectedColor;
 		tick.gameObject.SetActive (false);
-		stamp = gameObject.transform.FindChild ("Stamp").GetComponent<SpriteRenderer> ();
+		stamp = gameObject.transform.FindChild ("Stamp").GetComponent<MeshRenderer> ();
 
 	}
 
@@ -53,7 +53,7 @@ public class PhysicalLetter {
 
 		}
 			
-		stamp.sprite = Resources.Load<Sprite> ("2D/" + m.sender);
+		stamp.material.mainTexture = Resources.Load<Texture> ("2D/" + m.sender);
 
 	}
 

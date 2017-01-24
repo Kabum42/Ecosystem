@@ -54,15 +54,15 @@ public class Message {
 					lastOption.text = s;
 				} else if (lastHeader == Header.Consequence) {
 					// CONSEQUENCE
-					/*
+
 					float change = 0f;
 
 					if (float.TryParse (s, out change)) {
 						lastConsequence.change = change;
 					} else {
-						lastConsequence.species = (Species)Enum.Parse (typeof(Species), s);
+						//lastConsequence.species = (Species)Enum.Parse (typeof(Species), s);
 					}
-					*/
+
 				}
 			}
 		}
