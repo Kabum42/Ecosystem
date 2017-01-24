@@ -100,10 +100,11 @@ public class Main : MonoBehaviour {
 		public LetterStack() {
 
 			gameobject = new GameObject();
+			gameobject.name = "LetterStack";
 			gameobject.layer = LayerMask.NameToLayer("Grabbable");
 			gameobject.transform.SetParent(Camera.main.transform);
-			gameobject.transform.localPosition = new Vector3(0.5f, -3.55f, 8.63f);
-			gameobject.transform.eulerAngles = new Vector3(0f, 90f, 0f);
+			gameobject.transform.localPosition = new Vector3(0.5f, -3.1f, 7.6f);
+			gameobject.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
 			gameobject.transform.SetParent(null);
 			//gameobject.transform.position = Camera.main.transform.position + new Vector3(0.5f, -3.55f, 8.63f);
 			//gameobject.transform.position = Camera.main.transform.position + new Vector3(0.5f, 0f, 0f);
