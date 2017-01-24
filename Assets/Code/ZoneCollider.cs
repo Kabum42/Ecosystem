@@ -16,18 +16,12 @@ public class ZoneCollider : MonoBehaviour {
             if (Input.GetMouseButtonDown(0))
             {
                 if (!Notebook.Instance.grabbed)
-                    StartCoroutine(OpenNotebook());
+                    StartCoroutine(Notebook.Instance.OpenNotebook(notebookPage));
             }
         }
     }
 
     public void SetPage(int i) {
 		notebookPage = i;
-	}
-
-	IEnumerator OpenNotebook() {
-        Camera.main.GetComponent<ObjectGrabber>().Grab(Notebook.Instance.gameObject);
-        yield return new WaitForSeconds(0.5f);
-		Notebook.Instance.ShowPage (notebookPage);
 	}
 }

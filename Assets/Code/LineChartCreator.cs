@@ -56,9 +56,9 @@ public class LineChartCreator : MonoBehaviour {
 				CreateLine (line, new Vector3 (minX + ((i) * stepX), ((values [i] / 100) * stepY) - maxY, 0), new Vector3 (minX + ((i + 1) * stepX), ((values [i + 1] / 100) * stepY) - maxY, 0));
 			}
 		}
-			
-		if(!Notebook.Instance.grabbed)
-			Notebook.Instance.transform.eulerAngles = new Vector3(90f, 0f, -90f);
+
+        if (!Notebook.Instance.grabbed)
+            Notebook.Instance.transform.localEulerAngles = Notebook.Instance.initialEulerAngles;
 	}
 
 	void CreateLine(GameObject line, Vector3 initialPos, Vector3 finalPos) {

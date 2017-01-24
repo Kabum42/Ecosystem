@@ -75,7 +75,6 @@ public class ObjectGrabber : MonoBehaviour {
 	}
 
 	public void Grab (GameObject g) {
-
 		if (g != grabbedObject) {
 
 			if (grabbedObject != null) {

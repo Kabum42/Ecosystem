@@ -14,11 +14,16 @@ public class Notebook : MonoBehaviour {
 	int turningCounter = 0;
 
 	public bool grabbed = false;
+    public Vector3 initialEulerAngles;
+    public int turningPageVelocity;
 
 	public static Notebook Instance;
 
+    void Awake() {
+        Instance = this;
+    }
+
 	void Start () {
-		Instance = this;
 	}
 	
 	void Update () {
@@ -43,22 +48,6 @@ public class Notebook : MonoBehaviour {
 	}
 
 	void CheckInput() {
-		/*foreach (GameObject s in separators) {
-			if (Hacks.isOver (s)) {
-				s.GetComponent<Outliner> ().enabled = true;
-				if (Input.GetMouseButtonDown (0)) {
-					int index = separators.IndexOf (s);
-					ShowPage (index + 1);
-				}
-			}
-			else {
-				if(s.GetComponent<Outliner>().isOutlined)
-					s.GetComponent<Outliner> ().Outline (false);
-				
-				s.GetComponent<Outliner> ().enabled = false;
-			}
-		}*/
-
 		//SHOW NEXT PAGE
 		if (Input.GetAxis("Mouse ScrollWheel") < 0f) {
 			if (actualPage < (pages.Count - 1)) {
@@ -84,8 +73,8 @@ public class Notebook : MonoBehaviour {
 	void TurnPage(GameObject page, bool left) {
 		if (left) {
 			if (turningCounter < 160) {
-				page.transform.RotateAround (pivotRot.position, transform.up, 10f);
-				turningCounter += 10;
+				page.transform.RotateAround (pivotRot.position, transform.up, turningPageVelocity);
+				turningCounter += turningPageVelocity;
 			}
 			else {
 				actualPage++;
@@ -94,8 +83,8 @@ public class Notebook : MonoBehaviour {
 		} 
 		else {
 			if (turningCounter > 0) {
-				page.transform.RotateAround (pivotRot.position, transform.up, -10f);
-				turningCounter -= 10;
+				page.transform.RotateAround (pivotRot.position, transform.up, turningPageVelocity*-1);
+				turningCounter -= turningPageVelocity;
 			}
 			else {
 				actualPage--;
@@ -103,4 +92,11 @@ public class Notebook : MonoBehaviour {
 			}
 		}
 	}
+
+    public IEnumerator OpenNotebook(int notebookPage)
+    {
+        Camera.main.GetComponent<ObjectGrabber>().Grab(this.gameObject);
+        yield return new WaitForSeconds(0.5f);
+        ShowPage(notebookPage);
+    }
 }

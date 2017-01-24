@@ -11,6 +11,7 @@ public class WorkersBoard : MonoBehaviour {
 
     public int totalWorkers;
     public int initialWorkers;
+    public int notebookPage;
 
     public static WorkersBoard Instance;
 
@@ -44,7 +45,10 @@ public class WorkersBoard : MonoBehaviour {
     }
 	
 	void Update () {
-	    
+        if (Hacks.isOver(transform.GetChild(2).gameObject))
+            if (Input.GetMouseButton(0))
+                if (!Notebook.Instance.grabbed)
+                    StartCoroutine(Notebook.Instance.OpenNotebook(notebookPage));
 	}
 
     public bool UseWorker(int numWorkers, int numDays) {
@@ -80,5 +84,20 @@ public class WorkersBoard : MonoBehaviour {
             key.SetActive(t);
             i--;
         }
+    }
+
+    public void AddWorker() {
+        workersAvailable.Add(new Worker());
+    }
+
+    public void RemoveWorker() {
+        if (workersAvailable.Count > 0)
+            workersAvailable.RemoveAt(workersAvailable.Count - 1);
+        else if (workersWorking.Count > 0)
+            workersWorking.RemoveAt(workersWorking.Count - 1);
+    }
+
+    public int GetWorkersCount() {
+        return (workersAvailable.Count + workersWorking.Count);
     }
 }
