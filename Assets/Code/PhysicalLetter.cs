@@ -13,6 +13,7 @@ public class PhysicalLetter {
 	private TextMesh informationTextMesh;
 	private TextMesh optionSourceTextMesh;
 	public SpriteRenderer tick;
+	private MeshRenderer stamp;
 
 	public List<TextMesh> optionsTextMesh = new List<TextMesh> ();
 	public TextMesh selectedOption = null;
@@ -22,20 +23,19 @@ public class PhysicalLetter {
 	public PhysicalLetter() {
 
 		gameObject = MonoBehaviour.Instantiate (Resources.Load ("Prefabs/Letter") as GameObject);
-		senderTextMesh = gameObject.transform.FindChild ("Sender").GetComponent<TextMesh> ();
 		informationTextMesh = gameObject.transform.FindChild ("Information").GetComponent<TextMesh> ();
 		optionSourceTextMesh = gameObject.transform.FindChild ("OptionSource").GetComponent<TextMesh> ();
 		optionSourceTextMesh.gameObject.SetActive (false);
 		tick = gameObject.transform.FindChild ("Tick").GetComponent<SpriteRenderer> ();
 		tick.color = selectedColor;
 		tick.gameObject.SetActive (false);
+		stamp = gameObject.transform.FindChild ("Stamp").GetComponent<MeshRenderer> ();
 
 	}
 
 	public void AssignMessage(Message m) {
 
 		message = m;
-		senderTextMesh.text = Hacks.TextMultiline (senderTextMesh.gameObject, m.sender, 5f);
 		informationTextMesh.text = Hacks.TextMultiline (informationTextMesh.gameObject, m.information, 22f);
 
 		float distanceBetweenOptions = 0.7f;
@@ -52,6 +52,8 @@ public class PhysicalLetter {
 			physicalOption.SetActive (true);
 
 		}
+			
+		stamp.material.mainTexture = Resources.Load<Texture> ("2D/" + m.sender);
 
 	}
 
@@ -61,7 +63,21 @@ public class PhysicalLetter {
 
 		foreach (Consequence consequence in message.options[posOption].consequences) {
 
-			Ecosystem.GetSpeciesData (consequence.species).population += consequence.change;
+			if (consequence.action == "Pob") {
+				Ecosystem.GetSpeciesData (consequence.species).population += consequence.change * (float)Ecosystem.GetSpeciesData (consequence.species).populationCap;
+			} else if (consequence.action == "Crec") {
+				Ecosystem.GetSpeciesData (consequence.species).reproductionRate += consequence.change;
+			} else if (consequence.action == Message.Faction.Gobierno.ToString()) {
+				Ecosystem.friendshipGobierno += consequence.change;
+			} else if (consequence.action == Message.Faction.Cooperativa.ToString()) {
+				Ecosystem.friendshipCooperativa += consequence.change;
+			} else if (consequence.action == Message.Faction.Ecologistas.ToString()) {
+				Ecosystem.friendshipEcologistas += consequence.change;
+			} else if (consequence.action == "Trabajador") {
+
+			} else if (consequence.action == "Desbloquea") {
+
+			}
 
 		}
 

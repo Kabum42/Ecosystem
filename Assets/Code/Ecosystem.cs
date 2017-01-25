@@ -7,11 +7,14 @@ public static class Ecosystem {
 	private static bool started = false;
 
 	public static float deathRate = 1f/100f;
-	public static float cleaning = 100f/100f;
 	public static List<SpeciesData> speciesDataList = new List<SpeciesData>();
 
 	private static int vegetationCap = 1000;
 	private static float vegetationReproduction = 0.3f;
+
+	public static float friendshipGobierno = 0f;
+	public static float friendshipCooperativa = 0f;
+	public static float friendshipEcologistas = 0f;
 
 	public static void Start() {
 		if (!started) {
