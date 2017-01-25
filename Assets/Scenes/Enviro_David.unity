@@ -1862,7 +1862,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011949116392, guid: 546bed85357c5427c96cc77d52167a05, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.1164
+      value: 0.1259
       objectReference: {fileID: 0}
     - target: {fileID: 4000011949116392, guid: 546bed85357c5427c96cc77d52167a05, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2045,8 +2045,8 @@ Transform:
   m_Children:
   - {fileID: 612134167}
   - {fileID: 1885619808}
-  - {fileID: 1200780638}
   - {fileID: 1692590928}
+  - {fileID: 1200780638}
   - {fileID: 1543575997}
   - {fileID: 504703627}
   - {fileID: 1289609688}
@@ -2175,6 +2175,22 @@ MonoBehaviour:
   outlineColor: {r: 1, g: 1, b: 1, a: 0}
   outlineWidth: 2
   isOutlined: 0
+--- !u!114 &302401789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 302401786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31bdfcbc9a6a25d428fbfe02b89dd32d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabbableParent: {fileID: 0}
+  rotationGrabbed: {x: 0, y: 0, z: 0}
+  positionGrabbed: {x: 0, y: 0, z: 0}
+  justMouseIcon: 1
+  mouseName: 
 --- !u!65 &302401790
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2185,8 +2201,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.19999997, y: 0.2524163, z: 0.2}
-  m_Center: {x: 0.000027765342, y: 0.12239806, z: 0.0000100384195}
+  m_Size: {x: 0.09989302, y: 0.2524163, z: 0.12497315}
+  m_Center: {x: -0.00012190505, y: 0.122400664, z: 0.0104481345}
 --- !u!1 &314089528
 GameObject:
   m_ObjectHideFlags: 0
@@ -3564,7 +3580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popSongs:
-  - {fileID: 8300000, guid: 2d83cd13c2f181149b6c7daaffad5411, type: 3}
+  - {fileID: 8300000, guid: 811e3102c11c2454384e97c9a4c3b4ae, type: 3}
   - {fileID: 8300000, guid: 0824b2ed7d93caa41bdd30411aa907cf, type: 3}
   - {fileID: 8300000, guid: 82150d89f0c16874aa1e2c679952a151, type: 3}
   - {fileID: 8300000, guid: f4b5f4341f3f9a641b502684efb5a7fe, type: 3}
@@ -3582,6 +3598,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9e05544f43f4406458004b91da0848d3, type: 3}
   - {fileID: 8300000, guid: fc951b7aa79ee024c98a13fd1488f71a, type: 3}
   maxVolume: 0.5
+--- !u!114 &431777697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 431777690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31bdfcbc9a6a25d428fbfe02b89dd32d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabbableParent: {fileID: 0}
+  rotationGrabbed: {x: 0, y: 0, z: 0}
+  positionGrabbed: {x: 0, y: 0, z: 0}
+  justMouseIcon: 1
+  mouseName: 
 --- !u!114 &431777698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3593,7 +3625,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e84ff01dd5f7f34085c98f9ecd59517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToOutline: []
+  objectsToOutline:
+  - {fileID: 1447831518}
+  - {fileID: 505669320}
+  - {fileID: 1361936850}
   outlineColor: {r: 1, g: 1, b: 1, a: 0}
   outlineWidth: 2
   isOutlined: 0
@@ -4704,6 +4739,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 504703626}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &505669320 stripped
+MeshRenderer:
+  m_PrefabParentObject: {fileID: 23000014051649320, guid: 07ab825d399b84e5b9b2e7e38a682048,
+    type: 2}
+  m_PrefabInternal: {fileID: 1868157388}
 --- !u!1 &515509621
 GameObject:
   m_ObjectHideFlags: 0
@@ -4859,8 +4899,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519894255}
-  m_LocalRotation: {x: -0.045484226, y: 0.9284324, z: 0.121284805, w: 0.34818754}
-  m_LocalPosition: {x: -1102.9803, y: -52.103348, z: -202.732}
+  m_LocalRotation: {x: -0.15225774, y: 0.82772946, z: 0.2691644, w: 0.46822232}
+  m_LocalPosition: {x: -1119.0619, y: -72.320145, z: -171.16876}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -5322,6 +5362,8 @@ GameObject:
   - 33: {fileID: 570065829}
   - 23: {fileID: 570065828}
   - 65: {fileID: 570065830}
+  - 114: {fileID: 570065831}
+  - 114: {fileID: 570065832}
   m_Layer: 0
   m_Name: pCube50
   m_TagString: Untagged
@@ -5392,6 +5434,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.032675315, y: 0.009999999, z: 0.009999998}
   m_Center: {x: -0.011337516, y: 0.0000000073940845, z: 0}
+--- !u!114 &570065831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 570065826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e84ff01dd5f7f34085c98f9ecd59517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToOutline:
+  - {fileID: 137477734}
+  outlineColor: {r: 1, g: 1, b: 1, a: 0}
+  outlineWidth: 2
+  isOutlined: 0
+--- !u!114 &570065832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 570065826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31bdfcbc9a6a25d428fbfe02b89dd32d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabbableParent: {fileID: 0}
+  rotationGrabbed: {x: 0, y: 0, z: 0}
+  positionGrabbed: {x: 0, y: 0, z: 0}
+  justMouseIcon: 1
+  mouseName: 
 --- !u!1 &579912572
 GameObject:
   m_ObjectHideFlags: 0
@@ -7533,6 +7607,8 @@ MonoBehaviour:
   grabbableParent: {fileID: 0}
   rotationGrabbed: {x: 0, y: 25, z: -25}
   positionGrabbed: {x: 2.1, y: -1.7, z: 2.5}
+  justMouseIcon: 0
+  mouseName: 
 --- !u!114 &801896146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7544,9 +7620,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e84ff01dd5f7f34085c98f9ecd59517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToOutline: []
-  outlineColor: {r: 0.1518054, g: 0.30147058, b: 0.10418468, a: 1}
-  outlineWidth: 0.1
+  objectsToOutline:
+  - {fileID: 2018916030}
+  - {fileID: 1273960941}
+  - {fileID: 1703547924}
+  outlineColor: {r: 1, g: 1, b: 1, a: 0}
+  outlineWidth: 2
   isOutlined: 0
 --- !u!65 &801896147
 BoxCollider:
@@ -10516,7 +10595,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 298604701}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!23 &1200780639
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11248,7 +11327,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1289609687}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0995, y: 0.0658, z: 0.116099976}
+  m_LocalPosition: {x: 0.0995, y: 0.0658, z: 0.1256}
   m_LocalScale: {x: 0.0001, y: 0.007000003, z: 0.0070000044}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -11435,7 +11514,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011949116392, guid: 546bed85357c5427c96cc77d52167a05, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4000011949116392, guid: 546bed85357c5427c96cc77d52167a05, type: 2}
       propertyPath: m_LocalScale.x
@@ -11828,6 +11907,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4000013112196346, guid: d3fa573494081430f8b6be71adef8ea4,
     type: 2}
   m_PrefabInternal: {fileID: 1353225346}
+--- !u!23 &1361936850 stripped
+MeshRenderer:
+  m_PrefabParentObject: {fileID: 23000012265638176, guid: 07ab825d399b84e5b9b2e7e38a682048,
+    type: 2}
+  m_PrefabInternal: {fileID: 1868157388}
 --- !u!1 &1382682895
 GameObject:
   m_ObjectHideFlags: 0
@@ -12387,6 +12471,8 @@ MonoBehaviour:
   grabbableParent: {fileID: 0}
   rotationGrabbed: {x: 10, y: 0, z: 0}
   positionGrabbed: {x: 0, y: 0, z: 4}
+  justMouseIcon: 0
+  mouseName: 
 --- !u!114 &1409354655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13469,6 +13555,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1438770871}
   m_Mesh: {fileID: 4300084, guid: dfa769ff95f334499ba7ec9bb236864a, type: 3}
+--- !u!23 &1447831518 stripped
+MeshRenderer:
+  m_PrefabParentObject: {fileID: 23000013611702598, guid: 07ab825d399b84e5b9b2e7e38a682048,
+    type: 2}
+  m_PrefabInternal: {fileID: 1868157388}
 --- !u!1 &1453311582
 GameObject:
   m_ObjectHideFlags: 0
@@ -15480,7 +15571,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 298604701}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!23 &1692590929
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17575,8 +17666,8 @@ Transform:
   m_Children:
   - {fileID: 1091735539}
   - {fileID: 632870168}
-  - {fileID: 1300149724}
   - {fileID: 1985567285}
+  - {fileID: 1300149724}
   - {fileID: 550011075}
   - {fileID: 1469577013}
   - {fileID: 238466394}
@@ -18097,7 +18188,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011949116392, guid: 546bed85357c5427c96cc77d52167a05, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4000011949116392, guid: 546bed85357c5427c96cc77d52167a05, type: 2}
       propertyPath: m_LocalScale.x

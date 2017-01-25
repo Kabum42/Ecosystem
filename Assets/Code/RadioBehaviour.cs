@@ -48,6 +48,11 @@ public class RadioBehaviour : MonoBehaviour {
         songList.RemoveAt(0);
         songList.Add(nextSong);
         audioSources[audioSource].Play();
-        Invoke("PlayNextSong", nextSong.length);
+        StartCoroutine(WaitEndSong(nextSong.length, audioSource, songList));
+    }
+
+    IEnumerator WaitEndSong(float songLength, int audioSource, List<AudioClip> songList) {
+        yield return new WaitForSeconds(songLength);
+        PlayNextSong(audioSource, songList);
     }
 }

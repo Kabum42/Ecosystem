@@ -116,6 +116,8 @@ public class AnimalInstantiator : MonoBehaviour {
 		SphereCollider sc = circle.AddComponent<SphereCollider> () as SphereCollider;
 		sc.isTrigger = true;
 		ZoneCollider zc = circle.AddComponent<ZoneCollider> () as ZoneCollider;
+        Grabbable g = circle.AddComponent<Grabbable>() as Grabbable;
+        g.justMouseIcon = true;
 		zc.SetPage (notebookPage);
 	}
 

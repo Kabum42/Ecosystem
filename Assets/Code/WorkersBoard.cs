@@ -46,9 +46,13 @@ public class WorkersBoard : MonoBehaviour {
 	
 	void FixedUpdate () {
         if (Hacks.isOver(transform.GetChild(2).gameObject))
+        {
+            
+
             if (Input.GetMouseButton(0))
                 if (!Notebook.Instance.grabbed && !Notebook.Instance.turningPage)
                     StartCoroutine(Notebook.Instance.OpenNotebook(notebookPage));
+        }
 	}
 
     public bool UseWorker(int numWorkers, int numDays) {
