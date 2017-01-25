@@ -9,25 +9,32 @@ public class Notebook : MonoBehaviour {
 	[SerializeField] Transform pivotRot;
 	int actualPage = 0;
 	int desirePage = 0;
-	bool turningPage = false;
 	bool turningLeft;
 	int turningCounter = 0;
+    bool restored = false;
 
-	public bool grabbed = false;
+	public bool turningPage = false;
+    public bool grabbed = false;
+    public Vector3 initialEulerAngles;
+    public int turningPageVelocity;
 
 	public static Notebook Instance;
 
+    void Awake() {
+        Instance = this;
+    }
+
 	void Start () {
-		Instance = this;
 	}
 	
-	void Update () {
+	void FixedUpdate () {
 		if (Camera.main.GetComponent<ObjectGrabber> ().grabbedObject == this.gameObject && !turningPage) {
+            restored = false;
 			grabbed = true;
 			CheckInput ();
 		}
-		else if (Camera.main.GetComponent<ObjectGrabber> ().grabbedObject != this.gameObject && grabbed) {
-			grabbed = false;
+		else if (Camera.main.GetComponent<ObjectGrabber> ().grabbedObject != this.gameObject && !turningPage) {
+            grabbed = false;
 			ShowPage (0);
 		}
 			
@@ -40,25 +47,24 @@ public class Notebook : MonoBehaviour {
 			} else
 				turningPage = false;
 		}
+
+        if(!grabbed && actualPage==0 && !restored) {
+            RestorePagesDefaultPos();
+            restored = true;
+        }
+            
 	}
 
-	void CheckInput() {
-		/*foreach (GameObject s in separators) {
-			if (Hacks.isOver (s)) {
-				s.GetComponent<Outliner> ().enabled = true;
-				if (Input.GetMouseButtonDown (0)) {
-					int index = separators.IndexOf (s);
-					ShowPage (index + 1);
-				}
-			}
-			else {
-				if(s.GetComponent<Outliner>().isOutlined)
-					s.GetComponent<Outliner> ().Outline (false);
-				
-				s.GetComponent<Outliner> ().enabled = false;
-			}
-		}*/
+    void RestorePagesDefaultPos() {
+        float i = 0f;
+        foreach(GameObject page in pages) {
+            page.transform.localPosition = new Vector3(0f, 0f, i);
+            page.transform.localRotation = Quaternion.identity;
+            i += 0.005f;
+        }
+    }
 
+	void CheckInput() {
 		//SHOW NEXT PAGE
 		if (Input.GetAxis("Mouse ScrollWheel") < 0f) {
 			if (actualPage < (pages.Count - 1)) {
@@ -84,18 +90,22 @@ public class Notebook : MonoBehaviour {
 	void TurnPage(GameObject page, bool left) {
 		if (left) {
 			if (turningCounter < 160) {
-				page.transform.RotateAround (pivotRot.position, transform.up, 10f);
-				turningCounter += 10;
+				page.transform.RotateAround (pivotRot.position, transform.up, turningPageVelocity);
+				turningCounter += turningPageVelocity;
 			}
 			else {
-				actualPage++;
+                if(page.transform.localEulerAngles.y > 165f) {
+				    page.transform.RotateAround (pivotRot.position, transform.up, turningPageVelocity*-1);
+                }
+
+                actualPage++;
 				turningCounter = 0;
 			}
 		} 
 		else {
 			if (turningCounter > 0) {
-				page.transform.RotateAround (pivotRot.position, transform.up, -10f);
-				turningCounter -= 10;
+				page.transform.RotateAround (pivotRot.position, transform.up, turningPageVelocity*-1);
+				turningCounter -= turningPageVelocity;
 			}
 			else {
 				actualPage--;
@@ -103,4 +113,12 @@ public class Notebook : MonoBehaviour {
 			}
 		}
 	}
+
+    public IEnumerator OpenNotebook(int notebookPage)
+    {
+        Camera.main.GetComponent<ObjectGrabber>().Grab(this.gameObject);
+        yield return new WaitForSeconds(.5f);
+        if(Notebook.Instance.grabbed)
+            ShowPage(notebookPage);
+    }
 }

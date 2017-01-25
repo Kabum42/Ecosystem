@@ -47,6 +47,7 @@ public static class Ecosystem {
 		sp = new SpeciesData(Species.Conejos, deathRate + vegetationReproduction * 1.5f);
 		sp.population = 366;
 		sp.initialPopulation = sp.population;
+        sp.maxVisual = 20;
 		sp.AddPrey (Species.Vegetacion);
 		speciesDataList.Add (sp);
 
@@ -61,6 +62,7 @@ public static class Ecosystem {
 		sp = new SpeciesData(Species.Ciervos, deathRate + vegetationReproduction * 0.32f);
 		sp.population = 100;
 		sp.initialPopulation = sp.population;
+        sp.maxVisual = 10;
 		sp.AddPrey (Species.Vegetacion);
 		speciesDataList.Add (sp);
 
@@ -68,6 +70,7 @@ public static class Ecosystem {
 		sp = new SpeciesData(Species.Lobos, deathRate + vegetationReproduction * 0.05f);
 		sp.population = 62;
 		sp.initialPopulation = sp.population;
+        sp.maxVisual = 10;
 		sp.AddPrey (Species.Conejos);
 		sp.AddPrey (Species.Ciervos);
 		speciesDataList.Add (sp);
@@ -76,6 +79,7 @@ public static class Ecosystem {
 		sp = new SpeciesData(Species.Osos, deathRate + vegetationReproduction * 0.01f);
 		sp.population = 20;
 		sp.initialPopulation = sp.population;
+        sp.maxVisual = 5;
 		sp.AddPrey (Species.NidoAbejas);
 		sp.AddPrey (Species.Conejos);
 		sp.AddPrey (Species.Salmones);
@@ -119,6 +123,7 @@ public class SpeciesData {
 	public float population = 100f;
 	public float reproductionRate = 0f;
 	public int populationCap = -1;
+    public int maxVisual = 10;
 
 	private List<Species> preys = new List<Species> ();
 	private List<Species> boosters = new List<Species> ();

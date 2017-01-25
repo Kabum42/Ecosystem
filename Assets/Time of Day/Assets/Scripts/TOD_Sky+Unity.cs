@@ -41,7 +41,7 @@ public partial class TOD_Sky : MonoBehaviour
 	protected void LateUpdate()
 	{
 		if (!Initialized) Initialize();
-
+        
 		Profiler.BeginSample("UpdateScattering");
 		UpdateScattering();
 		Profiler.EndSample();

@@ -7,6 +7,7 @@ public class Grabbable : MonoBehaviour {
 
 	public Vector3 rotationGrabbed;
 	public Vector3 positionGrabbed;
+    public bool justMouseIcon;
 
 	private static float lastTimeChecked = 0f;
 	private static CursorOption lastCursor = CursorOption.Arrow;
@@ -25,7 +26,7 @@ public class Grabbable : MonoBehaviour {
 
 			setHand ();
 
-			if (Input.GetMouseButtonDown (0)) {
+			if (Input.GetMouseButtonDown (0) && !justMouseIcon) {
 
 				Grab ();
 
@@ -90,7 +91,7 @@ public class Grabbable : MonoBehaviour {
 			Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
 
 		} else if (lastCursor == CursorOption.Hand) {
-			
+            
 			Texture2D cursorTexture = Resources.Load ("2d/cursor_hand", typeof(Texture2D)) as Texture2D;
 			Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
 

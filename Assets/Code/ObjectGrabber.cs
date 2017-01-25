@@ -72,7 +72,6 @@ public class ObjectGrabber : MonoBehaviour {
 	}
 
 	public void Grab (GameObject g) {
-
 		if (g != grabbedObject) {
 
 			if (g.name == "Walkie Talkie" && grabbedObject == Camera.main.GetComponent<Main>().todayStack.gameobject) {
