@@ -8,6 +8,7 @@ public class Grabbable : MonoBehaviour {
 	public Vector3 rotationGrabbed;
 	public Vector3 positionGrabbed;
     public bool justMouseIcon;
+	public CursorOption cursor = CursorOption.Hand;
 
 	private static float lastTimeChecked = 0f;
 	private static CursorOption lastCursor = CursorOption.Arrow;
@@ -24,7 +25,7 @@ public class Grabbable : MonoBehaviour {
 
 		if (ObjectGrabber.instance.trueOver() == this.gameObject && ObjectGrabber.instance.grabbedObject != this.gameObject) {
 
-			setHand ();
+			setSpecialCursor (cursor);
 
 			if (Input.GetMouseButtonDown (0) && !justMouseIcon) {
 
@@ -53,16 +54,16 @@ public class Grabbable : MonoBehaviour {
 
 	}
 
-	void setHand() {
+	void setSpecialCursor(CursorOption cO) {
 
 		if (lastTimeChecked == Time.time) {
 			// OVERRIDES
-			lastCursor = CursorOption.Hand;
+			lastCursor = cO;
 
 		} else {
 
 			setPrevious ();
-			lastCursor = CursorOption.Hand;
+			lastCursor = cO;
 
 		}
 
@@ -85,25 +86,20 @@ public class Grabbable : MonoBehaviour {
 
 	void setPrevious() {
 
-		if (lastCursor == CursorOption.Arrow) {
-			
-			Texture2D cursorTexture = Resources.Load ("2d/cursor_arrow", typeof(Texture2D)) as Texture2D;
-			Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
-
-		} else if (lastCursor == CursorOption.Hand) {
-            
-			Texture2D cursorTexture = Resources.Load ("2d/cursor_hand", typeof(Texture2D)) as Texture2D;
-			Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
-
-		}
+		Texture2D cursorTexture = Resources.Load ("2d/cursor_"+lastCursor.ToString(), typeof(Texture2D)) as Texture2D;
+		Cursor.SetCursor (cursorTexture, Vector2.zero, CursorMode.Auto);
 
 		lastTimeChecked = Time.time;
 
 	}
 
-	private enum CursorOption {
+	public enum CursorOption {
 		Arrow,
-		Hand
+		Hand,
+		Ciervos,
+		Conejos,
+		Lobos,
+		Osos
 	}
 
 }
