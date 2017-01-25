@@ -17,10 +17,9 @@ public class Message {
 
 	// SPEECH ONLY
 
-	public Message(string path) {
+	public Message(TextAsset tAsset) {
 
-		path = "Messages/" + path;
-		string info = (Resources.Load (path) as TextAsset).text;
+		string info = tAsset.text;
 		string[] subStrings = info.Split (MessageCrafter.infoSeparator.ToCharArray());
 
 		foreach (string s in subStrings) {

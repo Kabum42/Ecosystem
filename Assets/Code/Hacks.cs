@@ -473,4 +473,9 @@ public static class Hacks {
 
 	}
 
+	public static T GetRandomFromList<T>(List<T> list)
+	{
+		return list[Random.Range(0, list.Count)];
+	}
+
 }
