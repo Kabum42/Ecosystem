@@ -6,7 +6,7 @@ using System.Linq;
 
 public class Main : MonoBehaviour {
 
-	private LetterStack todayStack;
+	public LetterStack todayStack;
 	public static List<PhysicalLetter> discardedLetters = new List<PhysicalLetter>();
 	public Image fade;
 	public TOD_Sky sky;
@@ -83,6 +83,13 @@ public class Main : MonoBehaviour {
 
 	}
 
+	public PhysicalLetter GetCurrentTopLetter() {
+
+		PhysicalLetter currentPL = todayStack.pLetterList [todayStack.pLetterList.Count -1];
+		return currentPL;
+
+	}
+
 	private enum State {
 		Playing,
 		Off,
@@ -149,32 +156,37 @@ public class Main : MonoBehaviour {
 
 				PhysicalLetter currentPL = pLetterList [pLetterList.Count -1];
 
-				if (currentPL.selectedOption == null) {
-					foreach (TextMesh optionTM in currentPL.optionsTextMesh) {
+				foreach (TextMesh optionTM in currentPL.optionsTextMesh) {
 
-						if (Hacks.isOver (optionTM.gameObject)) {
-							
-							optionTM.color = PhysicalLetter.selectedColor;
+					if (Hacks.isOver (optionTM.gameObject)) {
+						
+						optionTM.color = PhysicalLetter.selectedColor;
 
-							if (Input.GetMouseButtonDown (0)) {
-								
+						if (Input.GetMouseButtonDown (0)) {
+
+							if (currentPL.selectedOption != optionTM) {
 								currentPL.selectedOption = optionTM;
-								currentPL.tick.transform.localPosition = new Vector3 (currentPL.tick.transform.localPosition.x, currentPL.tick.transform.localPosition.y, currentPL.selectedOption.transform.localPosition.z);
+								currentPL.tick.transform.localPosition = new Vector3 (currentPL.tick.transform.localPosition.x, currentPL.tick.transform.localPosition.y, currentPL.selectedOption.transform.localPosition.z + 0.1f);
 								currentPL.tick.gameObject.SetActive (true);
-
-								UseLetter (currentPL);
-
+							} else {
+								currentPL.selectedOption = null;
+								currentPL.tick.gameObject.SetActive (false);
 							}
-
-						} else {
-							
-							optionTM.color = PhysicalLetter.unselectedColor;
 
 						}
 
+					} else {
+						
+						optionTM.color = PhysicalLetter.unselectedColor;
+
+					}
+
+					if (currentPL.selectedOption == optionTM) {
+						optionTM.color = new Color (0f, 0.4f, 0f);
 					}
 
 				}
+					
 					
 				if (Input.GetKeyDown (KeyCode.UpArrow)) {
 					
@@ -231,7 +243,7 @@ public class Main : MonoBehaviour {
 
 		}
 
-		private void UseLetter(PhysicalLetter pL) {
+		public void UseLetter(PhysicalLetter pL) {
 
 			pL.Use ();
 			pLetterList.Remove (pL);
