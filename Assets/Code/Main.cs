@@ -20,7 +20,7 @@ public class Main : MonoBehaviour {
 
 		Ecosystem.Start ();
 		todayStack = new LetterStack ();
-		todayStack.addLetters (4);
+		AddLettersToday ();
 		fade.color = Hacks.ColorLerpAlpha (fade.color, 1f, 1f);
 		state = State.On;
 		sky.Cycle.Hour = minHour;
@@ -52,10 +52,16 @@ public class Main : MonoBehaviour {
 			if (fade.color.a >= 1f) {
 
 				Ecosystem.Simulate ();
-				todayStack.originalNum = 0;
-				todayStack.addLetters (4);
-				sky.Cycle.Hour = minHour;
-				state = State.On;
+				Ecosystem.day++;
+
+				if (Ecosystem.day > 5) {
+					// END
+				} else {
+					todayStack.originalNum = 0;
+					AddLettersToday ();
+					sky.Cycle.Hour = minHour;
+					state = State.On;
+				}
 
 			}
 
@@ -82,6 +88,17 @@ public class Main : MonoBehaviour {
 
 		}
 
+
+	}
+
+	private void AddLettersToday() {
+
+		if (Ecosystem.day == 1) {
+			todayStack.addLetters (3);
+		} else {
+			int num = Mathf.Min(2 + Ecosystem.day, 6); 
+			todayStack.addLetters (num);
+		}
 
 	}
 
@@ -144,13 +161,23 @@ public class Main : MonoBehaviour {
 			originalNum = num;
 
 			float distance = 0f;
-			int letterCounter = 0;
 
 			for (int i = 0; i < num; i++) {
+
+				string route = "";
+
 				PhysicalLetter pL = new PhysicalLetter ();
 				TextAsset[] texts = Resources.LoadAll ("Messages", typeof(TextAsset)).Cast<TextAsset> ().ToArray ();
-				TextAsset text = texts [letterCounter];
-				pL.AssignMessage (new Message (text.name));
+				TextAsset text = texts [i];
+
+				if (Ecosystem.day == 1) {
+					texts = Resources.LoadAll ("Messages/locked", typeof(TextAsset)).Cast<TextAsset> ().ToArray ();
+					Debug.Log (num);
+					text = texts [i];
+					route = "locked/";
+				}
+
+				pL.AssignMessage (new Message (route + text.name));
 				pL.gameObject.transform.SetParent (gameobject.transform);
 				pL.gameObject.transform.localPosition = new Vector3 (0f, 0f, 0f);
 				pL.gameObject.transform.localEulerAngles = new Vector3 (0f, 0f, 0f);
@@ -162,7 +189,6 @@ public class Main : MonoBehaviour {
 				pLetterList.Add (pL);
 				distance += 0.03f;
 
-				letterCounter++;
 			}
 
 			AdjustPosition (1f, 1f);

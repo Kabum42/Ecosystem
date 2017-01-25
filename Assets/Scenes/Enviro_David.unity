@@ -2190,7 +2190,7 @@ MonoBehaviour:
   rotationGrabbed: {x: 0, y: 0, z: 0}
   positionGrabbed: {x: 0, y: 0, z: 0}
   justMouseIcon: 1
-  mouseName: 
+  cursor: 1
 --- !u!65 &302401790
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3613,7 +3613,7 @@ MonoBehaviour:
   rotationGrabbed: {x: 0, y: 0, z: 0}
   positionGrabbed: {x: 0, y: 0, z: 0}
   justMouseIcon: 1
-  mouseName: 
+  cursor: 1
 --- !u!114 &431777698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4899,8 +4899,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519894255}
-  m_LocalRotation: {x: -0.15225774, y: 0.82772946, z: 0.2691644, w: 0.46822232}
-  m_LocalPosition: {x: -1119.0619, y: -72.320145, z: -171.16876}
+  m_LocalRotation: {x: -0.18345706, y: 0.71752584, z: 0.20579393, w: 0.63964766}
+  m_LocalPosition: {x: -1095.0681, y: -103.421234, z: -52.455284}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -5465,7 +5465,7 @@ MonoBehaviour:
   rotationGrabbed: {x: 0, y: 0, z: 0}
   positionGrabbed: {x: 0, y: 0, z: 0}
   justMouseIcon: 1
-  mouseName: 
+  cursor: 1
 --- !u!1 &579912572
 GameObject:
   m_ObjectHideFlags: 0
@@ -7608,7 +7608,7 @@ MonoBehaviour:
   rotationGrabbed: {x: 0, y: 25, z: -25}
   positionGrabbed: {x: 2.1, y: -1.7, z: 2.5}
   justMouseIcon: 0
-  mouseName: 
+  cursor: 1
 --- !u!114 &801896146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12472,7 +12472,7 @@ MonoBehaviour:
   rotationGrabbed: {x: 10, y: 0, z: 0}
   positionGrabbed: {x: 0, y: 0, z: 4}
   justMouseIcon: 0
-  mouseName: 
+  cursor: 1
 --- !u!114 &1409354655
 MonoBehaviour:
   m_ObjectHideFlags: 0

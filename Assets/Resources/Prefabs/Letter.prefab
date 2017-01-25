@@ -224,7 +224,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: 2441b6382e3beb449b5920348fa470bf, type: 2}
   m_Color:
     serializedVersion: 2
-    rgba: 4286677377
+    rgba: 4282664004
 --- !u!102 &10296584
 TextMesh:
   serializedVersion: 3
@@ -391,6 +391,8 @@ MonoBehaviour:
   grabbableParent: {fileID: 0}
   rotationGrabbed: {x: -80, y: 0, z: 0}
   positionGrabbed: {x: 0, y: 0, z: 3}
+  justMouseIcon: 0
+  cursor: 1
 --- !u!114 &114000011665196630
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1,0 +1,3 @@
+{Sender}Cooperativa}{Information}Estimado Guarda forestal.
+Felicitaciones por conseguir ponerse al cargo de Greenstem Forest.
+Desde la Cooperativa de Recursos Forestales (CRF) nos preocupa profundamente el estado del bosque así como los beneficios que éste genera; madera, papel, miel, carne y pieles son solo unos ejemplos de lo que este bosque nos ofrece, esperamos que hacernos con estos recursos no le suponga ningún problema.}{Option}Encantado de trabajar con vosotros.}{Consequence}Desbloquea}1
