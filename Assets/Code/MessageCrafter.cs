@@ -9,8 +9,8 @@ public class MessageCrafter : MonoBehaviour {
 
 	public RectTransform parentUI;
 	public InputField nameInput;
-	public Dropdown typeDropDown;
-	public InputField senderInput;
+	public Dropdown senderDropDown;
+	public Image senderImage;
 	public InputField informationInput;
 	public GameObject optionButton;
 	public GameObject saveButton;
@@ -31,19 +31,29 @@ public class MessageCrafter : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	
-		typeDropDown.ClearOptions ();
+		senderDropDown.ClearOptions ();
 
 		List<string> options = new List<string> ();
 
-		foreach (Message.Type type in Enum.GetValues(typeof(Message.Type))) {
-			options.Add (type.ToString ());
+		foreach (Message.Faction faction in Enum.GetValues(typeof(Message.Faction))) {
+			options.Add (faction.ToString ());
 		}
 
-		typeDropDown.AddOptions (options);
+		senderDropDown.AddOptions (options);
 
 		foreach (Species species in Enum.GetValues(typeof(Species))) {
-			statistics.Add (species.ToString ());
+			statistics.Add (species.ToString () + ".Pob");
+			statistics.Add (species.ToString () + ".Crec");
 		}
+
+		foreach (Message.Faction faction in Enum.GetValues(typeof(Message.Faction))) {
+			if (faction != Message.Faction.Otro) {
+				statistics.Add (faction.ToString ());
+			}
+		}
+
+		statistics.Add ("Trabajador");
+		statistics.Add ("Desbloquea");
 
 	}
 	
@@ -54,9 +64,17 @@ public class MessageCrafter : MonoBehaviour {
 			handleCLick ();
 		}
 
+		setSenderImage ();
+
 		handleNavigation ();
 		repositionUI ();
 	
+	}
+
+	void setSenderImage() {
+
+		senderImage.sprite = Resources.Load <Sprite> ("2D/"+senderDropDown.options[senderDropDown.value].text);
+
 	}
 
 	void handleNavigation() {
@@ -118,11 +136,8 @@ public class MessageCrafter : MonoBehaviour {
 
 		string path = "Assets/Resources/Messages/"+ nameInput.text +".txt";
 
-		messageInfo = infoHeader + Header.Type;
-		addInfo (typeDropDown.options[typeDropDown.value].text);
-
-		addHeader (Header.Sender);
-		addInfo (senderInput.text);
+		messageInfo = infoHeader + Header.Sender;
+		addInfo (senderDropDown.options[senderDropDown.value].text);
 
 		addHeader (Header.Information);
 		addInfo (informationInput.text);
@@ -261,7 +276,6 @@ public class OptionCraft {
 
 public enum Header {
 	Null,
-	Type,
 	Sender,
 	Information,
 	Option,

@@ -75,8 +75,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.46, y: 5.23, z: 14.63}
-  m_LocalScale: {x: 0.21930014, y: 0.31018427, z: 0.31018427}
+  m_LocalPosition: {x: -1439.4, y: 162.1, z: 943.8}
+  m_LocalScale: {x: 2.5456972, y: 3.6007066, z: 3.6007066}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000012305101006}
@@ -140,7 +140,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6a2327829f8687a4398767da7a40018b, type: 2}
+  - {fileID: 2100000, guid: c81672bd5e89408439dec532e646c906, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -169,7 +169,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6a2327829f8687a4398767da7a40018b, type: 2}
+  - {fileID: 2100000, guid: c81672bd5e89408439dec532e646c906, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -218,10 +218,10 @@ TextMesh:
   m_Anchor: 3
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 70
+  m_FontSize: 50
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 12800000, guid: 0ed23d5c28b22f649b4dd1c6efad76d5, type: 3}
+  m_Font: {fileID: 12800000, guid: 319a1ea0bbedcc045ab3d609218b071f, type: 2}
   m_Color:
     serializedVersion: 2
     rgba: 4286677377
@@ -236,13 +236,13 @@ TextMesh:
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
-  m_Anchor: 3
+  m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 70
+  m_FontSize: 50
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 12800000, guid: 0ed23d5c28b22f649b4dd1c6efad76d5, type: 3}
+  m_Font: {fileID: 12800000, guid: 319a1ea0bbedcc045ab3d609218b071f, type: 2}
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
@@ -329,7 +329,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6a2327829f8687a4398767da7a40018b, type: 2}
+  - {fileID: 2100000, guid: c81672bd5e89408439dec532e646c906, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -371,10 +371,10 @@ TextMesh:
   m_Anchor: 3
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 70
+  m_FontSize: 50
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 12800000, guid: 0ed23d5c28b22f649b4dd1c6efad76d5, type: 3}
+  m_Font: {fileID: 12800000, guid: 319a1ea0bbedcc045ab3d609218b071f, type: 2}
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
@@ -403,6 +403,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e84ff01dd5f7f34085c98f9ecd59517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectsToOutline: []
+  outlineColor: {r: 0, g: 0, b: 0, a: 0}
+  outlineWidth: 0
+  isOutlined: 0
 --- !u!212 &212000010024142386
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -25,64 +25,57 @@ public static class Ecosystem {
 		SpeciesData sp;
 
 		//VEGETATION
-		sp = new SpeciesData(Species.Vegetation, deathRate + vegetationReproduction);
-		sp.maxVisualPoblation = 100;
+		sp = new SpeciesData(Species.Vegetacion, deathRate + vegetationReproduction);
 		sp.population = 1000;
 		sp.initialPopulation = sp.population;
 		sp.populationCap = vegetationCap;
-		sp.AddBooster (Species.Beehive);
+		sp.AddBooster (Species.NidoAbejas);
 		speciesDataList.Add (sp);
 
 		//BEE
-		sp = new SpeciesData(Species.Beehive, deathRate + vegetationReproduction);
-		sp.maxVisualPoblation = 10;
+		sp = new SpeciesData(Species.NidoAbejas, deathRate + vegetationReproduction);
 		sp.population = 50;
 		sp.initialPopulation = sp.population;
 		sp.populationCap = 50;
-		sp.AddBooster (Species.Vegetation);
+		sp.AddBooster (Species.Vegetacion);
 		speciesDataList.Add (sp);
 
 		//RABBIT
-		sp = new SpeciesData(Species.Rabbit, deathRate + vegetationReproduction * 1.5f);
-		sp.maxVisualPoblation = 20;
+		sp = new SpeciesData(Species.Conejos, deathRate + vegetationReproduction * 1.5f);
 		sp.population = 366;
 		sp.initialPopulation = sp.population;
-		sp.AddPrey (Species.Vegetation);
+		sp.AddPrey (Species.Vegetacion);
 		speciesDataList.Add (sp);
 
 		//SALMON
-		sp = new SpeciesData(Species.Salmon, deathRate + vegetationReproduction * 0.31f);
-		sp.maxVisualPoblation = 10;
+		sp = new SpeciesData(Species.Salmones, deathRate + vegetationReproduction * 0.31f);
 		sp.population = 100;
 		sp.initialPopulation = sp.population;
-		sp.AddPrey (Species.Vegetation);
+		sp.AddPrey (Species.Vegetacion);
 		speciesDataList.Add (sp);
 
 		//DEER
-		sp = new SpeciesData(Species.Deer, deathRate + vegetationReproduction * 0.32f);
-		sp.maxVisualPoblation = 10;
+		sp = new SpeciesData(Species.Ciervos, deathRate + vegetationReproduction * 0.32f);
 		sp.population = 100;
 		sp.initialPopulation = sp.population;
-		sp.AddPrey (Species.Vegetation);
+		sp.AddPrey (Species.Vegetacion);
 		speciesDataList.Add (sp);
 
 		//WOLF
-		sp = new SpeciesData(Species.Wolf, deathRate + vegetationReproduction * 0.05f);
-		sp.maxVisualPoblation = 10;
+		sp = new SpeciesData(Species.Lobos, deathRate + vegetationReproduction * 0.05f);
 		sp.population = 62;
 		sp.initialPopulation = sp.population;
-		sp.AddPrey (Species.Rabbit);
-		sp.AddPrey (Species.Deer);
+		sp.AddPrey (Species.Conejos);
+		sp.AddPrey (Species.Ciervos);
 		speciesDataList.Add (sp);
 
 		//BEAR
-		sp = new SpeciesData(Species.Bear, deathRate + vegetationReproduction * 0.01f);
-		sp.maxVisualPoblation = 10;
+		sp = new SpeciesData(Species.Osos, deathRate + vegetationReproduction * 0.01f);
 		sp.population = 20;
 		sp.initialPopulation = sp.population;
-		sp.AddPrey (Species.Beehive);
-		sp.AddPrey (Species.Rabbit);
-		sp.AddPrey (Species.Salmon);
+		sp.AddPrey (Species.NidoAbejas);
+		sp.AddPrey (Species.Conejos);
+		sp.AddPrey (Species.Salmones);
 		speciesDataList.Add (sp);
 
 	}
@@ -119,7 +112,6 @@ public static class Ecosystem {
 public class SpeciesData {
 
 	public Species species;
-	public int maxVisualPoblation = 0;
 	public float initialPopulation = 0f;
 	public float population = 100f;
 	public float reproductionRate = 0f;
@@ -136,11 +128,11 @@ public class SpeciesData {
 	}
 
 
-	public int GetVisualPoblation() {
+	public float GetPercentage() {
 
 		float percentage = population / (initialPopulation * 2f);
-		int visualPopulation =  Mathf.FloorToInt(percentage * (float) maxVisualPoblation);
-		return visualPopulation;
+		percentage = Mathf.Clamp (percentage, 0f, 1f);
+		return percentage;
 
 	}
 
@@ -231,13 +223,13 @@ public class SpeciesData {
 }
 
 public enum Species {
-	Vegetation,
-	Beehive,
-	Rabbit,
-	Deer,
-	Wolf,
-	Bear,
-	Salmon
+	Vegetacion,
+	NidoAbejas,
+	Conejos,
+	Ciervos,
+	Lobos,
+	Osos,
+	Salmones
 }
 
 
