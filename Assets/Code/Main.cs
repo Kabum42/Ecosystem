@@ -30,6 +30,8 @@ public class Main : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+		UpdateDiscarded ();
+
 		if (state == State.Playing) {
 
 			todayStack.Update ();
@@ -80,6 +82,24 @@ public class Main : MonoBehaviour {
 
 		}
 
+
+	}
+
+	private void UpdateDiscarded() {
+
+		foreach (PhysicalLetter pL in discardedLetters) {
+
+			Vector3 targetPosition =  new Vector3(-5f, -3f, 3f);
+			Vector3 targetEulerAngles = new Vector3 (0f, -90f, 80f);
+
+			pL.gameObject.transform.localPosition = Vector3.Lerp (pL.gameObject.transform.localPosition, targetPosition, Time.deltaTime*4f);
+			pL.gameObject.transform.localEulerAngles = Hacks.LerpVector3Angle(pL.gameObject.transform.localEulerAngles, targetEulerAngles, Time.deltaTime * 5f);
+
+			if (Vector3.Distance (pL.gameObject.transform.localPosition, targetPosition) < 0.1f) {
+				pL.gameObject.SetActive (false);
+			}
+
+		}
 
 	}
 
@@ -247,8 +267,8 @@ public class Main : MonoBehaviour {
 
 			pL.Use ();
 			pLetterList.Remove (pL);
+			pL.gameObject.transform.SetParent (Camera.main.transform);
 			Main.discardedLetters.Add (pL);
-			pL.gameObject.SetActive (false);
 
 		}
 
