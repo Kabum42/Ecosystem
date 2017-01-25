@@ -1,3 +1,0 @@
-{Type}Letter}{Sender}Alcalde}{Information}¡Bienvenido a tu nuevo puesto!
-En esta ciudad valoramos mucho nuestro amado Greenstem Forest. Básicamente debes tomar las decisiones que afectan a este preciado bosque, lo haría yo pero… Alguien con mi porte debe estar de cara al público. La cuestión, necesito que me pases la ficha con los últimos beneficios del bosque, no me gustaría que esa arboleda solo generara deudas y tuviera que cerrarla, me tendría que buscar otro lugar donde hacer el posado en bañador cada verano.
-}{Option}Enviar los presupuestos
