@@ -7,7 +7,7 @@ public class PhysicalLetter {
 	public GameObject gameObject;
 	public Vector3 targetLocalEulerAngles = Vector3.zero;
 	public static Color selectedColor = new Color(0f, 0f, 0f);
-	public static Color unselectedColor = new Color (0.2f, 0.2f, 0.2f);
+	public static Color unselectedColor = new Color (0.1f, 0.1f, 0.1f);
 
 	private TextMesh senderTextMesh;
 	private TextMesh informationTextMesh;
@@ -38,7 +38,7 @@ public class PhysicalLetter {
 		message = m;
 		informationTextMesh.text = Hacks.TextMultiline (informationTextMesh.gameObject, m.information, 22f);
 
-		float distanceBetweenOptions = 0.7f;
+		float distanceBetweenOptions = 0.9f;
 		float maxOffset = (m.options.Count -1) * distanceBetweenOptions;
 
 		for (int i = 0; i < m.options.Count; i++) {
@@ -48,6 +48,7 @@ public class PhysicalLetter {
 			physicalOption.transform.localScale = optionSourceTextMesh.transform.localScale;
 			physicalOption.transform.localPosition = optionSourceTextMesh.transform.localPosition + new Vector3 (0f, 0f, maxOffset - (float)i * distanceBetweenOptions); ;
 			physicalOption.GetComponent<TextMesh> ().text = Hacks.TextMultiline (physicalOption, m.options [i].text, 22f);
+			physicalOption.GetComponent<TextMesh> ().color = unselectedColor;
 			optionsTextMesh.Add (physicalOption.GetComponent<TextMesh> ());
 			physicalOption.SetActive (true);
 
@@ -76,7 +77,12 @@ public class PhysicalLetter {
 			} else if (consequence.action == "Trabajador") {
 
 			} else if (consequence.action == "Desbloquea") {
-
+				string folderName = "carpeta" + consequence.change;
+				if (!Ecosystem.unlockedFolders.Contains (folderName)) {
+					Ecosystem.unlockedFolders.Add (folderName);
+				}
+			} else if (consequence.action == "Dinero") {
+				
 			}
 
 		}

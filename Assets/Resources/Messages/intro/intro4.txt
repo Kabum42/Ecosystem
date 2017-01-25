@@ -1,0 +1,2 @@
+{Sender}Otro}{Information}¡Bienvenido a su nuevo puesto, Jefe!
+Somos la plantilla de trabajadores. Realizaremos las tareas que nos encomiende para mejorar este bosque. Por ahora somos pocos, pero si gana suficiente dinero contará con más empleados. Le hemos obsqequiado con una radio para amenizar su jornada. Se enciende clicando en ella y se pasa de emisora con la rueda del ratón.¡Qué casualidad!. Como las páginas de la libreta.}{Option}Gracias. Contaré con vosotros.

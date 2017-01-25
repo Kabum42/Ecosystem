@@ -20,7 +20,7 @@ public class Main : MonoBehaviour {
 
 		Ecosystem.Start ();
 		todayStack = new LetterStack ();
-		todayStack.addLetters (4);
+		AddLettersToday ();
 		fade.color = Hacks.ColorLerpAlpha (fade.color, 1f, 1f);
 		state = State.On;
 		sky.Cycle.Hour = minHour;
@@ -52,10 +52,16 @@ public class Main : MonoBehaviour {
 			if (fade.color.a >= 1f) {
 
 				Ecosystem.Simulate ();
-				todayStack.originalNum = 0;
-				todayStack.addLetters (4);
-				sky.Cycle.Hour = minHour;
-				state = State.On;
+				Ecosystem.day++;
+
+				if (Ecosystem.day > 5) {
+					// END
+				} else {
+					todayStack.originalNum = 0;
+					AddLettersToday ();
+					sky.Cycle.Hour = minHour;
+					state = State.On;
+				}
 
 			}
 
@@ -82,6 +88,17 @@ public class Main : MonoBehaviour {
 
 		}
 
+
+	}
+
+	private void AddLettersToday() {
+
+		if (Ecosystem.day == 1) {
+			todayStack.addFirstLetters ();
+		} else {
+			int num = Mathf.Min(2 + Ecosystem.day, 6); 
+			todayStack.addLetters (num);
+		}
 
 	}
 
@@ -139,34 +156,79 @@ public class Main : MonoBehaviour {
 
 		}
 
-		public void addLetters(int num) {
+		public void addFirstLetters() {
 
-			originalNum = num;
+			originalNum = 4;
 
 			float distance = 0f;
-			int letterCounter = 0;
 
-			for (int i = 0; i < num; i++) {
+			for (int i = 0; i < originalNum; i++) {
+
 				PhysicalLetter pL = new PhysicalLetter ();
-				TextAsset[] texts = Resources.LoadAll ("Messages", typeof(TextAsset)).Cast<TextAsset> ().ToArray ();
-				TextAsset text = texts [letterCounter];
-				pL.AssignMessage (new Message (text.name));
-				pL.gameObject.transform.SetParent (gameobject.transform);
-				pL.gameObject.transform.localPosition = new Vector3 (0f, 0f, 0f);
-				pL.gameObject.transform.localEulerAngles = new Vector3 (0f, 0f, 0f);
-				pL.gameObject.GetComponent<Grabbable> ().grabbableParent = gameobject.GetComponent<Grabbable> ();
+				TextAsset[] texts = Resources.LoadAll ("Messages/intro", typeof(TextAsset)).Cast<TextAsset> ().ToArray ();
+				TextAsset text = texts [originalNum - (i+1)];
 
-				pL.targetLocalEulerAngles = new Vector3 (0f, Random.Range (-10f, 10f), 0f);
-				pL.gameObject.transform.localEulerAngles = pL.targetLocalEulerAngles;
-				pL.gameObject.transform.localPosition = new Vector3 (0f, distance, 0f);
+				pL.AssignMessage (new Message (text));
+				buildLetter (pL, distance);
 				pLetterList.Add (pL);
 				distance += 0.03f;
 
-				letterCounter++;
 			}
 
 			AdjustPosition (1f, 1f);
 			lastTimeGrabbed = false;
+
+		}
+
+		public void addLetters(int num) {
+
+			originalNum = num;
+			float distance = 0f;
+
+			List<TextAsset> possibleTextAssets = new List<TextAsset> ();
+
+			TextAsset[] texts = Resources.LoadAll ("Messages/basic", typeof(TextAsset)).Cast<TextAsset> ().ToArray ();
+
+			foreach (TextAsset t in texts) {
+				possibleTextAssets.Add (t);
+			}
+
+			foreach (string s in Ecosystem.unlockedFolders) {
+				texts = Resources.LoadAll ("Messages/"+s, typeof(TextAsset)).Cast<TextAsset> ().ToArray ();
+				foreach (TextAsset t in texts) {
+					possibleTextAssets.Add (t);
+				}
+			}
+
+			for (int i = 0; i < originalNum; i++) {
+
+				PhysicalLetter pL = new PhysicalLetter ();
+
+				TextAsset text = Hacks.GetRandomFromList (possibleTextAssets);
+				possibleTextAssets.Remove (text);
+
+				pL.AssignMessage (new Message (text));
+				buildLetter (pL, distance);
+				pLetterList.Add (pL);
+				distance += 0.03f;
+
+			}
+
+			AdjustPosition (1f, 1f);
+			lastTimeGrabbed = false;
+
+		}
+
+		private void buildLetter(PhysicalLetter pL, float distance) {
+
+			pL.gameObject.transform.SetParent (gameobject.transform);
+			pL.gameObject.transform.localPosition = new Vector3 (0f, 0f, 0f);
+			pL.gameObject.transform.localEulerAngles = new Vector3 (0f, 0f, 0f);
+			pL.gameObject.GetComponent<Grabbable> ().grabbableParent = gameobject.GetComponent<Grabbable> ();
+
+			pL.targetLocalEulerAngles = new Vector3 (0f, Random.Range (-10f, 10f), 0f);
+			pL.gameObject.transform.localEulerAngles = pL.targetLocalEulerAngles;
+			pL.gameObject.transform.localPosition = new Vector3 (0f, distance, 0f);
 
 		}
 

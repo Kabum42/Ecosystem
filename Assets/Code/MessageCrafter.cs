@@ -54,6 +54,7 @@ public class MessageCrafter : MonoBehaviour {
 
 		statistics.Add ("Trabajador");
 		statistics.Add ("Desbloquea");
+		statistics.Add ("Dinero");
 
 	}
 	

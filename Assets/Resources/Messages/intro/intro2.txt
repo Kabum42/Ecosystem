@@ -1,0 +1,3 @@
+{Sender}Ecologistas}{Information}Buenos días nuevo forestal!
+Somos la agrupación de Ecologistas, codo con codo trabajamos con el anterior guarda forestal para preservar la pureza de Greenstem Forest. Mientras paseábamos por el bosque no hemos visto casi ciervos ¿Podrías decirnos el número de ciervos que hay actualmente? 
+Desde la ventana puedes clicar a algún ciervo. Pero no muy fuerte, podrían asustarse.}{Option}Me pondré con eso ahora mismo

@@ -6,6 +6,9 @@ public static class Ecosystem {
 
 	private static bool started = false;
 
+	public static int day = 1;
+	public static List<string> unlockedFolders = new List<string> ();
+
 	public static float deathRate = 1f/100f;
 	public static List<SpeciesData> speciesDataList = new List<SpeciesData>();
 
