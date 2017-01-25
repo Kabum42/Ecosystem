@@ -47,7 +47,7 @@ public class PhysicalLetter {
 			physicalOption.transform.SetParent (optionSourceTextMesh.transform.parent);
 			physicalOption.transform.localScale = optionSourceTextMesh.transform.localScale;
 			physicalOption.transform.localPosition = optionSourceTextMesh.transform.localPosition + new Vector3 (0f, 0f, maxOffset - (float)i * distanceBetweenOptions); ;
-			physicalOption.GetComponent<TextMesh> ().text = m.options [i].text;
+			physicalOption.GetComponent<TextMesh> ().text = Hacks.TextMultiline (physicalOption, m.options [i].text, 22f);
 			optionsTextMesh.Add (physicalOption.GetComponent<TextMesh> ());
 			physicalOption.SetActive (true);
 

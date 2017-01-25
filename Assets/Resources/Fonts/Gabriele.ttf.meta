@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 769e1532c9f21b84086bb02b027c53c9
-timeCreated: 1480532830
+guid: 287e5c3fef712c84d885248b63ca0267
+timeCreated: 1485360491
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
-  fontSize: 30
+  fontSize: 28
   forceTextureCase: -1
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - AA Typewriter
+  - Gabriele Dark Ribbon FG
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

@@ -67,9 +67,6 @@ public class ObjectGrabber : MonoBehaviour {
 			}
 		}
 
-
-
-
 		return g;
 
 	}
@@ -77,6 +74,13 @@ public class ObjectGrabber : MonoBehaviour {
 	public void Grab (GameObject g) {
 
 		if (g != grabbedObject) {
+
+			if (g.name == "Walkie Talkie" && grabbedObject == Camera.main.GetComponent<Main>().todayStack.gameobject) {
+				PhysicalLetter topLetter = Camera.main.GetComponent<Main> ().GetCurrentTopLetter ();
+				if (topLetter != null && topLetter.selectedOption != null) {
+					Camera.main.GetComponent<Main> ().todayStack.UseLetter (topLetter);
+				}
+			}
 
 			if (grabbedObject != null) {
 				ReturnGrabbedObject ();
@@ -94,6 +98,7 @@ public class ObjectGrabber : MonoBehaviour {
 			}
 
 			grabbedObject.transform.SetParent (this.transform);
+
 		}
 
 	}
