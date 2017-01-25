@@ -6,7 +6,7 @@ using System.Linq;
 
 public class Main : MonoBehaviour {
 
-	private LetterStack todayStack;
+	public LetterStack todayStack;
 	public static List<PhysicalLetter> discardedLetters = new List<PhysicalLetter>();
 	public Image fade;
 	public TOD_Sky sky;
@@ -20,7 +20,7 @@ public class Main : MonoBehaviour {
 
 		Ecosystem.Start ();
 		todayStack = new LetterStack ();
-		todayStack.addLetters (5);
+		todayStack.addLetters (4);
 		fade.color = Hacks.ColorLerpAlpha (fade.color, 1f, 1f);
 		state = State.On;
 		sky.Cycle.Hour = minHour;
@@ -30,6 +30,8 @@ public class Main : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+		UpdateDiscarded ();
+
 		if (state == State.Playing) {
 
 			todayStack.Update ();
@@ -51,7 +53,7 @@ public class Main : MonoBehaviour {
 
 				Ecosystem.Simulate ();
 				todayStack.originalNum = 0;
-				todayStack.addLetters (5);
+				todayStack.addLetters (4);
 				sky.Cycle.Hour = minHour;
 				state = State.On;
 
@@ -83,6 +85,31 @@ public class Main : MonoBehaviour {
 
 	}
 
+	private void UpdateDiscarded() {
+
+		foreach (PhysicalLetter pL in discardedLetters) {
+
+			Vector3 targetPosition =  new Vector3(-5f, -3f, 3f);
+			Vector3 targetEulerAngles = new Vector3 (0f, -90f, 80f);
+
+			pL.gameObject.transform.localPosition = Vector3.Lerp (pL.gameObject.transform.localPosition, targetPosition, Time.deltaTime*4f);
+			pL.gameObject.transform.localEulerAngles = Hacks.LerpVector3Angle(pL.gameObject.transform.localEulerAngles, targetEulerAngles, Time.deltaTime * 5f);
+
+			if (Vector3.Distance (pL.gameObject.transform.localPosition, targetPosition) < 0.1f) {
+				pL.gameObject.SetActive (false);
+			}
+
+		}
+
+	}
+
+	public PhysicalLetter GetCurrentTopLetter() {
+
+		PhysicalLetter currentPL = todayStack.pLetterList [todayStack.pLetterList.Count -1];
+		return currentPL;
+
+	}
+
 	private enum State {
 		Playing,
 		Off,
@@ -106,8 +133,6 @@ public class Main : MonoBehaviour {
 			gameobject.transform.localPosition = new Vector3(0.5f, -3.1f, 7.6f);
 			gameobject.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
 			gameobject.transform.SetParent(null);
-			//gameobject.transform.position = Camera.main.transform.position + new Vector3(0.5f, -3.55f, 8.63f);
-			//gameobject.transform.position = Camera.main.transform.position + new Vector3(0.5f, 0f, 0f);
 			gameobject.AddComponent<Grabbable>();
 			gameobject.GetComponent<Grabbable>().rotationGrabbed = new Vector3(-80f, 0f, 0f);
 			gameobject.GetComponent<Grabbable>().positionGrabbed = new Vector3(0f, 0.1f, 2.6f);
@@ -134,12 +159,14 @@ public class Main : MonoBehaviour {
 				pL.targetLocalEulerAngles = new Vector3 (0f, Random.Range (-10f, 10f), 0f);
 				pL.gameObject.transform.localEulerAngles = pL.targetLocalEulerAngles;
 				pL.gameObject.transform.localPosition = new Vector3 (0f, distance, 0f);
-				pL.gameObject.transform.FindChild ("Sender").GetComponent<TextMesh> ().text = "" + i;
 				pLetterList.Add (pL);
 				distance += 0.03f;
 
 				letterCounter++;
 			}
+
+			AdjustPosition (1f, 1f);
+			lastTimeGrabbed = false;
 
 		}
 
@@ -149,32 +176,37 @@ public class Main : MonoBehaviour {
 
 				PhysicalLetter currentPL = pLetterList [pLetterList.Count -1];
 
-				if (currentPL.selectedOption == null) {
-					foreach (TextMesh optionTM in currentPL.optionsTextMesh) {
+				foreach (TextMesh optionTM in currentPL.optionsTextMesh) {
 
-						if (Hacks.isOver (optionTM.gameObject)) {
-							
-							optionTM.color = PhysicalLetter.selectedColor;
+					if (Hacks.isOver (optionTM.gameObject)) {
+						
+						optionTM.color = PhysicalLetter.selectedColor;
 
-							if (Input.GetMouseButtonDown (0)) {
-								
+						if (Input.GetMouseButtonDown (0)) {
+
+							if (currentPL.selectedOption != optionTM) {
 								currentPL.selectedOption = optionTM;
-								currentPL.tick.transform.localPosition = new Vector3 (currentPL.tick.transform.localPosition.x, currentPL.tick.transform.localPosition.y, currentPL.selectedOption.transform.localPosition.z);
+								currentPL.tick.transform.localPosition = new Vector3 (currentPL.tick.transform.localPosition.x, currentPL.tick.transform.localPosition.y, currentPL.selectedOption.transform.localPosition.z + 0.1f);
 								currentPL.tick.gameObject.SetActive (true);
-
-								UseLetter (currentPL);
-
+							} else {
+								currentPL.selectedOption = null;
+								currentPL.tick.gameObject.SetActive (false);
 							}
-
-						} else {
-							
-							optionTM.color = PhysicalLetter.unselectedColor;
 
 						}
 
+					} else {
+						
+						optionTM.color = PhysicalLetter.unselectedColor;
+
+					}
+
+					if (currentPL.selectedOption == optionTM) {
+						optionTM.color = new Color (0f, 0.4f, 0f);
 					}
 
 				}
+					
 					
 				if (Input.GetKeyDown (KeyCode.UpArrow)) {
 					
@@ -213,24 +245,30 @@ public class Main : MonoBehaviour {
 
 			}
 
+			AdjustPosition (Time.deltaTime*3f, Time.deltaTime * 10f);
+
+		}
+
+		public void AdjustPosition(float speedAngles, float speedPosition) {
+
 			float distance = 0f;
 
 			foreach (PhysicalLetter pL in pLetterList) {
 
-				pL.gameObject.transform.localEulerAngles = Hacks.LerpVector3Angle(pL.gameObject.transform.localEulerAngles, pL.targetLocalEulerAngles, Time.deltaTime*3f);
-				pL.gameObject.transform.localPosition = Vector3.Lerp (pL.gameObject.transform.localPosition, new Vector3 (0f, distance, 0f), Time.deltaTime * 10f);
+				pL.gameObject.transform.localEulerAngles = Hacks.LerpVector3Angle(pL.gameObject.transform.localEulerAngles, pL.targetLocalEulerAngles, speedAngles);
+				pL.gameObject.transform.localPosition = Vector3.Lerp (pL.gameObject.transform.localPosition, new Vector3 (0f, distance, 0f), speedPosition);
 				distance += 0.2f;
 
 			}
 
 		}
 
-		private void UseLetter(PhysicalLetter pL) {
+		public void UseLetter(PhysicalLetter pL) {
 
 			pL.Use ();
 			pLetterList.Remove (pL);
+			pL.gameObject.transform.SetParent (Camera.main.transform);
 			Main.discardedLetters.Add (pL);
-			pL.gameObject.SetActive (false);
 
 		}
 
