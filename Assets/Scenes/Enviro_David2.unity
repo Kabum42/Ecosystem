@@ -3580,23 +3580,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popSongs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: fc626f6079da79546bf3f086a0d82490, type: 3}
+  - {fileID: 8300000, guid: 58b28731b53e5d4439eca520b3ad591e, type: 3}
+  - {fileID: 8300000, guid: f5205bc595f6a424e8195f54fe7bb374, type: 3}
+  - {fileID: 8300000, guid: 5e0ec557dd4795443bb87d7764d31a95, type: 3}
+  - {fileID: 8300000, guid: dd2245a760d625d4ea538bc8a4fb8a8b, type: 3}
+  - {fileID: 8300000, guid: 32dd96c8419f45541ae22d334d7837e6, type: 3}
+  - {fileID: 8300000, guid: b98349c94b2bd534b8db86155447108d, type: 3}
+  - {fileID: 8300000, guid: 5a2932fb07ad31b46827903db0e8c567, type: 3}
+  - {fileID: 8300000, guid: 3b60a94c4bba1eb45b8738f334ee5b63, type: 3}
   rockSongs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: e4ec45907fc2cdb48a2546334c04188f, type: 3}
+  - {fileID: 8300000, guid: 0355d74479552be4f9c909d33a73342c, type: 3}
+  - {fileID: 8300000, guid: bad66807ec9c27f458963a560e5d3a5f, type: 3}
+  - {fileID: 8300000, guid: 0601b2271ec8ad641a4cceb416849274, type: 3}
+  - {fileID: 8300000, guid: 859a9be722f264f409ee97f5153af2de, type: 3}
+  - {fileID: 8300000, guid: cf16090ac9d87f640be539904bd0b835, type: 3}
+  - {fileID: 8300000, guid: 2ae3247ce7cc48044a060307365a1413, type: 3}
+  - {fileID: 8300000, guid: 836e8f3e4b8e52d48bc873e6f8be6b38, type: 3}
+  - {fileID: 8300000, guid: ee07b17f0fa45714f953ef3a38239812, type: 3}
   classicalSongs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: b48c6ea18a72ed941ae61b4598426cbb, type: 3}
+  - {fileID: 8300000, guid: e6b5d123dad9682469a4f1f6369d2261, type: 3}
+  - {fileID: 8300000, guid: a4579214688aecf409905d430515fc7d, type: 3}
+  - {fileID: 8300000, guid: 6a1fbcd6cda184a43bff890094407a2e, type: 3}
+  - {fileID: 8300000, guid: c412f9f6f5502fa4a866167e07435eee, type: 3}
+  - {fileID: 8300000, guid: 84c4a7c75edb83444ad20c6655d9055d, type: 3}
+  - {fileID: 8300000, guid: 93abade8e57327b47a30916fac70eddf, type: 3}
+  - {fileID: 8300000, guid: f17f027c5a7558e4e9bb7f3847de11dd, type: 3}
+  - {fileID: 8300000, guid: f20bc49c4d5d2454fbf13d91f0627cb7, type: 3}
+  - {fileID: 8300000, guid: e51d8cdddaf165d44bac9555cba2e3c8, type: 3}
+  countrySongs:
+  - {fileID: 8300000, guid: ba02113ba62c0084fab2234e06aa34e0, type: 3}
+  - {fileID: 8300000, guid: df2f811c8e4f2c14190f8153d01769b8, type: 3}
+  - {fileID: 8300000, guid: daf16f1ca1435074b82785d133783e5d, type: 3}
+  - {fileID: 8300000, guid: 9cf48dfc41be34a4e8d2d1120e2362fc, type: 3}
+  - {fileID: 8300000, guid: c7e6edbe587c70b4b8879a5736dc943c, type: 3}
+  - {fileID: 8300000, guid: f1425f3ffddd5ee4fa4c72a914dd04b4, type: 3}
+  - {fileID: 8300000, guid: d847a69f5a0ac304788be0fd8a4c9459, type: 3}
+  - {fileID: 8300000, guid: adaf60bf98097fa45a9ad017c58b8c02, type: 3}
+  jazzSongs:
+  - {fileID: 8300000, guid: f335be5086709c141b44fc94cdbbbe0a, type: 3}
+  - {fileID: 8300000, guid: 865b51b029aea6249a6484f76fee2c5f, type: 3}
+  - {fileID: 8300000, guid: 700b1c54607ae364f9714adf1aa23643, type: 3}
+  - {fileID: 8300000, guid: 618dd3f427b152741b675fe30ea666ff, type: 3}
+  - {fileID: 8300000, guid: ce1868c69e527574293356c43709759d, type: 3}
+  - {fileID: 8300000, guid: 75df5e68c3b2b5742b4b0ec7b683bddc, type: 3}
+  - {fileID: 8300000, guid: ece6639ae638eaa49aab6752443ee695, type: 3}
+  - {fileID: 8300000, guid: 8df8407c15442dc408fadc53552b0980, type: 3}
+  - {fileID: 8300000, guid: 78c2b99d8b88633478863dbaee9ef697, type: 3}
+  ambientalSongs:
+  - {fileID: 8300000, guid: dd35ce83b5e307549a8b56839ed44bbc, type: 3}
+  - {fileID: 8300000, guid: dde806355f46b9046a4d4f4bece1a33a, type: 3}
+  - {fileID: 8300000, guid: bdd1c5665dfa1cb41bbec2454f077738, type: 3}
+  - {fileID: 8300000, guid: ff9c1c79fb982c94c9c56538a58a2996, type: 3}
+  - {fileID: 8300000, guid: f58fdfb924bdf8e48b42a49edd75c86f, type: 3}
+  - {fileID: 8300000, guid: 31fe226c4e5596e49847d54d95c681a4, type: 3}
+  fmSound: {fileID: 0}
   maxVolume: 0.5
 --- !u!114 &431777697
 MonoBehaviour:
@@ -3632,6 +3672,154 @@ MonoBehaviour:
   outlineColor: {r: 1, g: 1, b: 1, a: 0}
   outlineWidth: 2
   isOutlined: 0
+--- !u!82 &431777700
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 431777690}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!82 &431777701
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 431777690}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &433326602
 GameObject:
   m_ObjectHideFlags: 0
@@ -4899,8 +5087,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519894255}
-  m_LocalRotation: {x: -0.18345706, y: 0.71752584, z: 0.20579393, w: 0.63964766}
-  m_LocalPosition: {x: -1095.0681, y: -103.421234, z: -52.455284}
+  m_LocalRotation: {x: -0.056942686, y: 0.93862027, z: 0.2829738, w: 0.18887934}
+  m_LocalPosition: {x: -1099.1157, y: -104.727844, z: -57.6449}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -7539,7 +7727,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 801896142}
   m_LocalRotation: {x: 0, y: 0.8538051, z: 0, w: 0.5205928}
-  m_LocalPosition: {x: -34.04, y: -7.48, z: -6.46}
+  m_LocalPosition: {x: -33.92, y: -7.48, z: -7.47}
   m_LocalScale: {x: 36.6643, y: 40.815716, z: 36.664295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:

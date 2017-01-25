@@ -25,8 +25,6 @@ public class RadioBehaviour : MonoBehaviour {
         radioSource.Stop();
         radioSource.clip = fmSound;
 
-        currentFM = audioSources.Length-1;
-
         PlayNextSong(0, classicalSongs);
         PlayNextSong(1, rockSongs);
         PlayNextSong(2, popSongs);
@@ -34,7 +32,10 @@ public class RadioBehaviour : MonoBehaviour {
         PlayNextSong(4, jazzSongs);
         PlayNextSong(5, ambientalSongs);
 
-        TurnOffRadio();
+		currentFM = 1;
+		NextFM ();
+
+		TurnOffRadio ();
     }
 
     void Update () {
