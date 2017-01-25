@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class AnimalInstantiator : MonoBehaviour {
 
+    [SerializeField] Species specie;
 	List<GameObject> animalsInScene = new List<GameObject> ();
 //	float zoneMinX = 100f;
 //	float zoneMaxX = -100f;
@@ -14,7 +15,7 @@ public class AnimalInstantiator : MonoBehaviour {
     LineRenderer line;
     GameObject circle;
 
-	public int animalNum;
+	public float animalNum;
     public int segments;
 	public float initialY;
 	public Transform zoneCenter;
@@ -28,12 +29,10 @@ public class AnimalInstantiator : MonoBehaviour {
 	public float offsety;
 
 	void Start () {
-//		Ecosystem.Start ();
-//
-//		GET ANIMAL POPULATION
-//		animalNum = Ecosystem.GetSpeciesData(Species.Deer).populationCap;
+        //		GET ANIMAL POPULATION
+        animalNum = Mathf.FloorToInt(Ecosystem.GetSpeciesData(specie).GetPercentage() * Ecosystem.GetSpeciesData(specie).maxVisual);
 
-		parent = new GameObject (animalPrefab.name + "Zone");
+        parent = new GameObject (animalPrefab.name + "Zone");
 
 		InstantiateAnimals ();
 
@@ -73,7 +72,7 @@ public class AnimalInstantiator : MonoBehaviour {
 	}
 
 	void DrawCircle() {
-		circle = new GameObject ("Circle");
+		circle = new GameObject ("Circle " + specie);
 		circle.transform.position = zoneCenter.position;
 		line = circle.gameObject.AddComponent<LineRenderer> ();
 		line.SetVertexCount (segments + 1);
@@ -118,18 +117,20 @@ public class AnimalInstantiator : MonoBehaviour {
 		sc.isTrigger = true;
 		ZoneCollider zc = circle.AddComponent<ZoneCollider> () as ZoneCollider;
 		zc.SetPage (notebookPage);
-		//circle.transform.SetParent (parent.transform);
 	}
 
-//	void CreateZoneCollider() {
-//		PolygonCollider2D col = circle.AddComponent<PolygonCollider2D> () as PolygonCollider2D;
-//		List<Vector2> polygonPoints = new List<Vector2> ();
-//
-//		foreach (Vector3 circlePoint in circlePoints) {
-//			polygonPoints.Add(new Vector2(circlePoint.x, circlePoint.z));
-//		}
-//			
-//		polygonPoints.RemoveAt (polygonPoints.Count-1);
-//		col.SetPath (0, polygonPoints.ToArray ());
-//	}
+    void RemoveAnimals() {
+        animalsInScene.Clear();
+        Destroy(GameObject.Find("Circle " + specie));
+    }
+
+    public void UpdateAnimals() {
+        animalNum = Ecosystem.GetSpeciesData(specie).GetPercentage() * Ecosystem.GetSpeciesData(specie).maxVisual;
+
+        RemoveAnimals();
+
+        InstantiateAnimals();
+
+        DrawCircle();
+    }
 }

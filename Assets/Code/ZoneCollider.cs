@@ -15,7 +15,7 @@ public class ZoneCollider : MonoBehaviour {
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (!Notebook.Instance.grabbed)
+                if (!Notebook.Instance.grabbed && !Notebook.Instance.turningPage)
                     StartCoroutine(Notebook.Instance.OpenNotebook(notebookPage));
             }
         }

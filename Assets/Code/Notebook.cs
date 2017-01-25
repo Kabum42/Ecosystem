@@ -9,11 +9,12 @@ public class Notebook : MonoBehaviour {
 	[SerializeField] Transform pivotRot;
 	int actualPage = 0;
 	int desirePage = 0;
-	bool turningPage = false;
 	bool turningLeft;
 	int turningCounter = 0;
+    bool restored = false;
 
-	public bool grabbed = false;
+	public bool turningPage = false;
+    public bool grabbed = false;
     public Vector3 initialEulerAngles;
     public int turningPageVelocity;
 
@@ -26,12 +27,13 @@ public class Notebook : MonoBehaviour {
 	void Start () {
 	}
 	
-	void Update () {
+	void FixedUpdate () {
 		if (Camera.main.GetComponent<ObjectGrabber> ().grabbedObject == this.gameObject && !turningPage) {
+            restored = false;
 			grabbed = true;
 			CheckInput ();
 		}
-		else if (Camera.main.GetComponent<ObjectGrabber> ().grabbedObject != this.gameObject && grabbed) {
+		else if (Camera.main.GetComponent<ObjectGrabber> ().grabbedObject != this.gameObject && !turningPage) {
             grabbed = false;
 			ShowPage (0);
 		}
@@ -45,7 +47,22 @@ public class Notebook : MonoBehaviour {
 			} else
 				turningPage = false;
 		}
+
+        if(!grabbed && actualPage==0 && !restored) {
+            RestorePagesDefaultPos();
+            restored = true;
+        }
+            
 	}
+
+    void RestorePagesDefaultPos() {
+        float i = 0f;
+        foreach(GameObject page in pages) {
+            page.transform.localPosition = new Vector3(0f, 0f, i);
+            page.transform.localRotation = Quaternion.identity;
+            i += 0.005f;
+        }
+    }
 
 	void CheckInput() {
 		//SHOW NEXT PAGE
@@ -77,7 +94,11 @@ public class Notebook : MonoBehaviour {
 				turningCounter += turningPageVelocity;
 			}
 			else {
-				actualPage++;
+                if(page.transform.localEulerAngles.y > 165f) {
+				    page.transform.RotateAround (pivotRot.position, transform.up, turningPageVelocity*-1);
+                }
+
+                actualPage++;
 				turningCounter = 0;
 			}
 		} 
@@ -96,7 +117,8 @@ public class Notebook : MonoBehaviour {
     public IEnumerator OpenNotebook(int notebookPage)
     {
         Camera.main.GetComponent<ObjectGrabber>().Grab(this.gameObject);
-        yield return new WaitForSeconds(0.5f);
-        ShowPage(notebookPage);
+        yield return new WaitForSeconds(.5f);
+        if(Notebook.Instance.grabbed)
+            ShowPage(notebookPage);
     }
 }

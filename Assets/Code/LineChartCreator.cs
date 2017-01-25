@@ -5,7 +5,9 @@ using System.Collections.Generic;
 public class LineChartCreator : MonoBehaviour {
 
 	[SerializeField] Sprite dotSprite;
+    [SerializeField] Sprite skullSprite;
 	[SerializeField] Sprite lineSprite;
+    [SerializeField] Species specie;
 	float stepX;
 	float stepY;
 
@@ -13,18 +15,20 @@ public class LineChartCreator : MonoBehaviour {
 	public float maxY = 2.5f;
 	public float minX = -3.5f;
 	public float maxX = 2.5f;
+    public bool deadSpecie = false;
 	public List<float> values = new List<float>();
 
 	void Start () {
 		stepX = (maxX - minX) / 12;
 		stepY = (maxY - minY);
 
-		RandomValues ();
+        values.Add(Ecosystem.GetSpeciesData(specie).GetPercentage() * 100);
+        UpdateChart();
 	}
 	
 	void Update () {
-		if (Input.GetKey (KeyCode.F1)) {
-			RandomValues ();
+		if (Input.GetKeyDown (KeyCode.F3)) {
+			AddChartValue ();
 		}
 	}
 
@@ -41,20 +45,28 @@ public class LineChartCreator : MonoBehaviour {
 			dot.transform.SetParent (this.transform);
 			dot.transform.localScale = new Vector3(1,1,1);
 			dot.AddComponent<SpriteRenderer> ();
-			dot.GetComponent<SpriteRenderer> ().sprite = dotSprite;
+            dot.GetComponent<SpriteRenderer>().sprite = (values[i] == 0) ? skullSprite : dotSprite;
 			dot.transform.localPosition = new Vector3 (minX + ((i) * stepX), ((values [i]/100) * stepY) - maxY, 0);
 			dot.transform.localEulerAngles = Vector3.zero;
 
-			if (i < values.Count - 1) {
-				string lineName = "line" + i;
-				GameObject line = new GameObject (lineName);
-				line.transform.SetParent (this.transform);
-				line.AddComponent<SpriteRenderer> ();
-				line.GetComponent<SpriteRenderer> ().sprite = lineSprite;
-				line.GetComponent<SpriteRenderer> ().color = new Color (1, 0, 0, 0.5f);
-				line.GetComponent<SpriteRenderer> ().sortingOrder = -1;
-				CreateLine (line, new Vector3 (minX + ((i) * stepX), ((values [i] / 100) * stepY) - maxY, 0), new Vector3 (minX + ((i + 1) * stepX), ((values [i + 1] / 100) * stepY) - maxY, 0));
-			}
+            if (values[i] > 0)
+            {
+                if (i < values.Count - 1)
+                {
+                    string lineName = "line" + i;
+                    GameObject line = new GameObject(lineName);
+                    line.transform.SetParent(this.transform);
+                    line.AddComponent<SpriteRenderer>();
+                    line.GetComponent<SpriteRenderer>().sprite = lineSprite;
+                    line.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 0.5f);
+                    line.GetComponent<SpriteRenderer>().sortingOrder = -1;
+                    CreateLine(line, new Vector3(minX + ((i) * stepX), ((values[i] / 100) * stepY) - maxY, 0), new Vector3(minX + ((i + 1) * stepX), ((values[i + 1] / 100) * stepY) - maxY, 0));
+                }
+            }
+            else if(values[i] == 0) {
+                deadSpecie = true;
+                break;
+            }
 		}
 
         if (!Notebook.Instance.grabbed)
@@ -87,4 +99,15 @@ public class LineChartCreator : MonoBehaviour {
 			Destroy (child.gameObject);
 		}
 	}
+
+    void AddChartValue() {
+        if (!deadSpecie)
+        {
+            if (values.Count == 13)
+                values.RemoveAt(0);
+
+            values.Add(Random.Range(0, 100));
+            UpdateChart();
+        }
+    }
 }

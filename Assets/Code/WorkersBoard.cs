@@ -44,10 +44,10 @@ public class WorkersBoard : MonoBehaviour {
         UpdateBoard();
     }
 	
-	void Update () {
+	void FixedUpdate () {
         if (Hacks.isOver(transform.GetChild(2).gameObject))
             if (Input.GetMouseButton(0))
-                if (!Notebook.Instance.grabbed)
+                if (!Notebook.Instance.grabbed && !Notebook.Instance.turningPage)
                     StartCoroutine(Notebook.Instance.OpenNotebook(notebookPage));
 	}
 
@@ -68,26 +68,41 @@ public class WorkersBoard : MonoBehaviour {
             return false;
     }
 
-    public void UpdateBoard() {
-        foreach(Worker worker in workersWorking) {
+    public void DayUpdateBoard() {
+        foreach (Worker worker in workersWorking)
+        {
             worker.DayPassed();
 
-            if (worker.isAvailable()) {
+            if (worker.isAvailable())
+            {
                 workersWorking.Remove(worker);
                 workersAvailable.Add(worker);
             }
         }
 
+        UpdateBoard();
+    }
+
+    public void UpdateBoard() {
         int i = workersAvailable.Count;
-        foreach(GameObject key in keys) {
+        foreach (GameObject key in keys)
+        {
             bool t = (i > 0) ? true : false;
             key.SetActive(t);
+            i--;
+        }
+
+        i = GetWorkersCount();
+        foreach(GameObject photo in photos) {
+            bool b = (i > 0) ? true : false;
+            photo.SetActive(b);
             i--;
         }
     }
 
     public void AddWorker() {
         workersAvailable.Add(new Worker());
+        UpdateBoard();
     }
 
     public void RemoveWorker() {
@@ -95,6 +110,8 @@ public class WorkersBoard : MonoBehaviour {
             workersAvailable.RemoveAt(workersAvailable.Count - 1);
         else if (workersWorking.Count > 0)
             workersWorking.RemoveAt(workersWorking.Count - 1);
+
+        UpdateBoard();
     }
 
     public int GetWorkersCount() {

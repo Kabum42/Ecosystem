@@ -4,15 +4,19 @@ using System.Collections.Generic;
 
 public class WorkersPage : MonoBehaviour {
 
-    public GameObject fill;
-    public int workerCost;
-
-    public int money;
+    [SerializeField] Sprite availableWorkerSprite;
+    [SerializeField] Sprite unavailableWorkerSprite;
+    [SerializeField] Sprite workingWorkerSprite;
     int workersAvailable;
     Transform fillDefaultPos;
     List<GameObject> barFills;
+    List<SpriteRenderer> workersSprites;
 
-	void Start () {
+    public GameObject fill;
+    public int workerCost;
+    public int money;
+
+    void Start () {
         barFills = new List<GameObject>();
         barFills.Add(transform.GetChild(0).GetChild(0).gameObject);
         fillDefaultPos = barFills[0].transform;
@@ -24,6 +28,17 @@ public class WorkersPage : MonoBehaviour {
         barFills.Add(barFill);
 
         workersAvailable = WorkersBoard.Instance.initialWorkers;
+
+        workersSprites = new List<SpriteRenderer>();
+        for (int i = 0; i < transform.GetChild(1).childCount; i++) {
+            workersSprites.Add(transform.GetChild(1).GetChild(i).GetComponent<SpriteRenderer>());
+            workersSprites[i].sprite = unavailableWorkerSprite;
+        }
+
+        for (int i = 0; i < workersAvailable; i++)
+        {
+            workersSprites[i].sprite = availableWorkerSprite;
+        }
     }
 
     void Update () {
@@ -38,7 +53,6 @@ public class WorkersPage : MonoBehaviour {
                                                                         fillDefaultPos.localPosition.z);
 
         workersAvailable = Mathf.FloorToInt(money / workerCost) + WorkersBoard.Instance.initialWorkers;
-        Debug.Log(workersAvailable);
 
         if(WorkersBoard.Instance.GetWorkersCount() < workersAvailable) {
             WorkersBoard.Instance.AddWorker();
@@ -52,16 +66,16 @@ public class WorkersPage : MonoBehaviour {
             barFill.transform.rotation = fillDefaultPos.rotation;
             barFill.transform.localScale = fillDefaultPos.localScale;
             barFills.Add(barFill);
+
+            workersSprites[workersAvailable - 1].sprite = availableWorkerSprite;
         }
 
         else if(WorkersBoard.Instance.GetWorkersCount() > workersAvailable) {
             WorkersBoard.Instance.RemoveWorker();
             Destroy(barFills[barFills.Count - 1]);
             barFills.RemoveAt(barFills.Count - 1);
-        }
-	}
 
-    public void UpdatePage() {
-        
+            workersSprites[workersAvailable].sprite = unavailableWorkerSprite;
+        }
     }
 }
