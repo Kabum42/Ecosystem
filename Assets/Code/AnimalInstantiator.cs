@@ -23,6 +23,7 @@ public class AnimalInstantiator : MonoBehaviour {
 	public GameObject animalPrefab;
 	public int notebookPage;
 	public Material circleMat;
+	public Grabbable.CursorOption cursorOption;
 
 	public float offsetz;
 	public float offsetx;
@@ -118,6 +119,7 @@ public class AnimalInstantiator : MonoBehaviour {
 		ZoneCollider zc = circle.AddComponent<ZoneCollider> () as ZoneCollider;
         Grabbable g = circle.AddComponent<Grabbable>() as Grabbable;
         g.justMouseIcon = true;
+		g.cursor = cursorOption;
 		zc.SetPage (notebookPage);
 	}
 

@@ -4628,8 +4628,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e24c6858272156a4682ecbe1d65bfb5f, type: 3}
-    m_FontSize: 150
+    m_Font: {fileID: 12800000, guid: 0cec064e2d6d98241a69d9aff70f6058, type: 3}
+    m_FontSize: 127
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -5162,8 +5162,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519894255}
-  m_LocalRotation: {x: -0.025073525, y: 0.7066621, z: 0.025073525, w: 0.7066621}
-  m_LocalPosition: {x: -1138.6565, y: -50.757904, z: -145.34984}
+  m_LocalRotation: {x: -0.056942686, y: 0.93862027, z: 0.2829738, w: 0.18887934}
+  m_LocalPosition: {x: 24.239746, y: -773.5994, z: 900.6152}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -19219,6 +19219,7 @@ MonoBehaviour:
   animalPrefab: {fileID: 107524, guid: a1996fe2620624884922d58ff893b9b2, type: 2}
   notebookPage: 1
   circleMat: {fileID: 2100000, guid: 41668b7e488714336bbb5133ac8015da, type: 2}
+  cursorOption: 5
   offsetz: 0
   offsetx: 0
   offsety: 10
@@ -19255,6 +19256,7 @@ MonoBehaviour:
   animalPrefab: {fileID: 197360, guid: 10cdc5eadd7b045248f453d31bcdceec, type: 2}
   notebookPage: 2
   circleMat: {fileID: 2100000, guid: 41668b7e488714336bbb5133ac8015da, type: 2}
+  cursorOption: 4
   offsetz: 0
   offsetx: 0
   offsety: 10
@@ -19278,6 +19280,7 @@ MonoBehaviour:
   animalPrefab: {fileID: 119154, guid: 4162d9f8d4f2649818cb7cb7f2fa5adb, type: 2}
   notebookPage: 3
   circleMat: {fileID: 2100000, guid: 41668b7e488714336bbb5133ac8015da, type: 2}
+  cursorOption: 3
   offsetz: 0
   offsetx: 0
   offsety: 7
@@ -19301,6 +19304,7 @@ MonoBehaviour:
   animalPrefab: {fileID: 169736, guid: df29fda4da7dd452c835a733de5dd8fe, type: 2}
   notebookPage: 0
   circleMat: {fileID: 2100000, guid: 41668b7e488714336bbb5133ac8015da, type: 2}
+  cursorOption: 2
   offsetz: 0
   offsetx: 0
   offsety: 10
