@@ -1,0 +1,1 @@
+{Sender}Ecologistas}{Information}Varios senderistas han visto conejos de un pelaje diferente al que suele habitar este bosque}{Option}Controlaré la especie invasora.}{Consequence}Trabajador}1}{Consequence}Ecologistas}4}{Option}No supondrá ningun problema para los conejos que habitan aquí.}{Consequence}Ecologistas}-4

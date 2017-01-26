@@ -1,0 +1,1 @@
+{Sender}Gobierno}{Information}Hay una antigua zona donde se originó un incendio y aún no ha sido estudiada.}{Option}Investigaremos la zona.}{Consequence}Trabajador}2}{Consequence}Gobierno}4}{Consequence}Vegetacion.Crec}2}{Option}Será una perdida de tiempo.}{Consequence}Vegetacion.Crec}-3}{Consequence}Gobierno}-2

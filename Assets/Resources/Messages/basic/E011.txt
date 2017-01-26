@@ -1,0 +1,3 @@
+{Sender}Ecologistas}{Information}Hemos detectado una invasión de avispas asiáticas, que están destruyendo algunas especies autóctonas. 
+¡No podemos permitir la desaparición de una especie endémica! Pero intenta no lastimar mucho a las avispas.
+}{Option}Fumigaré la zona, aunque es posible que afecte a las abejas.}{Consequence}NidoAbejas.Crec}-1}{Consequence}Trabajador}1}{Option}Enviaremos las avispas de vuelta a Asia por correspondencia.}{Consequence}NidoAbejas.Crec}3}{Consequence}Trabajador}1}{Consequence}Trabajador}1}{Option}Al final se harán amigas.}{Consequence}Ecologistas}-5}{Consequence}NidoAbejas.Crec}-2

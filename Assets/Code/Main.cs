@@ -9,6 +9,7 @@ public class Main : MonoBehaviour {
 	public LetterStack todayStack;
 	public static List<PhysicalLetter> discardedLetters = new List<PhysicalLetter>();
 	public Image fade;
+	public Text textFade;
 	public TOD_Sky sky;
 	private State state = State.Playing;
 
@@ -22,6 +23,7 @@ public class Main : MonoBehaviour {
 		todayStack = new LetterStack ();
 		AddLettersToday ();
 		fade.color = Hacks.ColorLerpAlpha (fade.color, 1f, 1f);
+		textFade.color = Hacks.ColorLerpAlpha (textFade.color, 1f, 1f);
 		state = State.On;
 		sky.Cycle.Hour = minHour;
 
@@ -40,6 +42,7 @@ public class Main : MonoBehaviour {
 				
 				ObjectGrabber.instance.ReturnGrabbedObject ();
 				state = State.Off;
+				textFade.text = "Semana  " + (Ecosystem.day+1);
 
 			}
 
@@ -50,6 +53,10 @@ public class Main : MonoBehaviour {
 			}
 
 			if (fade.color.a >= 1f) {
+				textFade.color = Hacks.ColorLerpAlpha (textFade.color, 1.1f, Time.deltaTime * 2f);
+			}
+
+			if (textFade.color.a >= 1f) {
 
 				Ecosystem.Simulate ();
 				Ecosystem.day++;
@@ -67,7 +74,13 @@ public class Main : MonoBehaviour {
 
 		} else if (state == State.On) {
 
-			fade.color = Hacks.ColorLerpAlpha (fade.color, -0.1f, Time.deltaTime * 2f);
+			textFade.color = Hacks.ColorLerpAlpha (textFade.color, -0.1f, Time.deltaTime * 2f);
+
+			if (textFade.color.a <= 0f) {
+
+				fade.color = Hacks.ColorLerpAlpha (fade.color, -0.1f, Time.deltaTime * 2f);
+
+			}
 
 			if (fade.color.a <= 0f) {
 

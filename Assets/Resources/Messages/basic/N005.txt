@@ -1,0 +1,1 @@
+{Sender}Otro}{Information}Desde los 5 años tengo una serpiente llamada Sr Colmillos como mascota, pero ahora es demasiado grande ¿Podría soltar a Sr Colmillos en tu bosque?}{Option}Debes llevarlo a la protectora. Es un animal, no un juguete.}{Consequence}Ecologistas}2}{Option}Aquí hay espacio para todos.}{Consequence}Conejos.Crec}-2}{Consequence}Ecologistas}-4
