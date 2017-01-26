@@ -1,0 +1,2 @@
+{Sender}Otro}{Information}En la Iglesia de la Iluminación Mística estamos buscando lugares perfectos para realizar retiros espirituales. Hemos visto una zona única en su bosque, y nos gustaría realizar allí alguno de estos retiros. De los donativos una parte iría para su bosque, el resto para nuestra causa y posiblemente comida.
+Bendiciones y buenos días.}{Option}Bienaventurados los que vienen a este bosque.}{Consequence}Vegetacion.Crec}-2}{Consequence}Dinero}20}{Option}Seguro que encontrarán otro sitio donde practicar sus ritos de culto.

@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 769e1532c9f21b84086bb02b027c53c9
-timeCreated: 1480532830
+guid: 0cec064e2d6d98241a69d9aff70f6058
+timeCreated: 1485423324
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
-  fontSize: 60
+  fontSize: 16
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - AA Typewriter
+  - A little sunshine
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

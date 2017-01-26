@@ -1,0 +1,1 @@
+{Sender}Cooperativa}{Information}No soy un científico pero si pudiéramos cortar árboles ganaríamos más dinero ¿Qué me dices?}{Option}Talad lo que queraís. Los arboles crecen rápido.}{Consequence}Cooperativa}4}{Consequence}Vegetacion.Crec}-4}{Consequence}Ecologistas}-4}{Option}En este bosque no se tala.}{Consequence}Cooperativa}-4}{Consequence}Ecologistas}4

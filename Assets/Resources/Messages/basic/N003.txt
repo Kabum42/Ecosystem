@@ -1,0 +1,3 @@
+{Sender}Otro}{Information}Han crecido unas plantas venenosas en una zona donde abundan conejos. Creo que debería quitarlas para evitar que alguno de ellos enferme.
+Un saludo.
+Un senderista habitual.}{Option}Uno de mis trabajadores se hará cargo.}{Consequence}Trabajador}1}{Consequence}Vegetacion.Pob}-2}{Option}Los conejos solo comen carne,no debería haber problema.}{Consequence}Conejos.Pob}-5

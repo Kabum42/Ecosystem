@@ -1,0 +1,2 @@
+{Sender}Cooperativa}{Information}Este bosque va bien, pero no le veo futuro sin un aserradero. Aumentaríamos mucho nuestra producción, y pocas especies se verían afectadas. 
+}{Option}Me parece una buena propuesta.}{Consequence}Trabajador}1}{Consequence}Trabajador}1}{Consequence}Cooperativa}8}{Consequence}Dinero}15}{Consequence}Vegetacion.Crec}-2}{Consequence}Desbloquea}3}{Option}Sería fatal para el bosque.}{Consequence}Cooperativa}-7}{Consequence}Desbloquea}6

@@ -1,0 +1,2 @@
+{Sender}Gobierno}{Information}Desde la secretaría medioambiental estamos organizando unas jornadas de reforestación.
+¿¡Qué mejor manera de pasar un fin de semana en familia que ayudando a reforestar un bosque!?}{Option}Por supuesto, el bosque necesita cualquier ayuda posible.}{Consequence}Vegetacion.Crec}8}{Consequence}Ecologistas}4}{Consequence}Dinero}20}{Consequence}Trabajador}1}{Consequence}Gobierno}2}{Option}¿Reforestar? No tengo tiempo para eso.}{Consequence}Ecologistas}-2}{Consequence}Gobierno}2

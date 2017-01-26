@@ -1,0 +1,1 @@
+{Sender}Otro}{Information}Queremos organizar un concierto homenaje a las leyendas del Folk. La zona se llenará de gente, ¡y de dinero!}{Option}¡No puedo negarme! La música Folk es mi pasión. }{Consequence}Dinero}40}{Consequence}Vegetacion.Pob}-8}{Consequence}Ecologistas}-2}{Option}Aquí no se hará ningun concierto.}{Consequence}Ecologistas}4

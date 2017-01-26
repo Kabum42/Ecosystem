@@ -1,0 +1,4 @@
+{Sender}Gobierno}{Information}Soy el Alcalde.
+
+¡Bienvenido a tu nuevo puesto!
+En esta ciudad valoramos mucho nuestro amado Greenstem Forest. Básicamente debes tomar las decisiones que afectan a este preciado bosque, lo haría yo pero… Alguien con mi porte debe estar de cara al público. La cuestión, necesito que le eches un ojo a los últimos beneficios del bosque, no me gustaría que esa arboleda solo generara deudas y tuviera que cerrarla, me tendría que buscar otro lugar donde hacer el posado en bañador cada verano. Espero que seas mejor que el anterior que ocupaba tu puesto. Ni siquiera sabía que hay que informar las respuestas con el walkie talkie.}{Option}Informar por el walkie:"Gracias, Apuntaré los beneficios en mi libreta".}{Consequence}Gobierno}1}{Option}Informar por el walkie:"Aputaré los datos, pero no dejaré que use el bosque para su campaña política".}{Consequence}Gobierno}-1
