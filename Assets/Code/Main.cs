@@ -31,6 +31,10 @@ public class Main : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			Application.Quit();
+		}
 	
 		UpdateDiscarded ();
 
@@ -62,7 +66,7 @@ public class Main : MonoBehaviour {
 				Ecosystem.day++;
 
 				if (Ecosystem.day > 5) {
-					// END
+					Application.LoadLevel (1);
 				} else {
 					todayStack.originalNum = 0;
 					AddLettersToday ();

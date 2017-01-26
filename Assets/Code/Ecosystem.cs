@@ -22,11 +22,24 @@ public static class Ecosystem {
 	public static void Start() {
 		if (!started) {
 			started = true;
-			TrueStart ();
+			Restart ();
 		}
 	}
 
-	private static void TrueStart() {
+	public static void Restart() {
+
+		day = 1;
+		unlockedFolders.Clear ();
+		speciesDataList.Clear ();
+		friendshipGobierno = 0f;
+		friendshipCooperativa = 0f;
+		friendshipEcologistas = 0f;
+
+		Initialize ();
+
+	}
+
+	private static void Initialize() {
 
 		SpeciesData sp;
 
